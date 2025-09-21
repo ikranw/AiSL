@@ -1,0 +1,1 @@
+As a beginner ASL learner, I want to learn to sign more ASL. I want to be able to sign specific sentences in the correct ASL grammar and word order. This will allow me to learn new words in sentences as relevant to me, rather than in fragments without knowing how to string words together.
