@@ -80,7 +80,7 @@ Below are the main options we discussed, plus alternatives we might consider if 
 
 ---
 
-# ⚙️ Back-End Options
+# Back-End Options
 
 ### 1. **Node.js + Express**
 **Pros:**
