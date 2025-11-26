@@ -16,12 +16,12 @@ AiSL is an innovative AI-powered American Sign Language (ASL) learning tool desi
 [Project Description](https://github.com/ikranw/AiSL/blob/main/homework-uploads/project-description.md)
 
 ### User Stories and Design Diagrams
-[User Stories](https://github.com/ikranw/AiSL/blob/main/homework-uploads/user-stories.md)
-[Design Diagrams](https://github.com/ikranw/AiSL/blob/main/homework-uploads/design-diagrams.pdf)
+* [User Stories](https://github.com/ikranw/AiSL/blob/main/homework-uploads/user-stories.md)
+* [Design Diagrams](https://github.com/ikranw/AiSL/blob/main/homework-uploads/design-diagrams.pdf)
 
 ### Project Tasks and Timeline
-[Task List](https://github.com/ikranw/AiSL/blob/main/homework-uploads/tasklist.md)
-[Milestones, Timeline, and Effort Matrix](https://github.com/ikranw/AiSL/blob/main/homework-uploads/milestones%2Ctimelines%2Ceffort-matrix.pdf)
+* [Task List](https://github.com/ikranw/AiSL/blob/main/homework-uploads/tasklist.md)
+* [Milestones, Timeline, and Effort Matrix](https://github.com/ikranw/AiSL/blob/main/homework-uploads/milestones%2Ctimelines%2Ceffort-matrix.pdf)
 
 ### ABET Concerns Essay
 [ABET Concerns](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ABET-concerns.pdf)
@@ -30,14 +30,14 @@ AiSL is an innovative AI-powered American Sign Language (ASL) learning tool desi
 [Presentation](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ppt-fall2025.pdf)
 
 ### Self-Assessment Essays
-[Elshaddai Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-contract.md)
-[Ikran Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/warsame-contract.md)
-[Fareena Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/khan-contract.md)
+* [Elshaddai Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-contract.md)
+* [Ikran Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/warsame-contract.md)
+* [Fareena Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/khan-contract.md)
 
 ### Professional Biographies
-[Elshaddai Bio](https://github.com/ikranw/AiSL/blob/main/biographies/melaku-bio.md)
-[Ikran Bio](https://github.com/ikranw/AiSL/blob/main/biographies/warsame-bio.md)
-[Fareena Bio](https://github.com/ikranw/AiSL/blob/main/biographies/khan-bio.md)
+* [Elshaddai Bio](https://github.com/ikranw/AiSL/blob/main/biographies/melaku-bio.md)
+* [Ikran Bio](https://github.com/ikranw/AiSL/blob/main/biographies/warsame-bio.md)
+* [Fareena Bio](https://github.com/ikranw/AiSL/blob/main/biographies/khan-bio.md)
 
 ### Budget
 [Budget](https://github.com/ikranw/AiSL/blob/main/homework-uploads/budget.md)
