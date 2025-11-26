@@ -9,21 +9,27 @@ Advisor: Dr. Jillian Aurisano
 2. Ikran Warsame (warsamih@mail.uc.edu): Project Manager leading 3D avatar/animation, ASL community coordinator
 3. Fareena Khan (khanfe@mail.uc.edu): Project Manager leading UI and integration work
 
-Table of Contents for Fall Design Reports
+### Project Abstract:
+AiSL is an innovative AI-powered American Sign Language (ASL) learning tool designed to support accessible and culturally respectful language learning. The platform uses natural language processing (NLP) to convert English sentences into ASL grammar, then displays the translation through a 3D avatar built in Unity. By emphasizing accurate grammar rather than direct translation, AiSL enhances linguistic understanding, inclusion, and cross-cultural communication. Learners can use playback controls to adjust speed, loop signs, and download practice materials. Developed in collaboration with the Deaf community, AiSL aims to bridge communication gaps and promote equitable, technology-driven education for diverse users.
 
-1. Team names and Project Abstract 
-2. Project Description
-3. User Stories and Design Diagrams
-- User Stories
-- Design Diagrams: Level 0, Level 1 and Level 2 
-- Description of the Diagrams: including conventions and a brief description of the purpose of each component.
-4. Project Tasks and Timeline
-- Task List
-- Timeline
-- Effort Matrix
-5. ABET Concerns Essay 
-6. PPT Slideshow
-7. Self-Assessment Essays
+### Project Description
+[Project Description](https://github.com/ikranw/AiSL/blob/main/homework-uploads/project-description.md)
+
+### User Stories and Design Diagrams
+[User Stories](https://github.com/ikranw/AiSL/blob/main/homework-uploads/user-stories.md)
+[Design Diagrams](https://github.com/ikranw/AiSL/blob/main/homework-uploads/design-diagrams.pdf)
+
+### Project Tasks and Timeline
+[Task List](https://github.com/ikranw/AiSL/blob/main/homework-uploads/tasklist.md)
+[Milestones, Timeline, and Effort Matrix](https://github.com/ikranw/AiSL/blob/main/homework-uploads/milestones%2Ctimelines%2Ceffort-matrix.pdf)
+
+### ABET Concerns Essay
+[ABET Concerns](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ABET-concerns.pdf)
+
+### PPT Slideshow
+[Presentation](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ppt-fall2025.pdf)
+
+### Self-Assessment Essays
 8. Professional Biographies
 9. Budget
 10. Appendix
