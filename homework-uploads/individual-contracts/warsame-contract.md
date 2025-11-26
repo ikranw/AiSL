@@ -6,7 +6,8 @@ model with an input box for users. The input box will take in an English sentenc
 in the background with the help of an LLM, it will convert the English sentence into an ASL
 sentence structure.The avatar will sign the ASL sentence to the user, pulling recognized words
 from a database of signs. This will allow users, who are learning ASL, to see the proper
-grammar structure and which signs should be used in what order.
+grammar structure and which signs should be used in what order.  
+
 In my college curriculum, the courses I took that will help me prepare for the
 development of this project are CS 4092 Database Design and Development, CS 2023 Python
 Programming, and CS 4033 AI Principles and Applications. The Database Design and
@@ -16,16 +17,18 @@ Python Programming course, we learned how to program in python. We learned funda
 in programming as well. This will help us in programming our project. Lastly, the AI Principles
 and Applications course taught us AI fundamentals and algorithms used by AI, which will help
 us understand how to use an LLM to construct ASL sentence structure from English sentence
-structure.
+structure.  
+
 My co-op experiences were Cybersecurity Engineer, Business Analyst, and
 Infrastructure Engineer all at Marathon Petroleum. I developed technical skills in python,
 powershell, sql, and more. I developed non-technical skills like communication, teamwork,
 collaboration, and more. I acquired those skills through projects, work tasks, presentations, and
 being in a team. I expect to apply them in this project by working efficiently in a team and using
 python and/or sql if needed. My co-op experiences will allow me to manage my time and break
-down this project into deliverables on a realistic timeline.
+down this project into deliverables on a realistic timeline.   
+
 I am passionate about this project because it is close to home. I am a Hard-of-Hearing
-person who requires hearing aids to hear almost as well as a hearing person can. So, in high
+individual who requires hearing aids to hear almost as well as a hearing person can. So, in high
 school I took American Sign Language courses for 3 years to better understand Deaf culture
 and learn how to sign. There were not a lot of resources for me to continue to develop a deeper
 understanding after school, so this idea came to life. It will help ASL learners to gain more
@@ -38,3 +41,4 @@ are leaning towards having it sign a set amount of sentences and words that will
 ASL learners and teachers on campus through the ASL club on campus. We will know we are
 done when the avatar is capable of signing. We know we did a good job when it signs the right
 words in the right order and grammar. That is the goal of our project.
+
