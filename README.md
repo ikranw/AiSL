@@ -5,6 +5,7 @@ We are building an ASL learning tool. A user types an English sentence, our syst
 
 ### Team:
 Advisor: Dr. Jillian Aurisano
+Team Members:
 1. Elshaddai Melaku (melakueb@mail.uc.edu): Project Manager leading LLM work
 2. Ikran Warsame (warsamih@mail.uc.edu): Project Manager leading 3D avatar/animation, ASL community coordinator
 3. Fareena Khan (khanfe@mail.uc.edu): Project Manager leading UI and integration work
