@@ -38,4 +38,4 @@
 
 ## Project Sought
 
-Projects that apply UX/UI concepts, LLM and AI concepts, and more concepts to fruition. 
+Projects that apply UX/UI concepts, Data Visualization, impactful tech, LLM and AI concepts, and more. 
