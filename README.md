@@ -30,6 +30,22 @@ AiSL is an innovative AI-powered American Sign Language (ASL) learning tool desi
 [Presentation](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ppt-fall2025.pdf)
 
 ### Self-Assessment Essays
-8. Professional Biographies
-9. Budget
-10. Appendix
+[Elshaddai Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-contract.md)
+[Ikran Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/warsame-contract.md)
+[Fareena Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/khan-contract.md)
+
+### Professional Biographies
+[Elshaddai Bio](https://github.com/ikranw/AiSL/blob/main/biographies/melaku-bio.md)
+[Ikran Bio](https://github.com/ikranw/AiSL/blob/main/biographies/warsame-bio.md)
+[Fareena Bio](https://github.com/ikranw/AiSL/blob/main/biographies/khan-bio.md)
+
+### Budget
+[Budget](https://github.com/ikranw/AiSL/blob/main/homework-uploads/budget.md)
+
+### Appendix
+[Appendix Folder](https://github.com/ikranw/AiSL/tree/main/homework-uploads/appendix)
+[Initial Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/intial-brainstorm.md)
+[Idea 1 Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/idea1-brainstorm.md)
+[Resources](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/resources.md)
+[Considerations](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/tech-stack-considerations.md)
+
