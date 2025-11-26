@@ -43,9 +43,9 @@ AiSL is an innovative AI-powered American Sign Language (ASL) learning tool desi
 [Budget](https://github.com/ikranw/AiSL/blob/main/homework-uploads/budget.md)
 
 ### Appendix
-[Appendix Folder](https://github.com/ikranw/AiSL/tree/main/homework-uploads/appendix)
-[Initial Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/intial-brainstorm.md)
-[Idea 1 Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/idea1-brainstorm.md)
-[Resources](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/resources.md)
-[Considerations](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/tech-stack-considerations.md)
+* [Appendix Folder](https://github.com/ikranw/AiSL/tree/main/homework-uploads/appendix)
+* [Initial Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/intial-brainstorm.md)
+* [Idea 1 Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/idea1-brainstorm.md)
+* [Resources](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/resources.md)
+* [Considerations](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/tech-stack-considerations.md)
 
