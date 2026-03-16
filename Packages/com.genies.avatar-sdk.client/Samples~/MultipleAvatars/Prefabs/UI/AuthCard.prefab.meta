@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 17131e0707ba642daa60cd4c4b400aca
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 336166
+  packageName: Genies Avatar SDK
+  packageVersion: 1.3.2
+  assetPath: Packages/com.genies.avatar-sdk.client/Samples~/MultipleAvatars/Prefabs/UI/AuthCard.prefab
+  uploadId: 841192
