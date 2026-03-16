@@ -20,3 +20,8 @@ react UI -> backend (apis/translate/etc) -> react recieves sign sequence -> unit
 - contains 3D avatar + animation clips
 - exposes entry point
 - builds to webgl and produces static files that the frontend serves
+
+how to run frontend:
+- cd app/frontend
+- npm install
+- npm run dev
