@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8d7cba02935f6404a8c2860476029fa8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 336166
+  packageName: Genies Avatar SDK
+  packageVersion: 1.3.2
+  assetPath: Packages/com.genies.avatar-sdk.client/Internal/Shaders/Runtime/Shaders/MegaStylizer/StylePresets/08_2RegionCel.mat
+  uploadId: 841192

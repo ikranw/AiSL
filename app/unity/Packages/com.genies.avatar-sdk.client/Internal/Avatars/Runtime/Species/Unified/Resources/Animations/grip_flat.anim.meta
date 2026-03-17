@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0d25e3faf2232d649b223f6199d31de3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 336166
+  packageName: Genies Avatar SDK
+  packageVersion: 1.3.2
+  assetPath: Packages/com.genies.avatar-sdk.client/Internal/Avatars/Runtime/Species/Unified/Resources/Animations/grip_flat.anim
+  uploadId: 841192

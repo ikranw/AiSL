@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4631aad5e8397014eaa48ff0e4e5cd25
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 336166
+  packageName: Genies Avatar SDK
+  packageVersion: 1.3.2
+  assetPath: Packages/com.genies.avatar-sdk.client/Internal/Shaders/Runtime/Shaders/MegaStylizer/StylePresets/10_T1000.mat
+  uploadId: 841192
