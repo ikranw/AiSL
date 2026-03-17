@@ -38,8 +38,9 @@ def call_llm(prompt: str) -> str:
             {
                 "role": "system",
                 "content": (
-                    "You are a precise generator for dataset-compatible ASL gloss. "
-                    "Return valid JSON only."
+                    "You are a strict JSON generator for dataset-compatible ASL gloss. "
+                    "You must output exactly one valid JSON object and nothing else. "
+                    "Do not explain. Do not add commentary. Do not add markdown."
                 )
             },
             {
@@ -86,13 +87,23 @@ Repair instructions:
 - confidence_note must be a string.
 - Preserve dataset-style X-* and DESC-* tokens when appropriate.
 """
+def extract_json_object(raw_text: str) -> str:
+    start = raw_text.find("{")
+    end = raw_text.rfind("}")
+    if start == -1 or end == -1 or end <= start:
+        raise ValueError(f"No JSON object found in model output:\n{raw_text}")
+    return raw_text[start:end + 1]
 
 
 def parse_and_validate(raw_output: str) -> dict[str, Any]:
     try:
         parsed = json.loads(raw_output)
-    except json.JSONDecodeError as e:
-        raise ValueError(f"Model returned invalid JSON:\n{raw_output}") from e
+    except json.JSONDecodeError:
+        extracted = extract_json_object(raw_output)
+        try:
+            parsed = json.loads(extracted)
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Model returned invalid JSON:\n{raw_output}") from e
 
     validated = validate_output(parsed)
     return validated
@@ -149,6 +160,6 @@ def generate_once(text: str) -> dict[str, Any]:
 
 
 if __name__ == "__main__":
-    sample_text = "I want to go to the store."
+    sample_text = "Where are you going tomorrow?"
     result = generate_once(sample_text)
     print(json.dumps(result, indent=2, ensure_ascii=False))

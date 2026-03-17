@@ -14,6 +14,7 @@ DATA_DIR = BASE_DIR / "data"
 
 GRAMMAR_RULES_PATH = DATA_DIR / "grammar_rules.json"
 EXAMPLE_BANK_PATH = DATA_DIR / "example_bank.jsonl"
+CURATED_EXAMPLE_BANK_PATH = DATA_DIR / "example_bank_curated.jsonl"
 SIGN_INVENTORY_PATH = DATA_DIR / "sign_inventory.json"
 
 
@@ -37,7 +38,7 @@ CONDITIONAL_WORDS = {
 }
 
 COMMAND_HINT_WORDS = {
-    "please", "let", "remember", "do", "go", "stop", "help"
+    "please", "let", "remember", "do", "go", "stop", "help", "look", "sit", "tell"
 }
 
 
@@ -47,6 +48,9 @@ def _load_json(path: Path) -> Any:
 
 
 def _load_jsonl(path: Path) -> list[dict[str, Any]]:
+    if not path.exists():
+        return []
+
     rows: list[dict[str, Any]] = []
     with open(path, "r", encoding="utf-8") as f:
         for line in f:
@@ -67,25 +71,54 @@ def _detect_features(text: str) -> set[str]:
 
     if tokens & TIME_WORDS:
         features.add("time")
-    if tokens & WH_WORDS or text.strip().endswith("?"):
+    if tokens & WH_WORDS:
         features.add("question")
+        features.add("wh_question")
+    elif text.strip().endswith("?"):
+        features.add("question")
+        features.add("yes_no_question")
     if tokens & NEGATION_WORDS:
         features.add("negation")
     if tokens & CONDITIONAL_WORDS:
         features.add("conditional")
 
-    # Very rough command hint
-    if any(text.lower().startswith(word + " ") for word in COMMAND_HINT_WORDS):
+    first_word = _tokenize_text(text[:40])[:1]
+    if first_word and first_word[0] in COMMAND_HINT_WORDS:
         features.add("command")
 
     return features
+
+
+def _detect_sentence_type_hint(text: str) -> str:
+    tokens = set(_tokenize_text(text))
+    stripped = text.strip()
+
+    if tokens & CONDITIONAL_WORDS:
+        return "conditional"
+    if tokens & NEGATION_WORDS:
+        return "negation"
+    if tokens & WH_WORDS:
+        return "wh_question"
+    if stripped.endswith("?"):
+        return "yes_no_question"
+
+    first_word = _tokenize_text(text[:40])[:1]
+    if first_word and first_word[0] in COMMAND_HINT_WORDS:
+        return "command"
+
+    return "statement"
 
 
 def _get_default_rules(grammar_rules: list[dict[str, Any]]) -> list[dict[str, Any]]:
     defaults = []
     for rule in grammar_rules:
         rule_id = str(rule.get("rule_id", "")).lower()
-        if rule_id in {"compressed-gloss-style", "preserve-x-pronouns", "preserve-desc-markers"}:
+        if rule_id in {
+            "compact-word-order",
+            "preserve-x-pronouns",
+            "preserve-desc-markers",
+            "drop-articles",
+        }:
             defaults.append(rule)
     return defaults
 
@@ -100,22 +133,25 @@ def _select_relevant_rules(
 
     feature_to_rule_ids = {
         "time": {"time-topic-comment"},
-        "question": {"question-marking", "wh-question"},
-        "negation": {"explicit-negation", "negation"},
+        "question": {"question-marking", "yes-no-question", "wh-question"},
+        "wh_question": {"wh-question", "question-marking"},
+        "yes_no_question": {"yes-no-question", "question-marking", "non-manual-signals"},
+        "negation": {"explicit-negation"},
         "conditional": {"conditional"},
-        "command": {"command"},
+        "command": {"compact-word-order"},
     }
 
     wanted_rule_ids = set()
     for feature in features:
         wanted_rule_ids |= feature_to_rule_ids.get(feature, set())
 
+    # Priority pass: strongly relevant rules first
     for rule in grammar_rules:
         rule_id = str(rule.get("rule_id", "")).lower()
         if rule_id in wanted_rule_ids:
             selected.append(rule)
 
-    # Always include a few general-purpose rules
+    # Then add general defaults
     existing_ids = {str(r.get("rule_id", "")).lower() for r in selected}
     for rule in _get_default_rules(grammar_rules):
         rule_id = str(rule.get("rule_id", "")).lower()
@@ -126,23 +162,16 @@ def _select_relevant_rules(
     return selected[:max_rules]
 
 
-def _select_similar_examples(
-    text: str,
-    example_bank: list[dict[str, Any]],
-    max_examples: int = 5
-) -> list[dict[str, Any]]:
+def _score_examples(query: str, example_bank: list[dict[str, Any]], max_examples: int) -> list[dict[str, Any]]:
     if not example_bank:
         return []
 
     corpus = [str(row.get("english", "")).strip() for row in example_bank]
-    query = text.strip()
-
-    # Fallback if all corpus texts are empty
     if not any(corpus):
         return example_bank[:max_examples]
 
     vectorizer = TfidfVectorizer(lowercase=True, ngram_range=(1, 2))
-    matrix = vectorizer.fit_transform(corpus + [query])
+    matrix = vectorizer.fit_transform(corpus + [query.strip()])
 
     example_matrix = matrix[:-1]
     query_vector = matrix[-1]
@@ -159,6 +188,84 @@ def _select_similar_examples(
     return results
 
 
+def _filter_by_sentence_type(
+    examples: list[dict[str, Any]],
+    sentence_type_hint: str
+) -> list[dict[str, Any]]:
+    filtered = [ex for ex in examples if ex.get("sentence_type") == sentence_type_hint]
+    return filtered if filtered else examples
+
+
+def _filter_by_feature_bias(
+    examples: list[dict[str, Any]],
+    features: set[str]
+) -> list[dict[str, Any]]:
+    if not examples:
+        return examples
+
+    wanted_tags = set()
+    if "time" in features:
+        wanted_tags.add("time")
+    if "negation" in features:
+        wanted_tags.add("negation")
+    if "conditional" in features:
+        wanted_tags.add("conditional")
+    if "wh_question" in features:
+        wanted_tags.add("wh_question")
+    if "yes_no_question" in features:
+        wanted_tags.add("yes_no_question")
+    if "command" in features:
+        wanted_tags.add("command")
+
+    if not wanted_tags:
+        return examples
+
+    tagged = []
+    untagged = []
+    for ex in examples:
+        tags = set(ex.get("tags", []))
+        if tags & wanted_tags:
+            tagged.append(ex)
+        else:
+            untagged.append(ex)
+
+    return tagged + untagged
+
+
+def _select_similar_examples(
+    text: str,
+    curated_bank: list[dict[str, Any]],
+    full_bank: list[dict[str, Any]],
+    sentence_type_hint: str,
+    features: set[str],
+    max_examples: int = 5
+) -> list[dict[str, Any]]:
+    # 1) Prefer curated bank
+    curated_candidates = _filter_by_sentence_type(curated_bank, sentence_type_hint)
+    curated_candidates = _filter_by_feature_bias(curated_candidates, features)
+    curated_results = _score_examples(text, curated_candidates, max_examples=max_examples)
+
+    if len(curated_results) >= max_examples:
+        return curated_results[:max_examples]
+
+    # 2) Backfill from full bank only if needed
+    remaining = max_examples - len(curated_results)
+    full_candidates = _filter_by_sentence_type(full_bank, sentence_type_hint)
+    full_results = _score_examples(text, full_candidates, max_examples=remaining * 3)
+
+    # Avoid duplicates by English text
+    seen_english = {ex.get("english") for ex in curated_results}
+    backfill = []
+    for ex in full_results:
+        if ex.get("english") in seen_english:
+            continue
+        backfill.append(ex)
+        if len(backfill) >= remaining:
+            break
+
+    return curated_results + backfill
+
+
 def _build_allowed_token_policy(sign_inventory: dict[str, Any]) -> str:
     canonical_tokens = sign_inventory.get("canonical_tokens", [])
     token_count = len(canonical_tokens)
@@ -168,28 +275,41 @@ def _build_allowed_token_policy(sign_inventory: dict[str, Any]) -> str:
         f"(current inventory size: {token_count}). "
         f"Preserve X-* and DESC-* token forms exactly when supported by the inventory "
         f"or retrieved examples. "
+        f"Prefer compressed dataset-compatible gloss over English-like phrasing. "
         f"If a needed concept is unavailable, output FINGERSPELL(word)."
     )
 
 
 def retrieve_context(text: str) -> dict[str, Any]:
     grammar_rules = _load_json(GRAMMAR_RULES_PATH)
-    example_bank = _load_jsonl(EXAMPLE_BANK_PATH)
+    full_bank = _load_jsonl(EXAMPLE_BANK_PATH)
+    curated_bank = _load_jsonl(CURATED_EXAMPLE_BANK_PATH)
     sign_inventory = _load_json(SIGN_INVENTORY_PATH)
 
+    features = _detect_features(text)
+    sentence_type_hint = _detect_sentence_type_hint(text)
+
     retrieved_rules = _select_relevant_rules(text, grammar_rules, max_rules=5)
-    retrieved_examples = _select_similar_examples(text, example_bank, max_examples=5)
+    retrieved_examples = _select_similar_examples(
+        text=text,
+        curated_bank=curated_bank,
+        full_bank=full_bank,
+        sentence_type_hint=sentence_type_hint,
+        features=features,
+        max_examples=5,
+    )
     allowed_token_policy = _build_allowed_token_policy(sign_inventory)
 
     return {
         "retrieved_rules": retrieved_rules,
         "retrieved_examples": retrieved_examples,
         "allowed_token_policy": allowed_token_policy,
+        "detected_sentence_type_hint": sentence_type_hint,
+        "detected_features": sorted(features),
     }
 
 
 if __name__ == "__main__":
     sample_text = "Where are you going tomorrow?"
     result = retrieve_context(sample_text)
-
     print(json.dumps(result, indent=2, ensure_ascii=False))

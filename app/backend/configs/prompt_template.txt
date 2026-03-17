@@ -1,8 +1,12 @@
 You are converting English text into dataset-compatible ASL gloss.
 
 Return JSON only.
+Your entire response must be a single valid JSON object.
 Do not return markdown.
 Do not explain your reasoning.
+Do not include commentary before or after the JSON.
+Do not describe ASL grammar.
+Do not justify your answer.
 
 Schema:
 {{
@@ -30,6 +34,23 @@ Constraints:
 - sentence_type must be from the enum only.
 - non_manual must be an array, even if empty.
 - Output valid JSON only.
+- Follow dataset-compatible gloss order, not English word order.
+- Prefer the structure shown in the retrieved examples.
+- If retrieved rules conflict with English syntax, follow the retrieved rules.
+- Preserve X-* and DESC-* forms when supported by examples or inventory.
+- Do not rewrite into natural English-like sentences.
+- Output one valid JSON object only.
+- No prose before the JSON.
+- No prose after the JSON.
+- Follow dataset-compatible gloss order, not English word order.
+- Prefer compressed gloss and omit unnecessary English function words when supported by retrieved examples.
+- Use uppercase gloss tokens.
+- Use only canonical gloss tokens from the allowed list.
+- Preserve dataset-style X-* and DESC-* tokens when appropriate.
+- If a word cannot be represented with allowed tokens, output FINGERSPELL(word).
+- sentence_type must be from the enum only.
+- non_manual must be an array, even if empty.
+- Prefer compact gloss by omitting unnecessary English function words such as articles and infinitive markers when not supported by retrieved examples.
 
 Input sentence:
 {input_text}

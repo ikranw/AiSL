@@ -1,18 +1,211 @@
 [
     {
-      "rule_id": "drop-articles",
-      "description": "Articles like 'a', 'an', and 'the' may be omitted in gloss.",
-      "pattern": "ARTICLE often omitted",
+      "rule_id": "topic-comment",
+      "description": "ASL often introduces the topic first, followed by information about it.",
+      "pattern": "TOPIC, COMMENT",
       "examples": [
-        "the document was received -> DOCUMENT RECEIVE"
+        "BOOK, I READ FINISH",
+        "STORE, X-I GO"
+      ]
+    },
+    {
+      "rule_id": "time-topic-comment",
+      "description": "Time is often established near the beginning of the sentence before the main topic and comment.",
+      "pattern": "TIME + TOPIC + COMMENT",
+      "examples": [
+        "YESTERDAY X-I GO STORE",
+        "TOMORROW MEETING X-WE ATTEND"
+      ]
+    },
+    {
+      "rule_id": "drop-articles",
+      "description": "Articles such as 'a', 'an', and 'the' are often omitted in gloss.",
+      "pattern": "ARTICLE OMITTED",
+      "examples": [
+        "the document was received -> DOCUMENT RECEIVE",
+        "the book is on the table -> BOOK ON TABLE"
       ]
     },
     {
       "rule_id": "compact-word-order",
-      "description": "Gloss often uses condensed word order and drops non-essential function words.",
+      "description": "Gloss often compresses English by prioritizing content-bearing signs and dropping non-essential function words.",
       "pattern": "CONTENT TOKENS ONLY",
       "examples": [
-        "approval of minutes of previous sitting -> APPROVAL MINUTE DESC-PREVIOUS SIT"
+        "approval of minutes of previous sitting -> APPROVAL MINUTE DESC-PREVIOUS SIT",
+        "opening of the sitting -> OPEN SIT"
+      ]
+    },
+    {
+      "rule_id": "spatial-referencing",
+      "description": "ASL assigns referents to locations in signing space. Spatial reference markers can be carried through the discourse.",
+      "pattern": "REFERENT + IX-location",
+      "examples": [
+        "PERSON IX-LEFT",
+        "CAR IX-RIGHT"
+      ]
+    },
+    {
+      "rule_id": "indexing",
+      "description": "Pointing or index markers indicate referents in space and support agreement and tracking.",
+      "pattern": "IX / X-* REFERENT MARKING",
+      "examples": [
+        "PERSON IX-LEFT",
+        "X-I THINK X-IT BE MISUNDERSTANDING"
+      ]
+    },
+    {
+      "rule_id": "classifier-predicates",
+      "description": "Classifier predicates represent categories, shapes, and motion. Movement contributes meaning.",
+      "pattern": "CL:HANDSHAPE + MOVEMENT",
+      "examples": [
+        "CAR CL:3-DRIVE-UPHILL",
+        "ROLE-SHIFT DRIVER CL:HANDLING-3-STEER"
+      ]
+    },
+    {
+      "rule_id": "directional-verbs",
+      "description": "Some verbs move between subject and object to show agreement.",
+      "pattern": "VERB-direction",
+      "examples": [
+        "GIVE-ME",
+        "TELL-YOU"
+      ]
+    },
+    {
+      "rule_id": "non-manual-signals",
+      "description": "Facial expressions, head movement, and body shifts are grammatical and can mark questions, negation, or emphasis.",
+      "pattern": "MANUAL SIGNS + NMS",
+      "examples": [
+        "YES/NO QUESTION -> raised eyebrows",
+        "WH-QUESTION -> furrowed brows",
+        "NEGATION -> headshake"
+      ]
+    },
+    {
+      "rule_id": "yes-no-question",
+      "description": "Yes/no questions are often marked with raised eyebrows and question structure.",
+      "pattern": "QUESTION + RAISED EYEBROWS",
+      "examples": [
+        "BE THIS BE TAKE INTO CONSIDERATION ?",
+        "X-YOU GO STORE ?"
+      ]
+    },
+    {
+      "rule_id": "wh-question",
+      "description": "WH questions use explicit WH signs and are often accompanied by furrowed brows.",
+      "pattern": "COMMENT + WH / WH EXPLICIT",
+      "examples": [
+        "WHERE BE SE ?",
+        "WHO BE GUIDE WHOM DESC-HERE ?"
+      ]
+    },
+    {
+      "rule_id": "role-shift",
+      "description": "Body shift or perspective change represents another person's viewpoint or action.",
+      "pattern": "ROLE-SHIFT + ACTION",
+      "examples": [
+        "ROLE-SHIFT DRIVER CL:HANDLING-3-STEER",
+        "ROLE-SHIFT TEACHER TELL-STUDENT"
+      ]
+    },
+    {
+      "rule_id": "explicit-negation",
+      "description": "Negation is represented explicitly through signs such as NOT, NONE, NEVER, or dataset-specific negation markers such as DESC-NOT.",
+      "pattern": "NEGATION TOKEN + COMMENT",
+      "examples": [
+        "IF RAIN, GAME DESC-NOT HAPPEN",
+        "WILL DESC-NOT REPRESENT UNITE KINGDOM"
+      ]
+    },
+    {
+      "rule_id": "conditional",
+      "description": "Conditional clauses are often introduced first and may be marked with raised eyebrows.",
+      "pattern": "IF CONDITION, RESULT",
+      "examples": [
+        "IF RAIN, GAME CANCEL",
+        "IF X-YOU STUDY, X-YOU PASS"
+      ]
+    },
+    {
+      "rule_id": "preserve-x-pronouns",
+      "description": "Dataset-compatible gloss may use canonical X- forms for pronouns, referents, and possessive relations.",
+      "pattern": "X-* TOKENS PRESERVED",
+      "examples": [
+        "X-I THINK X-IT BE MISUNDERSTANDING",
+        "CHILD X-POSS FINGERPRINT"
+      ]
+    },
+    {
+      "rule_id": "preserve-desc-markers",
+      "description": "Dataset-compatible gloss may use DESC- forms for descriptive, emphatic, or discourse-marking tokens.",
+      "pattern": "DESC-* TOKENS PRESERVED",
+      "examples": [
+        "DESC-FINALLY",
+        "DESC-NOT",
+        "DESC-VERY KIND"
+      ]
+    },
+    {
+      "rule_id": "hyphen-continuous-movement",
+      "description": "A hyphen can indicate a continuous sign, connected movement, or directional morphology.",
+      "pattern": "TOKEN-TOKEN / MOVEMENT-CONTINUATION",
+      "examples": [
+        "DRIVE-UPHILL-SLOW",
+        "GIVE-ME"
+      ]
+    },
+    {
+      "rule_id": "repetition-intensity",
+      "description": "Repeated plus symbols indicate repeated movement, habitual action, or intensity.",
+      "pattern": "TOKEN++ / TOKEN+++",
+      "examples": [
+        "KNOCK++",
+        "STUDY+++"
+      ]
+    },
+    {
+      "rule_id": "parenthetical-nms",
+      "description": "Parentheses can be used in gloss notation to indicate non-manual signals such as mouth morphemes or facial markers.",
+      "pattern": "SIGN (NMS)",
+      "examples": [
+        "CL:B-THICK-WIDE (mm mouth)",
+        "QUESTION (raised eyebrows)"
+      ]
+    },
+    {
+      "rule_id": "incorporation",
+      "description": "Some time or number concepts may be incorporated into a single gloss form.",
+      "pattern": "NUMBER/TIME-INCORPORATED TOKEN",
+      "examples": [
+        "3-WEEK",
+        "EVERY-DAY"
+      ]
+    },
+    {
+      "rule_id": "aspect-marking",
+      "description": "Movement modifications can show repeated, habitual, prolonged, or intensified action.",
+      "pattern": "VERB + ASPECT MODIFICATION",
+      "examples": [
+        "STUDY+++",
+        "WAIT++"
+      ]
+    },
+    {
+      "rule_id": "spatial-agreement",
+      "description": "Agreement can be shown by moving verbs between indexed spatial referents.",
+      "pattern": "IX-location + AGREEMENT VERB",
+      "examples": [
+        "PERSON IX-LEFT, PERSON IX-RIGHT, GIVE-RIGHT-TO-LEFT",
+        "TELL-LEFT-TO-RIGHT"
+      ]
+    },
+    {
+      "rule_id": "constructed-action",
+      "description": "Constructed action uses body, face, and movement to depict a person's actions or perspective.",
+      "pattern": "CA / ROLE-SHIFT + DEPICTION",
+      "examples": [
+        "ROLE-SHIFT DRIVER CL:HANDLING-3-STEER",
+        "CA PERSON LOOK-AROUND"
       ]
     }
   ]

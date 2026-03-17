@@ -1,0 +1,50 @@
+{"english":"I want to go to the store.","gloss":["X-I","WANT","GO","STORE"],"sentence_type":"statement","tags":["statement","first_person","movement","everyday"]}
+{"english":"I am going to the store tomorrow.","gloss":["TOMORROW","STORE","X-I","GO"],"sentence_type":"statement","tags":["statement","time","movement","everyday"]}
+{"english":"I went to school yesterday.","gloss":["YESTERDAY","SCHOOL","X-I","GO"],"sentence_type":"statement","tags":["statement","time","school","first_person"]}
+{"english":"Today we work.","gloss":["TODAY","X-WE","WORK"],"sentence_type":"statement","tags":["statement","time","work"]}
+{"english":"I am at home now.","gloss":["NOW","X-I","AT","HOME"],"sentence_type":"statement","tags":["statement","time","location","first_person"]}
+{"english":"My friend is here.","gloss":["X-POSS","FRIEND","DESC-HERE"],"sentence_type":"statement","tags":["statement","relationship","location"]}
+{"english":"The teacher is kind.","gloss":["TEACHER","BE","KIND"],"sentence_type":"statement","tags":["statement","school","description"]}
+{"english":"The book is on the table.","gloss":["BOOK","ON","TABLE"],"sentence_type":"statement","tags":["statement","object","location"]}
+{"english":"I like coffee.","gloss":["X-I","LIKE","COFFEE"],"sentence_type":"statement","tags":["statement","food","first_person"]}
+{"english":"We study every day.","gloss":["EVERY-DAY","X-WE","STUDY"],"sentence_type":"statement","tags":["statement","habitual","school"]}
+{"english":"What is your name?","gloss":["X-YOU","NAME","WHAT"],"sentence_type":"wh_question","tags":["wh_question","identity","everyday"]}
+{"english":"Where are you going?","gloss":["WHERE","X-YOU","GO"],"sentence_type":"wh_question","tags":["wh_question","movement","everyday"]}
+{"english":"Where are you going tomorrow?","gloss":["TOMORROW","WHERE","X-YOU","GO"],"sentence_type":"wh_question","tags":["wh_question","time","movement"]}
+{"english":"Who is your teacher?","gloss":["X-YOU","TEACHER","WHO"],"sentence_type":"wh_question","tags":["wh_question","school","identity"]}
+{"english":"When is the meeting?","gloss":["MEETING","WHEN"],"sentence_type":"wh_question","tags":["wh_question","time","work"]}
+{"english":"Why are you here?","gloss":["WHY","X-YOU","DESC-HERE"],"sentence_type":"wh_question","tags":["wh_question","location","everyday"]}
+{"english":"How are you?","gloss":["X-YOU","HOW"],"sentence_type":"wh_question","tags":["wh_question","everyday"]}
+{"english":"Which book do you want?","gloss":["BOOK","X-YOU","WANT","WHICH"],"sentence_type":"wh_question","tags":["wh_question","object","choice"]}
+{"english":"Who told you?","gloss":["WHO","TELL-YOU"],"sentence_type":"wh_question","tags":["wh_question","directional_verb","everyday"]}
+{"english":"What time do we leave?","gloss":["X-WE","LEAVE","WHEN"],"sentence_type":"wh_question","tags":["wh_question","time","movement"]}
+{"english":"Are you ready?","gloss":["X-YOU","READY","?"],"sentence_type":"yes_no_question","tags":["yes_no_question","everyday"]}
+{"english":"Do you want coffee?","gloss":["X-YOU","WANT","COFFEE","?"],"sentence_type":"yes_no_question","tags":["yes_no_question","food","everyday"]}
+{"english":"Can you help me?","gloss":["X-YOU","HELP-ME","?"],"sentence_type":"yes_no_question","tags":["yes_no_question","everyday","directional_verb"]}
+{"english":"Is the class tomorrow?","gloss":["TOMORROW","CLASS","?"],"sentence_type":"yes_no_question","tags":["yes_no_question","time","school"]}
+{"english":"Are we late?","gloss":["X-WE","LATE","?"],"sentence_type":"yes_no_question","tags":["yes_no_question","time","everyday"]}
+{"english":"Did you go to work?","gloss":["X-YOU","GO","WORK","?"],"sentence_type":"yes_no_question","tags":["yes_no_question","work","movement"]}
+{"english":"Is this your book?","gloss":["THIS","X-YOU","BOOK","?"],"sentence_type":"yes_no_question","tags":["yes_no_question","object","everyday"]}
+{"english":"Can I sit here?","gloss":["X-I","SIT","DESC-HERE","?"],"sentence_type":"yes_no_question","tags":["yes_no_question","location","first_person"]}
+{"english":"Do they know you?","gloss":["X-THEY","KNOW","X-YOU","?"],"sentence_type":"yes_no_question","tags":["yes_no_question","people","everyday"]}
+{"english":"Should we leave now?","gloss":["NOW","X-WE","LEAVE","?"],"sentence_type":"yes_no_question","tags":["yes_no_question","time","movement"]}
+{"english":"I do not want that.","gloss":["THAT","X-I","WANT","DESC-NOT"],"sentence_type":"negation","tags":["negation","first_person","everyday"]}
+{"english":"I am not going.","gloss":["X-I","GO","DESC-NOT"],"sentence_type":"negation","tags":["negation","movement","first_person"]}
+{"english":"We do not have class today.","gloss":["TODAY","X-WE","HAVE","CLASS","DESC-NOT"],"sentence_type":"negation","tags":["negation","time","school"]}
+{"english":"She is not here.","gloss":["X-SHE","DESC-HERE","DESC-NOT"],"sentence_type":"negation","tags":["negation","location","people"]}
+{"english":"He never studies.","gloss":["X-HE","NEVER","STUDY"],"sentence_type":"negation","tags":["negation","school","habitual"]}
+{"english":"There is no milk.","gloss":["MILK","NONE"],"sentence_type":"negation","tags":["negation","food","everyday"]}
+{"english":"I cannot help today.","gloss":["TODAY","X-I","HELP","DESC-NOT"],"sentence_type":"negation","tags":["negation","time","first_person"]}
+{"english":"They do not know me.","gloss":["X-THEY","KNOW","X-I","DESC-NOT"],"sentence_type":"negation","tags":["negation","people","everyday"]}
+{"english":"The store is not open.","gloss":["STORE","OPEN","DESC-NOT"],"sentence_type":"negation","tags":["negation","location","everyday"]}
+{"english":"I am not ready yet.","gloss":["X-I","READY","DESC-NOT","YET"],"sentence_type":"negation","tags":["negation","everyday","first_person"]}
+{"english":"If it rains, the game is canceled.","gloss":["IF","RAIN",",","GAME","CANCEL"],"sentence_type":"conditional","tags":["conditional","weather","everyday"]}
+{"english":"If you study, you will pass.","gloss":["IF","X-YOU","STUDY",",","X-YOU","PASS"],"sentence_type":"conditional","tags":["conditional","school","everyday"]}
+{"english":"If I go to the store, I will buy milk.","gloss":["IF","X-I","GO","STORE",",","X-I","BUY","MILK"],"sentence_type":"conditional","tags":["conditional","shopping","first_person"]}
+{"english":"If we leave now, we will be early.","gloss":["IF","NOW","X-WE","LEAVE",",","X-WE","EARLY"],"sentence_type":"conditional","tags":["conditional","time","movement"]}
+{"english":"If she calls, tell me.","gloss":["IF","X-SHE","CALL",",","TELL-ME"],"sentence_type":"conditional","tags":["conditional","directional_verb","everyday"]}
+{"english":"Help me.","gloss":["HELP-ME"],"sentence_type":"command","tags":["command","everyday","directional_verb"]}
+{"english":"Please sit down.","gloss":["PLEASE","SIT"],"sentence_type":"command","tags":["command","everyday"]}
+{"english":"Go home now.","gloss":["NOW","GO","HOME"],"sentence_type":"command","tags":["command","time","movement"]}
+{"english":"Tell me your name.","gloss":["TELL-ME","X-YOU","NAME"],"sentence_type":"command","tags":["command","identity","directional_verb"]}
+{"english":"Look at the book.","gloss":["LOOK","BOOK"],"sentence_type":"command","tags":["command","object","everyday"]}
