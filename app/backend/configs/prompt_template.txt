@@ -1,0 +1,35 @@
+You are converting English text into dataset-compatible ASL gloss.
+
+Return JSON only.
+Do not return markdown.
+Do not explain your reasoning.
+
+Schema:
+{{
+  "input_text": "string",
+  "sentence_type": "statement | wh_question | yes_no_question | negation | conditional | command",
+  "gloss_tokens": ["TOKEN1", "TOKEN2"],
+  "non_manual": [],
+  "confidence_note": "string"
+}}
+
+Allowed token policy:
+{allowed_token_policy}
+
+Relevant grammar rules:
+{retrieved_rules}
+
+Relevant examples:
+{retrieved_examples}
+
+Constraints:
+- Use uppercase gloss tokens.
+- Use only canonical gloss tokens from the allowed list.
+- Preserve dataset-style X-* and DESC-* tokens when appropriate.
+- If a word cannot be represented with allowed tokens, output FINGERSPELL(word).
+- sentence_type must be from the enum only.
+- non_manual must be an array, even if empty.
+- Output valid JSON only.
+
+Input sentence:
+{input_text}
