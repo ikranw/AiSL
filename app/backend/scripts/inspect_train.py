@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("train.csv", encoding="utf-8-sig")
+df = pd.read_csv("scripts/train.csv", encoding="utf-8-sig")
 
 print("Shape:", df.shape)
 print("Columns:", df.columns.tolist())

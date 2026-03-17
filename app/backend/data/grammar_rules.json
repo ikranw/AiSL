@@ -1,0 +1,18 @@
+[
+    {
+      "rule_id": "drop-articles",
+      "description": "Articles like 'a', 'an', and 'the' may be omitted in gloss.",
+      "pattern": "ARTICLE often omitted",
+      "examples": [
+        "the document was received -> DOCUMENT RECEIVE"
+      ]
+    },
+    {
+      "rule_id": "compact-word-order",
+      "description": "Gloss often uses condensed word order and drops non-essential function words.",
+      "pattern": "CONTENT TOKENS ONLY",
+      "examples": [
+        "approval of minutes of previous sitting -> APPROVAL MINUTE DESC-PREVIOUS SIT"
+      ]
+    }
+  ]
