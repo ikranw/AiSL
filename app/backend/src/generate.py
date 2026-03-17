@@ -10,19 +10,13 @@ from openai import OpenAI
 from retrieval import retrieve_context
 from prompting import build_prompt
 from validate import validate_output
+from normalize import normalize_output
 
-# These two will be implemented in later phases.
-# For now, we provide safe fallbacks if the files do not exist yet.
-try:
-    from normalize import normalize_output
-except ImportError:
-    def normalize_output(data: Any) -> Any:
-        return data
-
+# Temporary fallback until map_to_signs.py is implemented
 try:
     from map_to_signs import map_to_signs
 except ImportError:
-    def map_to_signs(data: Any) -> Any:
+    def map_to_signs(data: dict[str, Any]) -> dict[str, Any]:
         return data
 
 
@@ -32,44 +26,30 @@ API_KEY = os.getenv("OPENAI_API_KEY")
 MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-5.4-mini")
 
 if not API_KEY:
-    raise RuntimeError(
-        "OPENAI_API_KEY is missing. Add it to your .env file in app/backend."
-    )
+    raise RuntimeError("OPENAI_API_KEY is missing in .env")
 
 client = OpenAI(api_key=API_KEY)
 
 
 def call_llm(prompt: str) -> str:
-    """
-    Calls the OpenAI model and returns raw text.
-    We explicitly ask for JSON text output only.
-    """
     response = client.responses.create(
         model=MODEL_NAME,
         input=[
             {
                 "role": "system",
-                "content": (
-                    "You are a precise generator for dataset-compatible ASL gloss. "
-                    "Return valid JSON only."
-                ),
+                "content": "You are a precise generator for dataset-compatible ASL gloss. Return valid JSON only."
             },
             {
                 "role": "user",
-                "content": prompt,
-            },
+                "content": prompt
+            }
         ],
         max_output_tokens=300,
     )
-
     return response.output_text
 
 
 def generate_once(text: str) -> dict[str, Any]:
-    """
-    Full Phase 9 flow:
-    retrieve → prompt → LLM → parse JSON → validate → normalize → map
-    """
     text = text.strip()
     if not text:
         raise ValueError("Input text cannot be empty.")
@@ -92,22 +72,16 @@ def generate_once(text: str) -> dict[str, Any]:
     try:
         parsed = json.loads(raw_output)
     except json.JSONDecodeError as e:
-        raise ValueError(
-            f"Model returned invalid JSON.\n\nRaw output:\n{raw_output}"
-        ) from e
+        raise ValueError(f"Model returned invalid JSON:\n{raw_output}") from e
 
-    # 5. Validate output schema
+    # 5. Validate schema
     validated = validate_output(parsed)
 
-    # 6. Normalize output
+    # 6. Normalize tokens
     normalized = normalize_output(validated)
 
     # 7. Map to signs
     mapped = map_to_signs(normalized)
-
-    # If later phases return Pydantic objects, convert cleanly
-    if hasattr(mapped, "model_dump"):
-        return mapped.model_dump()
 
     return mapped
 
