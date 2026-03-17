@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 86f27364e97e9494c931f875f47294cf
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 336166
+  packageName: Genies Avatar SDK
+  packageVersion: 1.3.2
+  assetPath: Packages/com.genies.avatar-sdk.client/Samples~/MultipleAvatars/Prefabs/UI/PrimaryButton.prefab
+  uploadId: 841192
