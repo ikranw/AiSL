@@ -31,11 +31,12 @@ export default function App(): JSX.Element {
 
   const handleTranslate = useCallback(async () => {
     const trimmedInput = input.trim();
+
     if (!trimmedInput) {
       return;
     }
 
-    if (input.length > MAX_INPUT_LENGTH) {
+    if (trimmedInput.length > MAX_INPUT_LENGTH) {
       setErrorMessage(`Please keep the input under ${MAX_INPUT_LENGTH} characters.`);
       return;
     }
@@ -46,7 +47,12 @@ export default function App(): JSX.Element {
     try {
       const result = await translateEnglishToASL(trimmedInput);
       setResponse(result);
-      sendSignSequenceToUnity(result.sign_sequence, { speed, loop: isLooping });
+
+      if (result.sign_sequence?.length) {
+        sendSignSequenceToUnity(result.sign_sequence.map((item) => item.token),
+        { speed, loop: isLooping }
+        );
+      }
     } catch (error) {
       setErrorMessage('We could not translate that text right now. Please try again.');
     } finally {
@@ -75,6 +81,7 @@ export default function App(): JSX.Element {
                 onTranslate={handleTranslate}
               />
             </Grid>
+
             <Grid item xs={12} md={6}>
               <AvatarCard statusText={statusText} isBusy={isLoading}>
                 <PlaybackControls
