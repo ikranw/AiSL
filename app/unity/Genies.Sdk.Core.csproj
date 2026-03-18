@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.Sdk</RootNamespace>
-    <ProjectGuid>{51D53F24-BC17-8C79-B7D8-6418388B24E6}</ProjectGuid>
+    <ProjectGuid>{DD07A929-013F-11D8-9371-28D09AA08A32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.Sdk.Core</AssemblyName>
@@ -58,7 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
+    <Analyzer Include="C:\Users\Ikran\Documents\GitHub\AiSL\app\unity\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Packages\com.genies.avatar-sdk.client\SDK Core\Runtime\Scripts\Internal\CoreSdk.cs" />
@@ -1206,47 +1206,47 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Genies.Avatars.csproj">
-      <Project>{D50A5BC8-36D3-9D7B-E3F1-C20DADF06EF6}</Project>
+      <Project>{FB011FCF-1CE1-E016-C913-A778F46828D3}</Project>
       <Name>Genies.Avatars</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Avatars.Sdk.csproj">
-      <Project>{B8E74801-D41F-430F-B889-4FB2B2554C18}</Project>
+      <Project>{8E5A2C2A-FE00-F054-30C8-8FBFCFDBF123}</Project>
       <Name>Genies.Avatars.Sdk</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Inventory.csproj">
-      <Project>{A6EC4965-BA31-5CED-C204-772422BFDFD8}</Project>
+      <Project>{CD2A0D68-D551-10EC-1C83-8FACC6DBC3FF}</Project>
       <Name>Genies.Inventory</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Login.csproj">
-      <Project>{F2791458-0FBB-05E9-57E2-4724DD1CF48F}</Project>
+      <Project>{77395620-F8DE-B1A6-98BF-E5A0037F2426}</Project>
       <Name>Genies.Login</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Login.Native.csproj">
-      <Project>{367EE28F-447C-A21B-6206-543630EB5BA5}</Project>
+      <Project>{D2158CD4-348F-671A-6F4A-D11E3E6FFC90}</Project>
       <Name>Genies.Login.Native</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Naf.csproj">
-      <Project>{30325F94-4230-7628-4D70-C15C9EDAE5DB}</Project>
+      <Project>{98DD484A-3942-9A58-3965-A08BCD4C2FB3}</Project>
       <Name>Genies.Naf</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.NafPlugin.csproj">
-      <Project>{61DF77DF-9D96-28E6-C8E9-845BEE90B1BC}</Project>
+      <Project>{98EFD3E5-0B9B-F015-6BEB-6375EDAAFBCB}</Project>
       <Name>Genies.NafPlugin</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Services.csproj">
-      <Project>{8DD8770F-0C94-44B8-B690-8AC95325E1E7}</Project>
+      <Project>{55654B81-509C-414A-CDB2-57263F355586}</Project>
       <Name>Genies.Services</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
+      <Project>{DCE68A21-EA6E-8E4A-2D4F-67B3F681EAD6}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Telemetry.csproj">
-      <Project>{27C9351A-7136-93D4-6197-36D30CC3A725}</Project>
+      <Project>{28ECAA76-87E6-1E6A-C6C6-FA2E2546F8FB}</Project>
       <Name>Genies.Telemetry</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

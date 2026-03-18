@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BD25E6D5-ACB8-249C-E6C1-9B8AA3C3A212}</ProjectGuid>
+    <ProjectGuid>{1A973F90-BCBC-9336-70B5-E4569FF85A3D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Unity.RenderPipelines.Universal.Editor</AssemblyName>
@@ -1460,11 +1460,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
-      <Project>{0CDDDAD6-141A-F965-1F00-A5A052C5B5BF}</Project>
+      <Project>{A02EBCC7-5C11-DE37-18CA-8262E2498B8F}</Project>
       <Name>Unity.ShaderGraph.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

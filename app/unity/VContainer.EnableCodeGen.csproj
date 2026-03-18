@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{DD7574DD-FBFA-EAA5-108E-28036E74A5E8}</ProjectGuid>
+    <ProjectGuid>{47E00FF7-297A-9AAC-0754-BCF36F2A8898}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>VContainer.EnableCodeGen</AssemblyName>

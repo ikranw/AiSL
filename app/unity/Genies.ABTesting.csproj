@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.ABTesting</RootNamespace>
-    <ProjectGuid>{E68DE711-647F-F326-9DD5-68DEC40433DC}</ProjectGuid>
+    <ProjectGuid>{4124E0DE-1318-819A-0955-97CF60D81E06}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.ABTesting</AssemblyName>
@@ -1194,11 +1194,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
+      <Project>{DCE68A21-EA6E-8E4A-2D4F-67B3F681EAD6}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
   </ItemGroup>

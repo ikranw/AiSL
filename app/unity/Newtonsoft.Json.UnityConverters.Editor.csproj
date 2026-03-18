@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{6FD84F95-47FC-310C-ECCA-B474E98A2B75}</ProjectGuid>
+    <ProjectGuid>{08C058D3-3643-ADBC-5E3C-F6C38A497389}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Newtonsoft.Json.UnityConverters.Editor</AssemblyName>
@@ -1150,11 +1150,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Newtonsoft.Json.UnityConverters.csproj">
-      <Project>{3A99B00D-1360-8EBE-03F4-49BE8CB2A984}</Project>
+      <Project>{AF333CC7-3258-AA6A-4A23-DD1F9468909E}</Project>
       <Name>Newtonsoft.Json.UnityConverters</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

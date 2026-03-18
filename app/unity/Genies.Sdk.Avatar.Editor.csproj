@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.Sdk.Editor</RootNamespace>
-    <ProjectGuid>{C0B60C9B-668A-9A7C-781D-9A33517C2BBD}</ProjectGuid>
+    <ProjectGuid>{E6C25918-5CB9-D274-9FFE-FE13BC219E93}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.Sdk.Avatar.Editor</AssemblyName>
@@ -1213,7 +1213,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

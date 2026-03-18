@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.Avatars</RootNamespace>
-    <ProjectGuid>{D50A5BC8-36D3-9D7B-E3F1-C20DADF06EF6}</ProjectGuid>
+    <ProjectGuid>{FB011FCF-1CE1-E016-C913-A778F46828D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.Avatars</AssemblyName>
@@ -58,7 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
+    <Analyzer Include="C:\Users\Ikran\Documents\GitHub\AiSL\app\unity\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Packages\com.genies.avatar-sdk.client\Internal\Avatars\Runtime\GenieContext\Services\OutfitAssetLoader\StaticWearableAsset.cs" />
@@ -1472,63 +1472,63 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Genies.Assets.Services.csproj">
-      <Project>{AACAD69F-401A-A432-19AE-D0549358C3D7}</Project>
+      <Project>{C7D1E718-C74D-C4BE-FECB-C12D37817303}</Project>
       <Name>Genies.Assets.Services</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.CrashReporting.csproj">
-      <Project>{8020C914-FC6B-44CD-C02E-B6857461CD69}</Project>
+      <Project>{FB88A904-BE7B-CA2A-5AD5-BD692750E6C7}</Project>
       <Name>Genies.CrashReporting</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.FeatureFlags.csproj">
-      <Project>{3C25FB2C-37DC-F49A-F583-4A81192AEFA6}</Project>
+      <Project>{705902F9-5B2E-BA2F-BBFE-8A58ADA3696F}</Project>
       <Name>Genies.FeatureFlags</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.PerformanceMonitoring.csproj">
-      <Project>{819B5F5A-CDBF-90E6-3BE3-F361569460C2}</Project>
+      <Project>{0AFE3DC5-DC0C-8578-AC7E-EABE5716C62F}</Project>
       <Name>Genies.PerformanceMonitoring</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Refs.csproj">
-      <Project>{027E52A0-E4D4-C921-87E0-C95029425B4B}</Project>
+      <Project>{D66AA6BA-7C43-B71E-5834-146CF20B369C}</Project>
       <Name>Genies.Refs</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.ServiceManagement.csproj">
-      <Project>{4418D1C9-C861-F024-24D9-9BBE2C1B6F9A}</Project>
+      <Project>{9E01C65C-C4CD-158C-CE10-C0E77EAD2883}</Project>
       <Name>Genies.ServiceManagement</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Shaders.csproj">
-      <Project>{3A69D35E-5FCF-E113-FADE-BF8487795FF0}</Project>
+      <Project>{0546D9B7-6438-E5EF-D018-01F3BE0F740D}</Project>
       <Name>Genies.Shaders</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Utilities.csproj">
-      <Project>{58A7772B-0071-B64D-C4DE-964A34D988D3}</Project>
+      <Project>{1B578D34-75EB-A9FB-251E-442410ED5FDC}</Project>
       <Name>Genies.Utilities</Name>
     </ProjectReference>
     <ProjectReference Include="GLTFSerialization.csproj">
-      <Project>{806C8881-F4CB-6284-9A62-4BD967C4AE01}</Project>
+      <Project>{4CB707A4-9319-F768-5E3C-C1F8C9BF721E}</Project>
       <Name>GLTFSerialization</Name>
     </ProjectReference>
     <ProjectReference Include="UMA_Core.csproj">
-      <Project>{ABE0D12A-A508-6D72-DD07-1820AA4AA049}</Project>
+      <Project>{D59CD1F3-E24D-0C63-69B0-FBF383B74FDE}</Project>
       <Name>UMA_Core</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
+      <Project>{DCE68A21-EA6E-8E4A-2D4F-67B3F681EAD6}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="UnityGLTFScripts.csproj">
-      <Project>{F623817C-F4FA-F5B6-6ED0-40E24FDED3AC}</Project>
+      <Project>{6433C6D0-F104-3513-5957-AFE2C72E0509}</Project>
       <Name>UnityGLTFScripts</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Components.ShaderlessTools.csproj">
-      <Project>{5E723EBF-C4E8-2660-F709-52CE0EFF3B68}</Project>
+      <Project>{75A745FC-5AC7-58FC-4368-EE793DE94F58}</Project>
       <Name>Genies.Components.ShaderlessTools</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Components.DataModels.csproj">
-      <Project>{8042C2BD-5D87-E9C5-453D-01DC67FF6E44}</Project>
+      <Project>{27AE429A-F762-BF7E-288D-7087322614EF}</Project>
       <Name>Genies.Components.DataModels</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

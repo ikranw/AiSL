@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.S3Service</RootNamespace>
-    <ProjectGuid>{0771AE2C-5258-EB7D-37E0-14DAC71D2A4B}</ProjectGuid>
+    <ProjectGuid>{5B985509-470E-69F4-4327-CBEEAFB37F51}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.S3Service</AssemblyName>
@@ -58,7 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
+    <Analyzer Include="C:\Users\Ikran\Documents\GitHub\AiSL\app\unity\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Packages\com.genies.avatar-sdk.client\Internal\S3Service\Runtime\Service\GeniesS3Service.cs" />
@@ -1199,23 +1199,23 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
+      <Project>{DCE68A21-EA6E-8E4A-2D4F-67B3F681EAD6}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.CrashReporting.csproj">
-      <Project>{8020C914-FC6B-44CD-C02E-B6857461CD69}</Project>
+      <Project>{FB88A904-BE7B-CA2A-5AD5-BD692750E6C7}</Project>
       <Name>Genies.CrashReporting</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Services.csproj">
-      <Project>{8DD8770F-0C94-44B8-B690-8AC95325E1E7}</Project>
+      <Project>{55654B81-509C-414A-CDB2-57263F355586}</Project>
       <Name>Genies.Services</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.DiskCaching.csproj">
-      <Project>{9FCEF949-E14E-2485-780D-F7217BDDABF1}</Project>
+      <Project>{46AB6C40-986D-196F-0D4C-8EE7A543CBF5}</Project>
       <Name>Genies.DiskCaching</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.AssetLocations</RootNamespace>
-    <ProjectGuid>{10819686-A4C4-E31C-969A-70EC360221D0}</ProjectGuid>
+    <ProjectGuid>{0E372777-DA72-860F-EAA9-5E5752B0A2B7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.AssetLocations</AssemblyName>
@@ -58,7 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
+    <Analyzer Include="C:\Users\Ikran\Documents\GitHub\AiSL\app\unity\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Packages\com.genies.avatar-sdk.client\Internal\AssetLocations\Runtime\AssetLocationDefaults.cs" />
@@ -1200,15 +1200,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
+      <Project>{DCE68A21-EA6E-8E4A-2D4F-67B3F681EAD6}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Components.DataModels.csproj">
-      <Project>{8042C2BD-5D87-E9C5-453D-01DC67FF6E44}</Project>
+      <Project>{27AE429A-F762-BF7E-288D-7087322614EF}</Project>
       <Name>Genies.Components.DataModels</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.Telemetry</RootNamespace>
-    <ProjectGuid>{27C9351A-7136-93D4-6197-36D30CC3A725}</ProjectGuid>
+    <ProjectGuid>{28ECAA76-87E6-1E6A-C6C6-FA2E2546F8FB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.Telemetry</AssemblyName>
@@ -58,7 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
+    <Analyzer Include="C:\Users\Ikran\Documents\GitHub\AiSL\app\unity\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Packages\com.genies.avatar-sdk.client\Internal\Telemetry\Runtime\Scripts\TelemetryEvent.cs" />
@@ -1198,23 +1198,23 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Genies.Login.Native.csproj">
-      <Project>{367EE28F-447C-A21B-6206-543630EB5BA5}</Project>
+      <Project>{D2158CD4-348F-671A-6F4A-D11E3E6FFC90}</Project>
       <Name>Genies.Login.Native</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.ServiceManagement.csproj">
-      <Project>{4418D1C9-C861-F024-24D9-9BBE2C1B6F9A}</Project>
+      <Project>{9E01C65C-C4CD-158C-CE10-C0E77EAD2883}</Project>
       <Name>Genies.ServiceManagement</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
+      <Project>{DCE68A21-EA6E-8E4A-2D4F-67B3F681EAD6}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="VContainer.csproj">
-      <Project>{76FE6450-8B91-27EC-07C0-80373701A94D}</Project>
+      <Project>{B3608C09-5AE4-80D0-A5F5-75A6DF7F2AEE}</Project>
       <Name>VContainer</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

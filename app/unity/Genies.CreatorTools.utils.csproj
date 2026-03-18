@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.CreatorTools.utils</RootNamespace>
-    <ProjectGuid>{45CB9B9D-A09F-6150-FF60-101068E38334}</ProjectGuid>
+    <ProjectGuid>{2CBE2C1F-B803-D86E-EFB8-1533E78D4BC6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.CreatorTools.utils</AssemblyName>
@@ -1213,15 +1213,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
+      <Project>{DCE68A21-EA6E-8E4A-2D4F-67B3F681EAD6}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="UMA_Core.csproj">
-      <Project>{ABE0D12A-A508-6D72-DD07-1820AA4AA049}</Project>
+      <Project>{D59CD1F3-E24D-0C63-69B0-FBF383B74FDE}</Project>
       <Name>UMA_Core</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

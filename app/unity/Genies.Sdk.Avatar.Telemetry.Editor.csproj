@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.Sdk.Avatar.Telemetry.Editor</RootNamespace>
-    <ProjectGuid>{5D3BDA6F-14A6-FB1A-1B83-CD41725BEF13}</ProjectGuid>
+    <ProjectGuid>{E2E44F84-4BC9-228C-36AB-9127B88918C1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.Sdk.Avatar.Telemetry.Editor</AssemblyName>
@@ -58,7 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
+    <Analyzer Include="C:\Users\Ikran\Documents\GitHub\AiSL\app\unity\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Packages\com.genies.avatar-sdk.client\Internal\SDK Avatar Telemetry\Editor\GeniesSdkEditorTelemetryObserver.cs" />
@@ -1214,15 +1214,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Genies.Telemetry.csproj">
-      <Project>{27C9351A-7136-93D4-6197-36D30CC3A725}</Project>
+      <Project>{28ECAA76-87E6-1E6A-C6C6-FA2E2546F8FB}</Project>
       <Name>Genies.Telemetry</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Sdk.Bootstrap.Editor.csproj">
-      <Project>{26532244-6C0F-9522-BBF6-675245578E78}</Project>
+      <Project>{16B342A9-195F-20D7-FEFE-D009466DBDFE}</Project>
       <Name>Genies.Sdk.Bootstrap.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

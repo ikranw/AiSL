@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{0E43612F-9019-0033-9A0E-ACF8E94F9E9D}</ProjectGuid>
+    <ProjectGuid>{6F26134C-ED0B-778A-3392-EB593444290B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Newtonsoft.Json.UnityConverters.Addressables</AssemblyName>
@@ -1157,11 +1157,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Newtonsoft.Json.UnityConverters.csproj">
-      <Project>{3A99B00D-1360-8EBE-03F4-49BE8CB2A984}</Project>
+      <Project>{AF333CC7-3258-AA6A-4A23-DD1F9468909E}</Project>
       <Name>Newtonsoft.Json.UnityConverters</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

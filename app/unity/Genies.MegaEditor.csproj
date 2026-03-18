@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.MegaEditor</RootNamespace>
-    <ProjectGuid>{00B50152-FE86-52EA-75FE-6AC748208C7C}</ProjectGuid>
+    <ProjectGuid>{5540E80B-B5DB-68CE-0F93-70FCC3D1A4B0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.MegaEditor</AssemblyName>
@@ -58,7 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
+    <Analyzer Include="C:\Users\Ikran\Documents\GitHub\AiSL\app\unity\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Packages\com.genies.avatar-sdk.client\Internal\MegaEditor\Runtime\UI\StyleEditor\ItemPickerCircleCell.cs" />
@@ -1300,155 +1300,155 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Genies.Analytics.csproj">
-      <Project>{A4DEFA0A-5AF1-B5EE-3E08-D046011BA4E2}</Project>
+      <Project>{A1A3C086-FB57-838C-095F-7D85DAE87CC3}</Project>
       <Name>Genies.Analytics</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
+      <Project>{DCE68A21-EA6E-8E4A-2D4F-67B3F681EAD6}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Customizer.csproj">
-      <Project>{3E6BAE83-BA17-6058-40BE-818E5D534EA5}</Project>
+      <Project>{6747833A-590E-9421-205F-97146825D5F5}</Project>
       <Name>Genies.Customizer</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.ServiceManagement.csproj">
-      <Project>{4418D1C9-C861-F024-24D9-9BBE2C1B6F9A}</Project>
+      <Project>{9E01C65C-C4CD-158C-CE10-C0E77EAD2883}</Project>
       <Name>Genies.ServiceManagement</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.CameraSystem.csproj">
-      <Project>{1FC3A706-9CE2-48DE-E3F9-9FC7760421DF}</Project>
+      <Project>{CD030D57-45B4-A442-F8CE-93E594304143}</Project>
       <Name>Genies.CameraSystem</Name>
     </ProjectReference>
     <ProjectReference Include="Toolbox.csproj">
-      <Project>{8D0FAED7-1D6B-615F-C9FC-B5AA0D718558}</Project>
+      <Project>{D31AB047-DB73-4400-AA44-961EA97901F9}</Project>
       <Name>Toolbox</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Looks.csproj">
-      <Project>{87AE2454-EEB6-374E-7D76-34D7E78BBBEE}</Project>
+      <Project>{A975900E-ED93-09FE-35A2-055116DD6CFE}</Project>
       <Name>Genies.Looks</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.CrashReporting.csproj">
-      <Project>{8020C914-FC6B-44CD-C02E-B6857461CD69}</Project>
+      <Project>{FB88A904-BE7B-CA2A-5AD5-BD692750E6C7}</Project>
       <Name>Genies.CrashReporting</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Avatars.csproj">
-      <Project>{D50A5BC8-36D3-9D7B-E3F1-C20DADF06EF6}</Project>
+      <Project>{FB011FCF-1CE1-E016-C913-A778F46828D3}</Project>
       <Name>Genies.Avatars</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.PerformanceMonitoring.csproj">
-      <Project>{819B5F5A-CDBF-90E6-3BE3-F361569460C2}</Project>
+      <Project>{0AFE3DC5-DC0C-8578-AC7E-EABE5716C62F}</Project>
       <Name>Genies.PerformanceMonitoring</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Animations.csproj">
-      <Project>{93E51918-CDD4-B210-2239-FE7B533FDADC}</Project>
+      <Project>{18DFE67B-E223-94A5-2D68-4DF416C62DEF}</Project>
       <Name>Genies.Animations</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Refs.csproj">
-      <Project>{027E52A0-E4D4-C921-87E0-C95029425B4B}</Project>
+      <Project>{D66AA6BA-7C43-B71E-5834-146CF20B369C}</Project>
       <Name>Genies.Refs</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Services.csproj">
-      <Project>{8DD8770F-0C94-44B8-B690-8AC95325E1E7}</Project>
+      <Project>{55654B81-509C-414A-CDB2-57263F355586}</Project>
       <Name>Genies.Services</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Ugc.csproj">
-      <Project>{F9AD3D78-4CB4-E615-1F17-1A6B15293DC6}</Project>
+      <Project>{B53A265A-490B-DBD7-7F68-73B727BD1011}</Project>
       <Name>Genies.Ugc</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.FeatureFlags.csproj">
-      <Project>{3C25FB2C-37DC-F49A-F583-4A81192AEFA6}</Project>
+      <Project>{705902F9-5B2E-BA2F-BBFE-8A58ADA3696F}</Project>
       <Name>Genies.FeatureFlags</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Assets.Services.csproj">
-      <Project>{AACAD69F-401A-A432-19AE-D0549358C3D7}</Project>
+      <Project>{C7D1E718-C74D-C4BE-FECB-C12D37817303}</Project>
       <Name>Genies.Assets.Services</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Components.DataModels.csproj">
-      <Project>{8042C2BD-5D87-E9C5-453D-01DC67FF6E44}</Project>
+      <Project>{27AE429A-F762-BF7E-288D-7087322614EF}</Project>
       <Name>Genies.Components.DataModels</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Avatars.Context.csproj">
-      <Project>{C982B936-55C6-D4F7-5BF8-9CD087EAF8E4}</Project>
+      <Project>{540313C0-2130-3878-8365-33CDF442179C}</Project>
       <Name>Genies.Avatars.Context</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.DataRepositoryFramework.csproj">
-      <Project>{9860690F-01DB-70D6-5E6C-F49AB2D8D671}</Project>
+      <Project>{2A31D707-28A0-EB1B-361A-7C3D9604B14A}</Project>
       <Name>Genies.DataRepositoryFramework</Name>
     </ProjectReference>
     <ProjectReference Include="XNode.csproj">
-      <Project>{3A8E6396-F6D5-940B-8EFC-D8F6EFB2EFB8}</Project>
+      <Project>{10B16357-07AC-FF52-E987-9A1ABC96F10A}</Project>
       <Name>XNode</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Avatars.Behaviors.csproj">
-      <Project>{47FF3644-47B8-5101-F6A4-5482632D5ECF}</Project>
+      <Project>{54197237-BB98-174D-D740-B02C95D391FC}</Project>
       <Name>Genies.Avatars.Behaviors</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Shaders.csproj">
-      <Project>{3A69D35E-5FCF-E113-FADE-BF8487795FF0}</Project>
+      <Project>{0546D9B7-6438-E5EF-D018-01F3BE0F740D}</Project>
       <Name>Genies.Shaders</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{320F9F27-4B3E-B87A-8CFF-87309FE5EE45}</Project>
+      <Project>{5D8864C1-3727-180D-A082-254EA283B9A7}</Project>
       <Name>UniTask.DOTween</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{E4AD85FE-BF9C-5DA7-63DC-6005B857435F}</Project>
+      <Project>{0BD17660-CD89-F499-1477-C6FB752DF7F8}</Project>
       <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Addressables.csproj">
-      <Project>{F43446CF-8910-CEF5-88AE-52CB4F8F60D1}</Project>
+      <Project>{280B43F5-08D8-4A64-6DC1-896CB8C49453}</Project>
       <Name>Genies.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Avatars.Services.csproj">
-      <Project>{6D21B6BD-CDDC-AFBB-6834-1DDCADB33A04}</Project>
+      <Project>{E93448AC-752D-7150-8F01-F184EC3896E1}</Project>
       <Name>Genies.Avatars.Services</Name>
     </ProjectReference>
     <ProjectReference Include="VContainer.csproj">
-      <Project>{76FE6450-8B91-27EC-07C0-80373701A94D}</Project>
+      <Project>{B3608C09-5AE4-80D0-A5F5-75A6DF7F2AEE}</Project>
       <Name>VContainer</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Login.csproj">
-      <Project>{F2791458-0FBB-05E9-57E2-4724DD1CF48F}</Project>
+      <Project>{77395620-F8DE-B1A6-98BF-E5A0037F2426}</Project>
       <Name>Genies.Login</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.UIFramework.csproj">
-      <Project>{3844A477-C943-5DF0-6ADA-24880C5EB957}</Project>
+      <Project>{96E0B24E-1D59-C701-F214-230E6E32A0BA}</Project>
       <Name>Genies.UIFramework</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Login.Native.csproj">
-      <Project>{367EE28F-447C-A21B-6206-543630EB5BA5}</Project>
+      <Project>{D2158CD4-348F-671A-6F4A-D11E3E6FFC90}</Project>
       <Name>Genies.Login.Native</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Utilities.csproj">
-      <Project>{58A7772B-0071-B64D-C4DE-964A34D988D3}</Project>
+      <Project>{1B578D34-75EB-A9FB-251E-442410ED5FDC}</Project>
       <Name>Genies.Utilities</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Naf.csproj">
-      <Project>{30325F94-4230-7628-4D70-C15C9EDAE5DB}</Project>
+      <Project>{98DD484A-3942-9A58-3965-A08BCD4C2FB3}</Project>
       <Name>Genies.Naf</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.NafPlugin.csproj">
-      <Project>{61DF77DF-9D96-28E6-C8E9-845BEE90B1BC}</Project>
+      <Project>{98EFD3E5-0B9B-F015-6BEB-6375EDAAFBCB}</Project>
       <Name>Genies.NafPlugin</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Naf.Content.csproj">
-      <Project>{19503C2C-6E9E-9ED6-9D11-D805E3A8861D}</Project>
+      <Project>{E83174C0-FC29-9623-9A17-CAD71499560D}</Project>
       <Name>Genies.Naf.Content</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.CreatorTools.utils.csproj">
-      <Project>{45CB9B9D-A09F-6150-FF60-101068E38334}</Project>
+      <Project>{2CBE2C1F-B803-D86E-EFB8-1533E78D4BC6}</Project>
       <Name>Genies.CreatorTools.utils</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Inventory.csproj">
-      <Project>{A6EC4965-BA31-5CED-C204-772422BFDFD8}</Project>
+      <Project>{CD2A0D68-D551-10EC-1C83-8FACC6DBC3FF}</Project>
       <Name>Genies.Inventory</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Inventory.UIData.csproj">
-      <Project>{AF452D90-8B95-EBC1-B000-0FAE5CE68EE7}</Project>
+      <Project>{F97D0B39-5101-AA9C-06E5-835EC8C1092F}</Project>
       <Name>Genies.Inventory.UIData</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{242F8558-8E94-DC33-0F94-EB51B96C6198}</ProjectGuid>
+    <ProjectGuid>{2F7EAE9F-34B2-4D5C-2803-A0B7ACBB1449}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>XNodeEditor</AssemblyName>
@@ -1237,11 +1237,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="XNode.csproj">
-      <Project>{3A8E6396-F6D5-940B-8EFC-D8F6EFB2EFB8}</Project>
+      <Project>{10B16357-07AC-FF52-E987-9A1ABC96F10A}</Project>
       <Name>XNode</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

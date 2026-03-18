@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>UMI</RootNamespace>
-    <ProjectGuid>{317134BD-3E6E-98EB-B187-51AE502810F1}</ProjectGuid>
+    <ProjectGuid>{1AE7D2C5-CF09-8E5D-5291-538F158ECB84}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>UMI.Editor</AssemblyName>
@@ -1217,11 +1217,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UMI.Runtime.csproj">
-      <Project>{08462B29-2F62-47A5-892A-12F7311B0216}</Project>
+      <Project>{09D7BB51-AA70-78DE-8CC9-40658020031D}</Project>
       <Name>UMI.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

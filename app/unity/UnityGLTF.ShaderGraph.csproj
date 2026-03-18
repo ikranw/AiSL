@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BA619C82-2C11-29E3-8139-06D83140485B}</ProjectGuid>
+    <ProjectGuid>{53877375-0864-D9AB-7433-F5B1F1088BB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>UnityGLTF.ShaderGraph</AssemblyName>
@@ -1147,23 +1147,23 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
-      <Project>{0CDDDAD6-141A-F965-1F00-A5A052C5B5BF}</Project>
+      <Project>{A02EBCC7-5C11-DE37-18CA-8262E2498B8F}</Project>
       <Name>Unity.ShaderGraph.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityGLTFScripts.csproj">
-      <Project>{F623817C-F4FA-F5B6-6ED0-40E24FDED3AC}</Project>
+      <Project>{6433C6D0-F104-3513-5957-AFE2C72E0509}</Project>
       <Name>UnityGLTFScripts</Name>
     </ProjectReference>
     <ProjectReference Include="GLTFSerialization.csproj">
-      <Project>{806C8881-F4CB-6284-9A62-4BD967C4AE01}</Project>
+      <Project>{4CB707A4-9319-F768-5E3C-C1F8C9BF721E}</Project>
       <Name>GLTFSerialization</Name>
     </ProjectReference>
     <ProjectReference Include="UnityGLTFEditor.csproj">
-      <Project>{5A24572E-C221-3EB2-BE02-13F94455EFEB}</Project>
+      <Project>{8D392CCC-8DC6-6E4A-EDB6-81BF6C3E0A43}</Project>
       <Name>UnityGLTFEditor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

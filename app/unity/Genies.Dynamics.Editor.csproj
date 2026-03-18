@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.Dynamics.Editor</RootNamespace>
-    <ProjectGuid>{4709A5BD-5CA6-F332-BF27-73B8885C4D1E}</ProjectGuid>
+    <ProjectGuid>{FD75EC14-D550-502C-D1AD-1FB7FDBF8699}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.Dynamics.Editor</AssemblyName>
@@ -58,7 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
+    <Analyzer Include="C:\Users\Ikran\Documents\GitHub\AiSL\app\unity\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Packages\com.genies.avatar-sdk.client\Internal\Dynamics\Editor\DynamicsParticleEditor.cs" />
@@ -1218,19 +1218,19 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Genies.Avatars.csproj">
-      <Project>{D50A5BC8-36D3-9D7B-E3F1-C20DADF06EF6}</Project>
+      <Project>{FB011FCF-1CE1-E016-C913-A778F46828D3}</Project>
       <Name>Genies.Avatars</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Dynamics.csproj">
-      <Project>{EF4475F8-E580-8734-0BB5-6B025087988D}</Project>
+      <Project>{BEE7BBE1-7A41-29B3-9714-63C18314F5D5}</Project>
       <Name>Genies.Dynamics</Name>
     </ProjectReference>
     <ProjectReference Include="UMA_Core.csproj">
-      <Project>{ABE0D12A-A508-6D72-DD07-1820AA4AA049}</Project>
+      <Project>{D59CD1F3-E24D-0C63-69B0-FBF383B74FDE}</Project>
       <Name>UMA_Core</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

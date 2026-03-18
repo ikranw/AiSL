@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.Sdk.Avatar.Telemetry</RootNamespace>
-    <ProjectGuid>{5BDAAE9F-2B6D-E36D-70F8-CD8663733A88}</ProjectGuid>
+    <ProjectGuid>{972B1169-3A8E-0BF2-D299-4D002E37BBFD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.Sdk.Avatar.Telemetry</AssemblyName>
@@ -58,7 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
+    <Analyzer Include="C:\Users\Ikran\Documents\GitHub\AiSL\app\unity\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Packages\com.genies.avatar-sdk.client\Internal\SDK Avatar Telemetry\Runtime\GeniesSdkTelemetryObserver.cs" />
@@ -1194,23 +1194,23 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Genies.AvatarEditor.csproj">
-      <Project>{53472B35-661F-B5AB-D7EB-DC8D1087C6C7}</Project>
+      <Project>{CFDEBFE0-B6D7-2E4F-6FD8-9926047C83D9}</Project>
       <Name>Genies.AvatarEditor</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Telemetry.csproj">
-      <Project>{27C9351A-7136-93D4-6197-36D30CC3A725}</Project>
+      <Project>{28ECAA76-87E6-1E6A-C6C6-FA2E2546F8FB}</Project>
       <Name>Genies.Telemetry</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Sdk.Bootstrap.Editor.csproj">
-      <Project>{26532244-6C0F-9522-BBF6-675245578E78}</Project>
+      <Project>{16B342A9-195F-20D7-FEFE-D009466DBDFE}</Project>
       <Name>Genies.Sdk.Bootstrap.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Avatars.Sdk.csproj">
-      <Project>{B8E74801-D41F-430F-B889-4FB2B2554C18}</Project>
+      <Project>{8E5A2C2A-FE00-F054-30C8-8FBFCFDBF123}</Project>
       <Name>Genies.Avatars.Sdk</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

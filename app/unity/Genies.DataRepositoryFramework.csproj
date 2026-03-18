@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.DataRepositoryFramework</RootNamespace>
-    <ProjectGuid>{9860690F-01DB-70D6-5E6C-F49AB2D8D671}</ProjectGuid>
+    <ProjectGuid>{2A31D707-28A0-EB1B-361A-7C3D9604B14A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.DataRepositoryFramework</AssemblyName>
@@ -1198,15 +1198,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Genies.CrashReporting.csproj">
-      <Project>{8020C914-FC6B-44CD-C02E-B6857461CD69}</Project>
+      <Project>{FB88A904-BE7B-CA2A-5AD5-BD692750E6C7}</Project>
       <Name>Genies.CrashReporting</Name>
     </ProjectReference>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
+      <Project>{DCE68A21-EA6E-8E4A-2D4F-67B3F681EAD6}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

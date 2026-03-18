@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.NafPlugin</RootNamespace>
-    <ProjectGuid>{61DF77DF-9D96-28E6-C8E9-845BEE90B1BC}</ProjectGuid>
+    <ProjectGuid>{98EFD3E5-0B9B-F015-6BEB-6375EDAAFBCB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.NafPlugin</AssemblyName>
@@ -1244,7 +1244,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

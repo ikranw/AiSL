@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{92400DE9-4701-B73C-9C70-C22833AB59AA}</ProjectGuid>
+    <ProjectGuid>{8496A36A-FFF9-772F-74AC-88BB43E811E4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>VContainer.Editor</AssemblyName>
@@ -1151,11 +1151,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="VContainer.csproj">
-      <Project>{76FE6450-8B91-27EC-07C0-80373701A94D}</Project>
+      <Project>{B3608C09-5AE4-80D0-A5F5-75A6DF7F2AEE}</Project>
       <Name>VContainer</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

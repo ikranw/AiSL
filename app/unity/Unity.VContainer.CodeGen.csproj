@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{CA7CB24A-9F74-5273-D3A7-186B1473CAA2}</ProjectGuid>
+    <ProjectGuid>{F36071A1-AECF-3B2F-B9B0-31D3408564B5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Unity.VContainer.CodeGen</AssemblyName>
@@ -1157,7 +1157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="VContainer.csproj">
-      <Project>{76FE6450-8B91-27EC-07C0-80373701A94D}</Project>
+      <Project>{B3608C09-5AE4-80D0-A5F5-75A6DF7F2AEE}</Project>
       <Name>VContainer</Name>
     </ProjectReference>
   </ItemGroup>

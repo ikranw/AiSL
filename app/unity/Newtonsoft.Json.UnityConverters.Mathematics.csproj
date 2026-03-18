@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{EF93F0FE-9507-420F-2C1F-7B08648C5908}</ProjectGuid>
+    <ProjectGuid>{0D46DE52-909D-F9DB-F6EC-642865DA951C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Newtonsoft.Json.UnityConverters.Mathematics</AssemblyName>
@@ -1163,11 +1163,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Newtonsoft.Json.UnityConverters.csproj">
-      <Project>{3A99B00D-1360-8EBE-03F4-49BE8CB2A984}</Project>
+      <Project>{AF333CC7-3258-AA6A-4A23-DD1F9468909E}</Project>
       <Name>Newtonsoft.Json.UnityConverters</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

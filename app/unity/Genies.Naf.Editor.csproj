@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.Naf.Editor</RootNamespace>
-    <ProjectGuid>{655BB163-7AAD-5AFC-AC1B-ECABEBC0E6FB}</ProjectGuid>
+    <ProjectGuid>{01A7A058-7E97-1BF7-0FAA-1A14B6FB2250}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.Naf.Editor</AssemblyName>
@@ -58,7 +58,7 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
+    <Analyzer Include="C:\Users\Ikran\Documents\GitHub\AiSL\app\unity\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Packages\com.genies.avatar-sdk.client\Internal\NAF\Editor\NafSettingsEditor.cs" />
@@ -1215,23 +1215,23 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
+      <Project>{DCE68A21-EA6E-8E4A-2D4F-67B3F681EAD6}</Project>
       <Name>UniTask</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Naf.csproj">
-      <Project>{30325F94-4230-7628-4D70-C15C9EDAE5DB}</Project>
+      <Project>{98DD484A-3942-9A58-3965-A08BCD4C2FB3}</Project>
       <Name>Genies.Naf</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.NafPlugin.csproj">
-      <Project>{61DF77DF-9D96-28E6-C8E9-845BEE90B1BC}</Project>
+      <Project>{98EFD3E5-0B9B-F015-6BEB-6375EDAAFBCB}</Project>
       <Name>Genies.NafPlugin</Name>
     </ProjectReference>
     <ProjectReference Include="Genies.Avatars.csproj">
-      <Project>{D50A5BC8-36D3-9D7B-E3F1-C20DADF06EF6}</Project>
+      <Project>{FB011FCF-1CE1-E016-C913-A778F46828D3}</Project>
       <Name>Genies.Avatars</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{1173A5FB-5A23-8CEA-6E34-0AE76B79C576}</ProjectGuid>
+    <ProjectGuid>{2C739221-8085-A8F6-7A74-E375E8739865}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>UnityGLTF.Plugins.Experimental</AssemblyName>
@@ -1134,15 +1134,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="UnityGLTFScripts.csproj">
-      <Project>{F623817C-F4FA-F5B6-6ED0-40E24FDED3AC}</Project>
+      <Project>{6433C6D0-F104-3513-5957-AFE2C72E0509}</Project>
       <Name>UnityGLTFScripts</Name>
     </ProjectReference>
     <ProjectReference Include="GLTFSerialization.csproj">
-      <Project>{806C8881-F4CB-6284-9A62-4BD967C4AE01}</Project>
+      <Project>{4CB707A4-9319-F768-5E3C-C1F8C9BF721E}</Project>
       <Name>GLTFSerialization</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

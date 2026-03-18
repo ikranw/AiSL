@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{17DE94C7-BA32-ED3F-8A02-A9190B30D837}</ProjectGuid>
+    <ProjectGuid>{85909CE3-AD22-F756-6F78-E9A446CC474E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Toolbox.Editor</AssemblyName>
@@ -1381,11 +1381,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Toolbox.csproj">
-      <Project>{8D0FAED7-1D6B-615F-C9FC-B5AA0D718558}</Project>
+      <Project>{D31AB047-DB73-4400-AA44-961EA97901F9}</Project>
       <Name>Toolbox</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

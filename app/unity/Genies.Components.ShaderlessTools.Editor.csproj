@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>Genies.Components.ShaderlessTools.Editor</RootNamespace>
-    <ProjectGuid>{8A1E9563-D37D-4228-38C2-8085C0C8FA50}</ProjectGuid>
+    <ProjectGuid>{D513C728-0E69-FAA7-2DD1-2CB37EF6593D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Genies.Components.ShaderlessTools.Editor</AssemblyName>
@@ -1218,11 +1218,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Genies.Components.ShaderlessTools.csproj">
-      <Project>{5E723EBF-C4E8-2660-F709-52CE0EFF3B68}</Project>
+      <Project>{75A745FC-5AC7-58FC-4368-EE793DE94F58}</Project>
       <Name>Genies.Components.ShaderlessTools</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
+      <Project>{B4DF9CC6-34E2-9228-09E0-F3BD60E5C932}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>

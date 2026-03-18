@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{226CDB5B-1888-060E-52F6-833B42C983C8}</ProjectGuid>
+    <ProjectGuid>{C3DA89E1-70C6-7D6C-993E-C8F831D35880}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -58,7 +58,6 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.3f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
-    <Analyzer Include="C:\Users\Ikran\ASLAvatar\Packages\com.genies.avatar-sdk.client\Internal\ServiceManagement\Runtime\DIAnalyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
@@ -608,14 +607,6 @@
       <HintPath>Library\PackageCache\com.unity.ext.nunit@d8c07649098d\net40\unity-custom\nunit.framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>Packages\com.genies.avatar-sdk.client\Internal\Services\Runtime\Plugins\RestSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="PhoneNumbers">
-      <HintPath>Packages\com.genies.avatar-sdk.client\Internal\PhoneNumberParser\Plugins\phonenumberparser.4.2.2\PhoneNumbers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.IO.Hashing">
       <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.IO.Hashing\System.IO.Hashing.dll</HintPath>
       <Private>False</Private>
@@ -628,20 +619,12 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@191c0d7e3b69\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
       <HintPath>Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.Runtime.CompilerServices.Unsafe\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="MathNet.Numerics">
-      <HintPath>Packages\com.genies.avatar-sdk.client\Internal\Avatars\Runtime\GenieContext\Services\RefittingService\AvatarBodyDeformation\Plugins\MathNet.Numerics.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib">
@@ -1172,18 +1155,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Animation.Rigging.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Addressables">
-      <HintPath>Library\ScriptAssemblies\Unity.Addressables.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime.Shared">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
       <Private>False</Private>
@@ -1194,10 +1165,6 @@
     </Reference>
     <Reference Include="Unity.UnifiedRayTracing.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.UnifiedRayTracing.Runtime.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Animation.Rigging">
-      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
@@ -1228,20 +1195,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Profiling.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.Profiling.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Ktx">
-      <HintPath>Library\ScriptAssemblies\Ktx.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
@@ -1256,10 +1215,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Config.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Config.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -1272,10 +1227,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Addressables.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Addressables.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
       <Private>False</Private>
@@ -1284,16 +1235,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Cinemachine">
-      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.ScriptableBuildPipeline">
-      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.2D.Editor.Overrides">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Editor.Overrides.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Timeline">
@@ -1306,10 +1253,6 @@
     </Reference>
     <Reference Include="Unity.Searcher.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.ScriptableBuildPipeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
@@ -1334,10 +1277,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.ResourceManager">
-      <HintPath>Library\ScriptAssemblies\Unity.ResourceManager.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Collections">
@@ -1384,372 +1323,16 @@
       <HintPath>Library\ScriptAssemblies\Unity.Collections.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Genies.Inventory.UIData.csproj">
-      <Project>{AF452D90-8B95-EBC1-B000-0FAE5CE68EE7}</Project>
-      <Name>Genies.Inventory.UIData</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Sdk.Core.csproj">
-      <Project>{51D53F24-BC17-8C79-B7D8-6418388B24E6}</Project>
-      <Name>Genies.Sdk.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Inventory.csproj">
-      <Project>{A6EC4965-BA31-5CED-C204-772422BFDFD8}</Project>
-      <Name>Genies.Inventory</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Animations.csproj">
-      <Project>{93E51918-CDD4-B210-2239-FE7B533FDADC}</Project>
-      <Name>Genies.Animations</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Addressables.Editor.csproj">
-      <Project>{7C5757A3-8E02-80D1-751B-E50E46FF84C3}</Project>
-      <Name>Genies.Addressables.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Services.csproj">
-      <Project>{8DD8770F-0C94-44B8-B690-8AC95325E1E7}</Project>
-      <Name>Genies.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Naf.csproj">
-      <Project>{30325F94-4230-7628-4D70-C15C9EDAE5DB}</Project>
-      <Name>Genies.Naf</Name>
-    </ProjectReference>
-    <ProjectReference Include="Newtonsoft.Json.UnityConverters.Mathematics.csproj">
-      <Project>{EF93F0FE-9507-420F-2C1F-7B08648C5908}</Project>
-      <Name>Newtonsoft.Json.UnityConverters.Mathematics</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Sdk.Avatar.csproj">
-      <Project>{CFD1295B-FCC6-51CC-B188-7B4CAD607573}</Project>
-      <Name>Genies.Sdk.Avatar</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.DOTween.csproj">
-      <Project>{320F9F27-4B3E-B87A-8CFF-87309FE5EE45}</Project>
-      <Name>UniTask.DOTween</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Refs.csproj">
-      <Project>{027E52A0-E4D4-C921-87E0-C95029425B4B}</Project>
-      <Name>Genies.Refs</Name>
-    </ProjectReference>
-    <ProjectReference Include="UMI.Runtime.csproj">
-      <Project>{08462B29-2F62-47A5-892A-12F7311B0216}</Project>
-      <Name>UMI.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Sdk.Bootstrap.Editor.csproj">
-      <Project>{26532244-6C0F-9522-BBF6-675245578E78}</Project>
-      <Name>Genies.Sdk.Bootstrap.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Components.ShaderlessTools.Editor.csproj">
-      <Project>{8A1E9563-D37D-4228-38C2-8085C0C8FA50}</Project>
-      <Name>Genies.Components.ShaderlessTools.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.ApiResolver.csproj">
-      <Project>{5CEDA5F1-39FC-087D-CA50-AF98E489A06C}</Project>
-      <Name>Genies.ApiResolver</Name>
-    </ProjectReference>
-    <ProjectReference Include="Toolbox.Editor.csproj">
-      <Project>{17DE94C7-BA32-ED3F-8A02-A9190B30D837}</Project>
-      <Name>Toolbox.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.CloudSave.csproj">
-      <Project>{736DA652-DE1F-5A60-14E9-6DBB59246E7F}</Project>
-      <Name>Genies.CloudSave</Name>
-    </ProjectReference>
-    <ProjectReference Include="XNode.csproj">
-      <Project>{3A8E6396-F6D5-940B-8EFC-D8F6EFB2EFB8}</Project>
-      <Name>XNode</Name>
-    </ProjectReference>
-    <ProjectReference Include="UMA_Core.csproj">
-      <Project>{ABE0D12A-A508-6D72-DD07-1820AA4AA049}</Project>
-      <Name>UMA_Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.ServiceManagement.Editor.csproj">
-      <Project>{CEDF107E-30EF-8AF0-B068-69E327E49BFB}</Project>
-      <Name>Genies.ServiceManagement.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Login.Native.Editor.csproj">
-      <Project>{AB8394DC-6A48-1DBA-9DB1-6101BD21906C}</Project>
-      <Name>Genies.Login.Native.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Naf.Editor.csproj">
-      <Project>{655BB163-7AAD-5AFC-AC1B-ECABEBC0E6FB}</Project>
-      <Name>Genies.Naf.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.NafPlugin.Editor.csproj">
-      <Project>{7149B123-3B5F-9D62-957B-060C35E9AAEF}</Project>
-      <Name>Genies.NafPlugin.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Wearables.csproj">
-      <Project>{B129DB2F-747E-C407-63ED-7D1E4605FE8D}</Project>
-      <Name>Genies.Wearables</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.CreatorTools.utils.csproj">
-      <Project>{45CB9B9D-A09F-6150-FF60-101068E38334}</Project>
-      <Name>Genies.CreatorTools.utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Inventory.UIData.Editor.csproj">
-      <Project>{A3A02713-BFBE-E31A-8267-29CF6A6B9DCB}</Project>
-      <Name>Genies.Inventory.UIData.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Shaders.csproj">
-      <Project>{3A69D35E-5FCF-E113-FADE-BF8487795FF0}</Project>
-      <Name>Genies.Shaders</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Naf.Content.csproj">
-      <Project>{19503C2C-6E9E-9ED6-9D11-D805E3A8861D}</Project>
-      <Name>Genies.Naf.Content</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Looks.csproj">
-      <Project>{87AE2454-EEB6-374E-7D76-34D7E78BBBEE}</Project>
-      <Name>Genies.Looks</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Avatars.Sdk.csproj">
-      <Project>{B8E74801-D41F-430F-B889-4FB2B2554C18}</Project>
-      <Name>Genies.Avatars.Sdk</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Avatars.csproj">
-      <Project>{D50A5BC8-36D3-9D7B-E3F1-C20DADF06EF6}</Project>
-      <Name>Genies.Avatars</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.CameraSystem.csproj">
-      <Project>{1FC3A706-9CE2-48DE-E3F9-9FC7760421DF}</Project>
-      <Name>Genies.CameraSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="Newtonsoft.Json.UnityConverters.csproj">
-      <Project>{3A99B00D-1360-8EBE-03F4-49BE8CB2A984}</Project>
-      <Name>Newtonsoft.Json.UnityConverters</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Sdk.Avatar.Editor.csproj">
-      <Project>{C0B60C9B-668A-9A7C-781D-9A33517C2BBD}</Project>
-      <Name>Genies.Sdk.Avatar.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.DataRepositoryFramework.csproj">
-      <Project>{9860690F-01DB-70D6-5E6C-F49AB2D8D671}</Project>
-      <Name>Genies.DataRepositoryFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Telemetry.csproj">
-      <Project>{27C9351A-7136-93D4-6197-36D30CC3A725}</Project>
-      <Name>Genies.Telemetry</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityGLTFEditor.csproj">
-      <Project>{5A24572E-C221-3EB2-BE02-13F94455EFEB}</Project>
-      <Name>UnityGLTFEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="VContainer.Editor.csproj">
-      <Project>{92400DE9-4701-B73C-9C70-C22833AB59AA}</Project>
-      <Name>VContainer.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Avatars.Sdk.Editor.csproj">
-      <Project>{72423A81-1B9E-1FF2-5242-3B9435BBAB70}</Project>
-      <Name>Genies.Avatars.Sdk.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Customizer.csproj">
-      <Project>{3E6BAE83-BA17-6058-40BE-818E5D534EA5}</Project>
-      <Name>Genies.Customizer</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Login.Native.csproj">
-      <Project>{367EE28F-447C-A21B-6206-543630EB5BA5}</Project>
-      <Name>Genies.Login.Native</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.CrashReporting.csproj">
-      <Project>{8020C914-FC6B-44CD-C02E-B6857461CD69}</Project>
-      <Name>Genies.CrashReporting</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.DiskCaching.csproj">
-      <Project>{9FCEF949-E14E-2485-780D-F7217BDDABF1}</Project>
-      <Name>Genies.DiskCaching</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Closet.csproj">
-      <Project>{31996B3B-7A5C-6A05-B8D2-CBE26CB1DB34}</Project>
-      <Name>Genies.Closet</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Avatars.Context.csproj">
-      <Project>{C982B936-55C6-D4F7-5BF8-9CD087EAF8E4}</Project>
-      <Name>Genies.Avatars.Context</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.UIFramework.csproj">
-      <Project>{3844A477-C943-5DF0-6ADA-24880C5EB957}</Project>
-      <Name>Genies.UIFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.Linq.csproj">
-      <Project>{9F12FAA1-F190-F9C5-3EC5-52A3F10B3E1B}</Project>
-      <Name>UniTask.Linq</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.S3Service.csproj">
-      <Project>{0771AE2C-5258-EB7D-37E0-14DAC71D2A4B}</Project>
-      <Name>Genies.S3Service</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Sdk.Avatar.Telemetry.Editor.csproj">
-      <Project>{5D3BDA6F-14A6-FB1A-1B83-CD41725BEF13}</Project>
-      <Name>Genies.Sdk.Avatar.Telemetry.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.NafPlugin.csproj">
-      <Project>{61DF77DF-9D96-28E6-C8E9-845BEE90B1BC}</Project>
-      <Name>Genies.NafPlugin</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Avatars.Services.csproj">
-      <Project>{6D21B6BD-CDDC-AFBB-6834-1DDCADB33A04}</Project>
-      <Name>Genies.Avatars.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.AssetLocations.csproj">
-      <Project>{10819686-A4C4-E31C-969A-70EC360221D0}</Project>
-      <Name>Genies.AssetLocations</Name>
-    </ProjectReference>
-    <ProjectReference Include="XNodeEditor.csproj">
-      <Project>{242F8558-8E94-DC33-0F94-EB51B96C6198}</Project>
-      <Name>XNodeEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.Addressables.csproj">
-      <Project>{E4AD85FE-BF9C-5DA7-63DC-6005B857435F}</Project>
-      <Name>UniTask.Addressables</Name>
-    </ProjectReference>
-    <ProjectReference Include="VContainer.csproj">
-      <Project>{76FE6450-8B91-27EC-07C0-80373701A94D}</Project>
-      <Name>VContainer</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Ugc.csproj">
-      <Project>{F9AD3D78-4CB4-E615-1F17-1A6B15293DC6}</Project>
-      <Name>Genies.Ugc</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj">
-      <Project>{BD25E6D5-ACB8-249C-E6C1-9B8AA3C3A212}</Project>
-      <Name>Unity.RenderPipelines.Universal.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Components.Shaders.Editor.csproj">
-      <Project>{6EC7DF46-9121-5078-FC47-88C36600B9C2}</Project>
-      <Name>Genies.Components.Shaders.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Utilities.csproj">
-      <Project>{58A7772B-0071-B64D-C4DE-964A34D988D3}</Project>
-      <Name>Genies.Utilities</Name>
-    </ProjectReference>
-    <ProjectReference Include="Toolbox.csproj">
-      <Project>{8D0FAED7-1D6B-615F-C9FC-B5AA0D718558}</Project>
-      <Name>Toolbox</Name>
-    </ProjectReference>
-    <ProjectReference Include="Newtonsoft.Json.UnityConverters.Addressables.csproj">
-      <Project>{0E43612F-9019-0033-9A0E-ACF8E94F9E9D}</Project>
-      <Name>Newtonsoft.Json.UnityConverters.Addressables</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Components.DataModels.csproj">
-      <Project>{8042C2BD-5D87-E9C5-453D-01DC67FF6E44}</Project>
-      <Name>Genies.Components.DataModels</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.FeatureFlags.csproj">
-      <Project>{3C25FB2C-37DC-F49A-F583-4A81192AEFA6}</Project>
-      <Name>Genies.FeatureFlags</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Events.csproj">
-      <Project>{502C1A12-7B9D-EAD9-6993-2307E945BFEB}</Project>
-      <Name>Genies.Events</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Telemetry.Editor.csproj">
-      <Project>{3167D99F-BC05-E529-0AC8-E497121C6C5C}</Project>
-      <Name>Genies.Telemetry.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Services.DynamicConfigs.csproj">
-      <Project>{92EB4A59-17F2-DBB4-4F2C-B109552AECEB}</Project>
-      <Name>Genies.Services.DynamicConfigs</Name>
-    </ProjectReference>
-    <ProjectReference Include="UMI.Editor.csproj">
-      <Project>{317134BD-3E6E-98EB-B187-51AE502810F1}</Project>
-      <Name>UMI.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Addressables.csproj">
-      <Project>{F43446CF-8910-CEF5-88AE-52CB4F8F60D1}</Project>
-      <Name>Genies.Addressables</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.MegaEditor.csproj">
-      <Project>{00B50152-FE86-52EA-75FE-6AC748208C7C}</Project>
-      <Name>Genies.MegaEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.csproj">
-      <Project>{AEF464C3-4EDE-1AC9-360E-409238A0C9C7}</Project>
-      <Name>UniTask</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Dynamics.Editor.csproj">
-      <Project>{4709A5BD-5CA6-F332-BF27-73B8885C4D1E}</Project>
-      <Name>Genies.Dynamics.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Utilities.Editor.csproj">
-      <Project>{ECBBD744-B45C-7D3D-C82A-4332EAA5A5A2}</Project>
-      <Name>Genies.Utilities.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="GLTFSerialization.csproj">
-      <Project>{806C8881-F4CB-6284-9A62-4BD967C4AE01}</Project>
-      <Name>GLTFSerialization</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Naf.Addressables.csproj">
-      <Project>{4F45611F-F161-4277-B5AE-4D945A249881}</Project>
-      <Name>Genies.Naf.Addressables</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityGLTFScripts.csproj">
-      <Project>{F623817C-F4FA-F5B6-6ED0-40E24FDED3AC}</Project>
-      <Name>UnityGLTFScripts</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Dynamics.csproj">
-      <Project>{EF4475F8-E580-8734-0BB5-6B025087988D}</Project>
-      <Name>Genies.Dynamics</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Avatars.Behaviors.csproj">
-      <Project>{47FF3644-47B8-5101-F6A4-5482632D5ECF}</Project>
-      <Name>Genies.Avatars.Behaviors</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Login.csproj">
-      <Project>{F2791458-0FBB-05E9-57E2-4724DD1CF48F}</Project>
-      <Name>Genies.Login</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Sdk.Avatar.Telemetry.csproj">
-      <Project>{5BDAAE9F-2B6D-E36D-70F8-CD8663733A88}</Project>
-      <Name>Genies.Sdk.Avatar.Telemetry</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.ABTesting.csproj">
-      <Project>{E68DE711-647F-F326-9DD5-68DEC40433DC}</Project>
-      <Name>Genies.ABTesting</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Assets.Services.csproj">
-      <Project>{AACAD69F-401A-A432-19AE-D0549358C3D7}</Project>
-      <Name>Genies.Assets.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Customizer.Editor.csproj">
-      <Project>{34FA0038-D90C-BDC8-7C5A-970A24832B05}</Project>
-      <Name>Genies.Customizer.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.ServiceManagement.csproj">
-      <Project>{4418D1C9-C861-F024-24D9-9BBE2C1B6F9A}</Project>
-      <Name>Genies.ServiceManagement</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Sdk.Core.Editor.csproj">
-      <Project>{862B1624-4E4A-7CC3-036A-8B41214D57C1}</Project>
-      <Name>Genies.Sdk.Core.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
-      <Project>{0CDDDAD6-141A-F965-1F00-A5A052C5B5BF}</Project>
-      <Name>Unity.ShaderGraph.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Analytics.csproj">
-      <Project>{A4DEFA0A-5AF1-B5EE-3E08-D046011BA4E2}</Project>
-      <Name>Genies.Analytics</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.PerformanceMonitoring.csproj">
-      <Project>{819B5F5A-CDBF-90E6-3BE3-F361569460C2}</Project>
-      <Name>Genies.PerformanceMonitoring</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.AvatarEditor.csproj">
-      <Project>{53472B35-661F-B5AB-D7EB-DC8D1087C6C7}</Project>
-      <Name>Genies.AvatarEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Genies.Components.ShaderlessTools.csproj">
-      <Project>{5E723EBF-C4E8-2660-F709-52CE0EFF3B68}</Project>
-      <Name>Genies.Components.ShaderlessTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{DE7038B0-D591-5F23-EA79-DDFA3DC68171}</Project>
-      <Name>UnityEditor.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="UniTask.TextMeshPro.csproj">
-      <Project>{3E23599D-33E5-879C-EF6F-3E5EBA7641FC}</Project>
-      <Name>UniTask.TextMeshPro</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
