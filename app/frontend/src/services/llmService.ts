@@ -2,15 +2,17 @@ import { TranslateResponse } from '../types/translate';
 
 const isValidResponse = (data: TranslateResponse): boolean => {
   return (
-    typeof data?.asl_gloss === 'string' &&
-    Array.isArray(data?.sign_sequence) &&
-    data.sign_sequence.every((item) => typeof item === 'string')
+    typeof data?.originalText === 'string' &&
+    Array.isArray(data?.aslGloss) &&
+    data.aslGloss.every((item) => typeof item === 'string') &&
+    Array.isArray(data?.notes) &&
+    Array.isArray(data?.unknownTokens)
   );
 };
 
 export async function translateEnglishToASL(input: string): Promise<TranslateResponse> {
   const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => controller.abort(), 8000);
+  const timeoutId = window.setTimeout(() => controller.abort(), 15000);
 
   try {
     const response = await fetch('/api/translate', {
@@ -40,10 +42,14 @@ export async function translateEnglishToASL(input: string): Promise<TranslateRes
       throw error;
     }
 
-    // Safe fallback when the backend is unavailable during local development.
+    // Safe fallback when the backend is unreachable during local development.
+    // NOTE: This is a frontend-only fallback for when the server is not running.
+    // For a richer offline demo, start the backend – it has its own mock mode.
     return {
-      asl_gloss: 'ME GO STORE TOMORROW',
-      sign_sequence: ['ME', 'GO', 'STORE', 'TOMORROW'],
+      originalText: input,
+      aslGloss: ['ME', 'GO', 'STORE', 'TOMORROW'],
+      notes: ['Frontend fallback – backend unreachable. Start the backend server for real responses.'],
+      unknownTokens: [],
     };
   } finally {
     window.clearTimeout(timeoutId);
