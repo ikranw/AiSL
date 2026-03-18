@@ -8,15 +8,14 @@ import {
 } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import LoopIcon from '@mui/icons-material/Loop';
-import { formatTime } from '../utils/time';
 
 interface PlaybackControlsProps {
   isPlaying: boolean;
   isLooping: boolean;
   speed: number;
   progress: number;
+  totalTokens: number;
   onTogglePlay: () => void;
   onToggleLoop: () => void;
   onSpeedChange: (value: number) => void;
@@ -30,20 +29,17 @@ export function PlaybackControls({
   isLooping,
   speed,
   progress,
+  totalTokens,
   onTogglePlay,
   onToggleLoop,
   onSpeedChange,
   onProgressChange,
 }: PlaybackControlsProps): JSX.Element {
-  const totalDurationSeconds = 60;
-  const currentTimeSeconds = (progress / 100) * totalDurationSeconds;
+  const currentToken = totalTokens > 0 ? Math.round((progress / 100) * (totalTokens - 1)) + 1 : 0;
 
   return (
     <Stack spacing={2} sx={{ mt: 2 }}>
       <Stack direction="row" spacing={1} alignItems="center">
-        <IconButton aria-label="volume" size="small">
-          <VolumeUpIcon fontSize="small" />
-        </IconButton>
         <IconButton aria-label="play" size="small" onClick={onTogglePlay}>
           {isPlaying ? <PauseIcon fontSize="small" /> : <PlayArrowIcon fontSize="small" />}
         </IconButton>
@@ -57,11 +53,8 @@ export function PlaybackControls({
             size="small"
           />
         </Box>
-        <Typography variant="caption" color="text.secondary">
-          {formatTime(currentTimeSeconds)}
-        </Typography>
-        <Typography variant="caption" color="text.secondary">
-          {formatTime(totalDurationSeconds)}
+        <Typography variant="caption" color="text.secondary" sx={{ whiteSpace: 'nowrap' }}>
+          {totalTokens > 0 ? `${currentToken} / ${totalTokens}` : '— / —'}
         </Typography>
       </Stack>
       <Stack direction="row" spacing={1} alignItems="center" justifyContent="flex-end">

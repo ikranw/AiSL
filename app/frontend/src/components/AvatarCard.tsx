@@ -8,10 +8,26 @@ interface AvatarCardProps {
   isBusy?: boolean;
   sequence?: string[];
   speed?: number;
+  isPlaying?: boolean;
+  isLooping?: boolean;
+  seekToIndex?: number | null;
+  onProgress?: (index: number, total: number) => void;
+  onPlaybackEnd?: () => void;
   children?: ReactNode;
 }
 
-export function AvatarCard({ statusText, isBusy = false, sequence = [], speed = 1, children }: AvatarCardProps): JSX.Element {
+export function AvatarCard({
+  statusText,
+  isBusy = false,
+  sequence = [],
+  speed = 1,
+  isPlaying = false,
+  isLooping = false,
+  seekToIndex = null,
+  onProgress,
+  onPlaybackEnd,
+  children,
+}: AvatarCardProps): JSX.Element {
   const videoA = useRef<HTMLVideoElement>(null);
   const videoB = useRef<HTMLVideoElement>(null);
   const [activeSlot, setActiveSlot] = useState<0 | 1>(0);
@@ -21,33 +37,76 @@ export function AvatarCard({ statusText, isBusy = false, sequence = [], speed = 
   // Refs to avoid stale closures inside event handlers
   const sequenceRef = useRef(sequence);
   const speedRef = useRef(speed);
+  const isPlayingRef = useRef(isPlaying);
+  const isLoopingRef = useRef(isLooping);
   const activeSlotRef = useRef<0 | 1>(0);
   const currentIndexRef = useRef<number | null>(null);
+  const onProgressRef = useRef(onProgress);
+  const onPlaybackEndRef = useRef(onPlaybackEnd);
+
   useEffect(() => { sequenceRef.current = sequence; }, [sequence]);
+  useEffect(() => { onProgressRef.current = onProgress; }, [onProgress]);
+  useEffect(() => { onPlaybackEndRef.current = onPlaybackEnd; }, [onPlaybackEnd]);
+  useEffect(() => { isLoopingRef.current = isLooping; }, [isLooping]);
+
   useEffect(() => {
     speedRef.current = speed;
     if (videoA.current) videoA.current.playbackRate = speed;
     if (videoB.current) videoB.current.playbackRate = speed;
   }, [speed]);
 
-  const getVideo = (slot: 0 | 1) => (slot === 0 ? videoA : videoB).current;
+  // Pause or resume the active video when isPlaying changes
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+    if (currentIndexRef.current === null) return;
+    const vid = (activeSlotRef.current === 0 ? videoA : videoB).current;
+    if (!vid) return;
+    if (isPlaying) {
+      vid.playbackRate = speedRef.current;
+      vid.play().catch(() => {});
+    } else {
+      vid.pause();
+    }
+  }, [isPlaying]);
 
-  const preload = (slot: 0 | 1, index: number) => {
+  const getVideo = useCallback((slot: 0 | 1) => (slot === 0 ? videoA : videoB).current, []);
+
+  const preload = useCallback((slot: 0 | 1, index: number) => {
     const seq = sequenceRef.current;
     const vid = getVideo(slot);
     if (!vid || index < 0 || index >= seq.length) return;
     vid.src = `/signs/${seq[index]}.mp4`;
     vid.load();
-  };
+  }, [getVideo]);
 
-  const playSlot = (slot: 0 | 1) => {
+  const playSlot = useCallback((slot: 0 | 1) => {
     const vid = getVideo(slot);
     if (!vid) return;
     vid.playbackRate = speedRef.current;
-    vid.play().catch(() => {});
-  };
+    if (isPlayingRef.current) vid.play().catch(() => {});
+  }, [getVideo]);
 
-  // Called when the active clip ends or errors — instantly swaps to the pre-buffered slot
+  const jumpToIndex = useCallback((index: number) => {
+    const seq = sequenceRef.current;
+    if (seq.length === 0 || index < 0 || index >= seq.length) return;
+
+    const slot: 0 | 1 = 0;
+    activeSlotRef.current = slot;
+    currentIndexRef.current = index;
+    setActiveSlot(slot);
+    setCurrentIndex(index);
+
+    const vid = videoA.current;
+    if (vid) {
+      vid.src = `/signs/${seq[index]}.mp4`;
+      vid.load();
+      playSlot(slot);
+    }
+    preload(1, index + 1);
+    onProgressRef.current?.(index, seq.length);
+  }, [playSlot, preload]);
+
+  // Called when the active clip ends or errors — swaps to the pre-buffered slot
   const advance = useCallback(() => {
     const seq = sequenceRef.current;
     const idx = currentIndexRef.current;
@@ -55,8 +114,13 @@ export function AvatarCard({ statusText, isBusy = false, sequence = [], speed = 
 
     const nextIndex = (idx ?? -1) + 1;
     if (nextIndex >= seq.length) {
+      if (isLoopingRef.current && seq.length > 0) {
+        jumpToIndex(0);
+        return;
+      }
       setCurrentIndex(null);
       currentIndexRef.current = null;
+      onPlaybackEndRef.current?.();
       return;
     }
 
@@ -66,12 +130,10 @@ export function AvatarCard({ statusText, isBusy = false, sequence = [], speed = 
     setActiveSlot(nextSlot);
     setCurrentIndex(nextIndex);
 
-    // The next slot is already buffered — play immediately at current speed
     playSlot(nextSlot);
-
-    // While it plays, buffer the clip after that into the now-idle slot
     preload(slot, nextIndex + 1);
-  }, []);
+    onProgressRef.current?.(nextIndex, seq.length);
+  }, [jumpToIndex, playSlot, preload]);
 
   // Kick off playback whenever the sequence changes
   useEffect(() => {
@@ -80,25 +142,16 @@ export function AvatarCard({ statusText, isBusy = false, sequence = [], speed = 
       currentIndexRef.current = null;
       return;
     }
+    jumpToIndex(0);
+  }, [sequence, jumpToIndex]);
 
-    const slot: 0 | 1 = 0;
-    activeSlotRef.current = slot;
-    currentIndexRef.current = 0;
-    setActiveSlot(slot);
-    setCurrentIndex(0);
+  // Seek when the parent moves the slider
+  useEffect(() => {
+    if (seekToIndex === null || seekToIndex === undefined) return;
+    jumpToIndex(seekToIndex);
+  }, [seekToIndex, jumpToIndex]);
 
-    const vid = videoA.current;
-    if (vid) {
-      vid.src = `/signs/${sequence[0]}.mp4`;
-      vid.load();
-      playSlot(slot);
-    }
-
-    // Pre-buffer the second clip into slot B
-    preload(1, 1);
-  }, [sequence]);
-
-  const isPlaying = currentIndex !== null;
+  const isActive = currentIndex !== null;
   const currentToken = currentIndex !== null ? sequence[currentIndex] : null;
 
   return (
@@ -126,7 +179,7 @@ export function AvatarCard({ statusText, isBusy = false, sequence = [], speed = 
             justifyContent: 'center',
           }}
         >
-          {!isPlaying && (
+          {!isActive && (
             <Box sx={{ textAlign: 'center', p: 3 }}>
               <PersonOutlineIcon sx={{ fontSize: 56, color: 'text.secondary' }} />
               <Typography variant="subtitle1" sx={{ mt: 1 }}>
@@ -144,7 +197,7 @@ export function AvatarCard({ statusText, isBusy = false, sequence = [], speed = 
             muted
             onEnded={advance}
             onError={advance}
-            className={`avatar-video${isPlaying && activeSlot === 0 ? '' : ' avatar-video--hidden'}`}
+            className={`avatar-video${isActive && activeSlot === 0 ? '' : ' avatar-video--hidden'}`}
           />
 
           {/* Slot B — preloaded while A plays, swapped in instantly on A's end */}
@@ -153,7 +206,7 @@ export function AvatarCard({ statusText, isBusy = false, sequence = [], speed = 
             muted
             onEnded={advance}
             onError={advance}
-            className={`avatar-video${isPlaying && activeSlot === 1 ? '' : ' avatar-video--hidden'}`}
+            className={`avatar-video${isActive && activeSlot === 1 ? '' : ' avatar-video--hidden'}`}
           />
 
           {currentToken && (

@@ -22,6 +22,7 @@ export default function App(): JSX.Element {
   const [isLooping, setIsLooping] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [progress, setProgress] = useState(0);
+  const [seekToIndex, setSeekToIndex] = useState<number | null>(null);
 
   const handleInputChange = useCallback((value: string) => {
     setInput(value);
@@ -31,9 +32,7 @@ export default function App(): JSX.Element {
 
   const handleTranslate = useCallback(async () => {
     const trimmedInput = input.trim();
-    if (!trimmedInput) {
-      return;
-    }
+    if (!trimmedInput) return;
 
     if (input.length > MAX_INPUT_LENGTH) {
       setErrorMessage(`Please keep the input under ${MAX_INPUT_LENGTH} characters.`);
@@ -46,6 +45,9 @@ export default function App(): JSX.Element {
     try {
       const result = await translateEnglishToASL(trimmedInput);
       setResponse(result);
+      setIsPlaying(true);
+      setProgress(0);
+      setSeekToIndex(null);
       sendSignSequenceToUnity(result.aslGloss, { speed, loop: isLooping });
     } catch (error) {
       setErrorMessage('We could not translate that text right now. Please try again.');
@@ -54,7 +56,27 @@ export default function App(): JSX.Element {
     }
   }, [input, speed, isLooping]);
 
-  const statusText = isLoading ? 'Translating...' : 'Ready to translate';
+  // Called by AvatarCard as each sign plays — keeps the slider in sync
+  const handleAvatarProgress = useCallback((index: number, total: number) => {
+    setProgress(total > 1 ? Math.round((index / (total - 1)) * 100) : 0);
+  }, []);
+
+  // Called by AvatarCard when the sequence finishes (and not looping)
+  const handlePlaybackEnd = useCallback(() => {
+    setIsPlaying(false);
+    setProgress(100);
+  }, []);
+
+  // Called when the user drags the slider — seeks AvatarCard to that sign
+  const handleProgressChange = useCallback((value: number) => {
+    setProgress(value);
+    const total = response?.aslGloss.length ?? 0;
+    if (total > 0) {
+      setSeekToIndex(Math.round((value / 100) * (total - 1)));
+    }
+  }, [response]);
+
+  const statusText = isLoading ? 'Translating...' : isPlaying ? 'Playing...' : 'Ready to translate';
 
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
@@ -76,16 +98,27 @@ export default function App(): JSX.Element {
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <AvatarCard statusText={statusText} isBusy={isLoading} sequence={response?.aslGloss ?? []} speed={speed}>
+              <AvatarCard
+                statusText={statusText}
+                isBusy={isLoading}
+                sequence={response?.aslGloss ?? []}
+                speed={speed}
+                isPlaying={isPlaying}
+                isLooping={isLooping}
+                seekToIndex={seekToIndex}
+                onProgress={handleAvatarProgress}
+                onPlaybackEnd={handlePlaybackEnd}
+              >
                 <PlaybackControls
                   isPlaying={isPlaying}
                   isLooping={isLooping}
                   speed={speed}
                   progress={progress}
+                  totalTokens={response?.aslGloss.length ?? 0}
                   onTogglePlay={() => setIsPlaying((value) => !value)}
                   onToggleLoop={() => setIsLooping((value) => !value)}
                   onSpeedChange={(value) => setSpeed(value)}
-                  onProgressChange={(value) => setProgress(value)}
+                  onProgressChange={handleProgressChange}
                 />
               </AvatarCard>
             </Grid>
