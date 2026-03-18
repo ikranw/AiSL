@@ -11,8 +11,8 @@ export function HeaderNav(): JSX.Element {
   return (
     <AppBar
       position="sticky"
-      elevation={0}
-      sx={{ bgcolor: 'transparent', color: 'inherit', py: 2 }}
+      elevation={1}
+      sx={{ bgcolor: 'background.paper', color: 'inherit', py: 2 }}
     >
       <Container maxWidth="lg">
         <Stack direction="row" alignItems="center" justifyContent="space-between">
