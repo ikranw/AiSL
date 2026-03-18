@@ -89,16 +89,39 @@ export function TranslatorCard({
           <Box>
             <Divider sx={{ mb: 2 }} />
             <Typography variant="subtitle2" sx={{ mb: 1 }}>
-              ASL Output
+              ASL Gloss
             </Typography>
-            <Typography variant="body1" sx={{ fontWeight: 600, mb: 2 }}>
-              {response.asl_gloss}
-            </Typography>
-            <Stack direction="row" spacing={1} flexWrap="wrap">
-              {response.sign_sequence.map((sign, index) => (
-                <Chip key={`${sign}-${index}`} label={sign} />
+            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap sx={{ mb: 2 }}>
+              {response.aslGloss.map((sign, index) => (
+                <Chip key={`${sign}-${index}`} label={sign} color="primary" variant="outlined" />
               ))}
             </Stack>
+
+            {response.notes.length > 0 && (
+              <Box sx={{ mb: 1 }}>
+                <Typography variant="caption" color="text.secondary" display="block" sx={{ mb: 0.5 }}>
+                  Notes
+                </Typography>
+                {response.notes.map((note, index) => (
+                  <Typography key={index} variant="body2" color="text.secondary">
+                    • {note}
+                  </Typography>
+                ))}
+              </Box>
+            )}
+
+            {response.unknownTokens.length > 0 && (
+              <Box>
+                <Typography variant="caption" color="text.secondary" display="block" sx={{ mb: 0.5 }}>
+                  Uncertain tokens
+                </Typography>
+                <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                  {response.unknownTokens.map((token, index) => (
+                    <Chip key={`unknown-${index}`} label={token} size="small" color="warning" variant="outlined" />
+                  ))}
+                </Stack>
+              </Box>
+            )}
           </Box>
         )}
       </Stack>

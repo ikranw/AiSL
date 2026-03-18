@@ -46,7 +46,7 @@ export default function App(): JSX.Element {
     try {
       const result = await translateEnglishToASL(trimmedInput);
       setResponse(result);
-      sendSignSequenceToUnity(result.sign_sequence, { speed, loop: isLooping });
+      sendSignSequenceToUnity(result.aslGloss, { speed, loop: isLooping });
     } catch (error) {
       setErrorMessage('We could not translate that text right now. Please try again.');
     } finally {
@@ -76,7 +76,7 @@ export default function App(): JSX.Element {
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <AvatarCard statusText={statusText} isBusy={isLoading}>
+              <AvatarCard statusText={statusText} isBusy={isLoading} sequence={response?.aslGloss ?? []} speed={speed}>
                 <PlaybackControls
                   isPlaying={isPlaying}
                   isLooping={isLooping}
