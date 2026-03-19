@@ -1,0 +1,32 @@
+{
+  "sign_id": "HELLO",
+  "fps": 30,
+  "frames": [
+    {
+      "time": 0.0,
+      "bones": [
+        {
+          "boneName": "Bip01 R Forearm",
+          "rotation": [0.0, 0.0, 0.0, 1.0]
+        },
+        {
+          "boneName": "Bip01 R Hand",
+          "rotation": [0.0, 0.0, 0.0, 1.0]
+        }
+      ]
+    },
+    {
+      "time": 0.5,
+      "bones": [
+        {
+          "boneName": "Bip01 R Forearm",
+          "rotation": [0.3, 0.0, 0.0, 0.95]
+        },
+        {
+          "boneName": "Bip01 R Hand",
+          "rotation": [0.0, 0.3, 0.0, 0.95]
+        }
+      ]
+    }
+  ]
+}
