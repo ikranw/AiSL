@@ -1,6 +1,5 @@
 import { Box, Paper, Stack, Typography } from '@mui/material';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import { useRef, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 interface AvatarCardProps {
   statusText: string;
@@ -9,8 +8,32 @@ interface AvatarCardProps {
 }
 
 export function AvatarCard({ statusText, isBusy = false, children }: AvatarCardProps): JSX.Element {
-  const unityMountRef = useRef<HTMLDivElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [unityError, setUnityError] = useState<string | null>(null);
   const statusColor = isBusy ? '#f59e0b' : '#16a34a';
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = '/unity-build/Build/unity-build.loader.js';
+    script.onerror = () => setUnityError('Failed to load Unity loader.');
+    script.onload = () => {
+      if (!canvasRef.current) return;
+      (window as any)
+        .createUnityInstance(canvasRef.current, {
+          dataUrl: '/unity-build/Build/unity-build.data',
+          frameworkUrl: '/unity-build/Build/unity-build.framework.js',
+          codeUrl: '/unity-build/Build/unity-build.wasm',
+        })
+        .then((instance: any) => {
+          window.unityInstance = instance;
+        })
+        .catch((err: Error) => setUnityError(err.message));
+    };
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <Paper sx={{ p: { xs: 3, md: 4 }, height: '100%' }}>
@@ -34,28 +57,25 @@ export function AvatarCard({ statusText, isBusy = false, children }: AvatarCardP
 
         <Box
           id="unity-webgl-mount"
-          ref={unityMountRef}
           sx={{
             flexGrow: 1,
             borderRadius: 3,
-            bgcolor: '#eef2f7',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            textAlign: 'center',
-            p: 3,
+            bgcolor: '#000',
+            overflow: 'hidden',
+            position: 'relative',
           }}
         >
-          {/* Unity WebGL build will mount a canvas into this container later. */}
-          <Box>
-            <PersonOutlineIcon sx={{ fontSize: 56, color: 'text.secondary' }} />
-            <Typography variant="subtitle1" sx={{ mt: 1 }}>
-              3D Avatar will appear here
+          {unityError ? (
+            <Typography color="error" sx={{ p: 2 }}>
+              {unityError}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Unity WebGL placeholder. The avatar loads after integration.
-            </Typography>
-          </Box>
+          ) : (
+            <canvas
+              ref={canvasRef}
+              id="unity-webgl-canvas"
+              style={{ width: '100%', height: '100%', display: 'block' }}
+            />
+          )}
         </Box>
         {children}
       </Stack>
