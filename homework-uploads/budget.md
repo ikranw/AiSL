@@ -1,1 +1,0 @@
-There have not been any purchases made related to the project.
