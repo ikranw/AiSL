@@ -1,0 +1,114 @@
+{
+    "rig_name": "rocketbox_female_adult_11",
+    "root_bone": "Bip01",
+    "armature_space": "local",
+    "bones": {
+      "spine": "Bip01 Spine",
+      "spine_upper": "Bip01 Spine2",
+      "neck": "Bip01 Neck",
+  
+      "left_clavicle": "Bip01 L Clavicle",
+      "left_upper_arm": "Bip01 L UpperArm",
+      "left_forearm": "Bip01 L Forearm",
+      "left_hand": "Bip01 L Hand",
+  
+      "right_clavicle": "Bip01 R Clavicle",
+      "right_upper_arm": "Bip01 R UpperArm",
+      "right_forearm": "Bip01 R Forearm",
+      "right_hand": "Bip01 R Hand"
+    },
+    "fingers": {
+      "left_thumb": [
+        "Bip01 L Finger0",
+        "Bip01 L Finger01",
+        "Bip01 L Finger02"
+      ],
+      "left_index": [
+        "Bip01 L Finger1",
+        "Bip01 L Finger11",
+        "Bip01 L Finger12"
+      ],
+      "left_middle": [
+        "Bip01 L Finger2",
+        "Bip01 L Finger21",
+        "Bip01 L Finger22"
+      ],
+      "left_ring": [
+        "Bip01 L Finger3",
+        "Bip01 L Finger31",
+        "Bip01 L Finger32"
+      ],
+      "left_pinky": [
+        "Bip01 L Finger4",
+        "Bip01 L Finger41",
+        "Bip01 L Finger42"
+      ],
+  
+      "right_thumb": [
+        "Bip01 R Finger0",
+        "Bip01 R Finger01",
+        "Bip01 R Finger02"
+      ],
+      "right_index": [
+        "Bip01 R Finger1",
+        "Bip01 R Finger11",
+        "Bip01 R Finger12"
+      ],
+      "right_middle": [
+        "Bip01 R Finger2",
+        "Bip01 R Finger21",
+        "Bip01 R Finger22"
+      ],
+      "right_ring": [
+        "Bip01 R Finger3",
+        "Bip01 R Finger31",
+        "Bip01 R Finger32"
+      ],
+      "right_pinky": [
+        "Bip01 R Finger4",
+        "Bip01 R Finger41",
+        "Bip01 R Finger42"
+      ]
+    },
+    "finger_order_note": {
+      "meaning": "FingerX is proximal (closest to palm), FingerX1 is middle, FingerX2 is distal (closest to nail).",
+      "thumb_note": "Finger0/Finger01/Finger02 are treated as thumb proximal/middle/distal."
+    },
+    "joint_limits_deg": {
+      "left_upper_arm": {
+        "x": [-90, 120],
+        "y": [-90, 90],
+        "z": [-120, 120]
+      },
+      "left_forearm": {
+        "x": [-10, 145],
+        "y": [-80, 80],
+        "z": [-90, 90]
+      },
+      "left_hand": {
+        "x": [-60, 60],
+        "y": [-45, 45],
+        "z": [-60, 60]
+      },
+  
+      "right_upper_arm": {
+        "x": [-90, 120],
+        "y": [-90, 90],
+        "z": [-120, 120]
+      },
+      "right_forearm": {
+        "x": [-10, 145],
+        "y": [-80, 80],
+        "z": [-90, 90]
+      },
+      "right_hand": {
+        "x": [-60, 60],
+        "y": [-45, 45],
+        "z": [-60, 60]
+      }
+    },
+    "default_pose": {
+      "left_hand_rest_position": [-0.20, 1.00, 0.25],
+      "right_hand_rest_position": [0.20, 1.00, 0.25]
+    }
+  }
