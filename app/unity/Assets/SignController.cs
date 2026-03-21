@@ -35,6 +35,8 @@ public class SignController : MonoBehaviour
         { "CHURCH",       110 },
         { "OR",           111 },
         { "WHERE",        112 },
+        {"TOMORROW",       114 },
+        {"WANT",          115 },
     };
 
     // -------------------------------------------------------
@@ -70,6 +72,8 @@ public class SignController : MonoBehaviour
         { 111, "SG ASL Or 2025-7-21 Animation" },
         { 112, "SG ASL Where Var 2025-7-24 Animation" },
         { 113, "SG ASL My Name Is 2024-6-9 Animation" },
+        { 114, "Tomorrow" },
+        { 115, "Want" },
 
         { 1,  "SG ASL A 2024-6-16 Animation" },
         { 2,  "SG ASL B 2024-6-16 Animation" },
@@ -97,6 +101,7 @@ public class SignController : MonoBehaviour
         { 24, "SG ASL X 1 2024-6-17 Animation" },
         { 25, "SG ASL Y 2 2024-6-17 Animation" },
         { 26, "SG ASL Z 2 2024-6-17 Animation" },
+    
     };
 
     void Start()
