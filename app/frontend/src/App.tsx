@@ -13,6 +13,26 @@ import { TranslateResponse } from './types/translate';
 
 const MAX_INPUT_LENGTH = 500;
 
+function normalizeUnityToken(token: string): string[] {
+  const t = token.trim().toUpperCase();
+
+  if (t === 'X-MY NAME' || t === 'MY NAME IS') {
+    return ['MY NAME IS'];
+  }
+
+  const fingerspellMatch = t.match(/^FINGERSPELL\((.+)\)$/);
+  if (fingerspellMatch) {
+    return [fingerspellMatch[1].toUpperCase()];
+  }
+
+  const nestedFingerspellMatch = t.match(/^FINGERSPELL\(FINGERSPELL\((.+)\)\)$/);
+  if (nestedFingerspellMatch) {
+    return [nestedFingerspellMatch[1].toUpperCase()];
+  }
+
+  return [t];
+}
+
 export default function App(): JSX.Element {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -49,9 +69,15 @@ export default function App(): JSX.Element {
       setResponse(result);
 
       if (result.sign_sequence?.length) {
-        sendSignSequenceToUnity(result.sign_sequence.map((item) => item.token),
-        { speed, loop: isLooping }
-        );
+        const normalizedSequence = result.sign_sequence
+          .map((item) => normalizeUnityToken(item.token))
+          .flat()
+          .filter(Boolean);
+
+        sendSignSequenceToUnity(normalizedSequence, {
+          speed,
+          loop: isLooping,
+        });
       }
     } catch (error) {
       setErrorMessage('We could not translate that text right now. Please try again.');

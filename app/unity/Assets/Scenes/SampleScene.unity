@@ -384,6 +384,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7bf826ded769004c8437f6870791392, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1451534622}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a7bf826ded769004c8437f6870791392, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1451534624}
   m_SourcePrefab: {fileID: 100100000, guid: a7bf826ded769004c8437f6870791392, type: 3}
 --- !u!1 &123695376
 GameObject:
@@ -522,6 +525,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123695376}
   m_CullTransparentMesh: 1
+--- !u!1 &239759514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 239759515}
+  - component: {fileID: 239759517}
+  - component: {fileID: 239759516}
+  m_Layer: 0
+  m_Name: ASLBridge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &239759515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239759514}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.25825, y: 0, z: -1.1963}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &239759516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239759514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e020a64f7cdcf94bb20f33e3a77965a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WebGLKeyboardFix
+--- !u!114 &239759517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239759514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5af23655a9a1b489f296f6216f214c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ASLBridge
+  signController: {fileID: 1451534622}
 --- !u!1 &243533399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,8 +1396,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SignController
   animator: {fileID: 1451534620}
-  userInputField: {fileID: 27145924}
-  submitButton: {fileID: 1537530573}
+--- !u!114 &1451534624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451534619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e020a64f7cdcf94bb20f33e3a77965a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WebGLKeyboardFix
 --- !u!1 &1537530571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1518,5 +1589,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 63651745}
+  - {fileID: 239759515}
   - {fileID: 244991915}
   - {fileID: 243533403}
