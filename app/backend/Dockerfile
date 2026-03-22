@@ -11,7 +11,10 @@ WORKDIR /app
 
 # Copy requirements and install Python dependencies
 COPY requirements.txt .
-RUN pip install --user --no-cache-dir -r requirements.txt
+RUN pip install --user --no-cache-dir -r requirements.txt && \
+    find /root/.local -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true && \
+    find /root/.local -type f -name "*.pyc" -delete && \
+    find /root/.local -type f -name "*.pyo" -delete
 
 # Final stage - runtime
 FROM python:3.11-slim
@@ -22,8 +25,9 @@ WORKDIR /app
 # Copy installed packages from builder
 COPY --from=builder /root/.local /root/.local
 
-# Copy application code
-COPY . .
+# Copy only essential application files
+COPY src/ src/
+COPY requirements.txt .
 
 # Set environment variables
 ENV PATH=/root/.local/bin:$PATH \
