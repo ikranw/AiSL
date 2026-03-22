@@ -1,9 +1,7 @@
 openai
 pydantic
 numpy
-pandas
 scikit-learn
-sentence-transformers
 kagglehub
 python-dotenv
 flask
