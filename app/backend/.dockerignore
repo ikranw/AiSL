@@ -13,3 +13,7 @@ env
 dist
 build
 .DS_Store
+data/
+scripts/
+tests/
+configs/
