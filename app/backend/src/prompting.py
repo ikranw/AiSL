@@ -104,9 +104,9 @@ if __name__ == "__main__":
 
     sample_policy = (
         "Use only canonical gloss tokens from the allowed list. "
-        "Preserve X-* and DESC-* token forms exactly when supported by inventory or examples. "
-        "If a needed concept is unavailable, output FINGERSPELL(word)."
-    )
+        "Remove X-* and DESC-* token forms exactly when supported by inventory or examples. "
+        "Do not invent new tokens or forms that are not supported by the inventory or examples."
+        )
 
     prompt = build_prompt(
         input_text="Where are you going tomorrow?",
