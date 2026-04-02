@@ -20,12 +20,17 @@ public class SignController : MonoBehaviour
         { "PLEASE",       106 },
         { "BOOK",         107 },
         { "CHILD",        108 },
-        { "CALIFORNIA",   109 },
-        { "CHURCH",       110 },
-        { "OR",           111 },
-        { "WHERE",        112 },
-        { "TOMORROW",     114 },
-        { "WANT",         115 },
+        { "CALIFORNIA",   116 },
+        { "CHURCH",       117 },
+        { "OR",           118 },
+        { "WHERE",        119 },
+        { "TOMORROW",     120 },
+        { "ADHD",         121 },
+        { "ASL",          122 },
+        { "ALASKA ALT",   123 },
+        { "ALGORITHM",    124 },
+        { "ANCIENT",      125 },
+        { "ALIEN",          126 },
     };
 
     private readonly Dictionary<char, int> letterToIndex = new Dictionary<char, int>()
@@ -85,6 +90,12 @@ public class SignController : MonoBehaviour
         { 24, "SG ASL X 1 2024-6-17 Animation" },
         { 25, "SG ASL Y 2 2024-6-17 Animation" },
         { 26, "SG ASL Z 2 2024-6-17 Animation" },
+        { 121, "SG ASL ADHD 1 2023-8-16 Animation" },
+        { 122, "SG ASL ASL 2023-9-7 Animation" },
+        { 123, "SG ASL Alaska Alt 3 2023-5-15 Animation" },
+        { 124, "SG ASL Algorithm 3 2023-5-19 Animation" },
+        { 125, "SG ASL Ancient 1 2023-6-28 Animation" },
+        { 126, "SG ASL Alien (ET) 1 2023-5-20 Animation" },
     };
 
     void Awake()
