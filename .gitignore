@@ -1,5 +1,9 @@
 # OS
 .DS_Store
+.DS_Store?
+
+# Claude
+.claude/
 
 # Node
 node_modules/

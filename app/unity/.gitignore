@@ -24,6 +24,7 @@ unitycloud_build_temp_dir/
 /*.csd
 /*.rsp
 *.sln
+*.slnx
 *.suo
 *.user
 *.userprefs
@@ -60,6 +61,12 @@ unitycloud_build_temp_dir/
 # for this you need to have your project settings correct
 # # Uncomment to ignore the Assets/AssetImportPipeline directory
 # # /Assets/AssetImportPipeline
+
+# Unity test runner artifacts
+/Assets/Resources/PerformanceTestRunInfo.json
+/Assets/Resources/PerformanceTestRunInfo.json.meta
+/Assets/Resources/PerformanceTestRunSettings.json
+/Assets/Resources/PerformanceTestRunSettings.json.meta
 
 # Misc
 *.stackdump
