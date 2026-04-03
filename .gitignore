@@ -1,12 +1,20 @@
 # OS
 .DS_Store
 .DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
 
 # Claude
 .claude/
 
-# Node
+# Node / JS
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
 
 # Build outputs
 /dist/
@@ -19,38 +27,12 @@ node_modules/
 .env
 .env.*
 
-# Logs
-# OS / editor
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-Thumbs.db
-*.swp
-*.swo
-*.tmp
-*.log
+# Editor
 .vscode/
 .idea/
 
-# Env
-.env
-.env.*
-
-# Node / JS
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Misc
-*.local
-# Build / bundlers
-/dist/
-/build/
-.vite/
+# TypeScript
+*.tsbuildinfo
 
 # Coverage / caches
 coverage/
@@ -58,8 +40,10 @@ coverage/
 .cache/
 .eslintcache
 
-# TypeScript
-*.tsbuildinfo
-
 # Misc
+*.local
 *.tgz
+*.swp
+*.swo
+*.tmp
+*.log
