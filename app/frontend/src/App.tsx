@@ -568,8 +568,8 @@ export default function App(): JSX.Element {
                           },
                         }}
                       >
-                        <MenuItem value="unity">3D ASL Avatar</MenuItem>
-                        <MenuItem value="video">ASL Sign Videos</MenuItem>
+                        <MenuItem value="unity">3D Avatar</MenuItem>
+                        <MenuItem value="video">Sign Videos</MenuItem>
                       </Select>
                     </FormControl>
                   )}
@@ -618,8 +618,8 @@ export default function App(): JSX.Element {
                           },
                         }}
                       >
-                        <MenuItem value="unity">3D ASL Avatar</MenuItem>
-                        <MenuItem value="video">ASL Sign Videos</MenuItem>
+                        <MenuItem value="unity">3D Avatar</MenuItem>
+                        <MenuItem value="video">Sign Videos</MenuItem>
                       </Select>
                     </FormControl>
                   )}

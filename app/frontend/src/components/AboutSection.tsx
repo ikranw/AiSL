@@ -33,6 +33,11 @@ const faqItems = [
       'Unity gives us direct control over the avatar\'s skeleton, animations, and her face. Facial expressions are a core part of ASL grammar, not just emotion, so being able to eventually drive eyebrows, mouth shapes, and gaze programmatically matters a lot. She may not be the most polished avatar right now, but the goal is to build toward expressive, accurate signing. That requires a platform we can actually control at that level.',
   },
   {
+    question: 'What is the difference between the 3D Avatar and ASL Sign Videos modes?',
+    answer:
+      'The two modes pull from completely separate databases, so they may not be able to sign the exact same words. The 3D Avatar uses motion-captured animation clips and gives us more direct control over how signing is displayed and built over time. The ASL Sign Videos mode pulls real video clips of human signers, which can feel more natural to watch. Because the word coverage differs between the two datasets, one mode may recognize a word the other does not.',
+  },
+  {
     question: 'Why do some avatar changes need a WebGL rebuild?',
     answer:
       'Frontend UI changes show up right away, but Unity script or animation changes only appear after exporting a fresh WebGL build.',
@@ -82,7 +87,7 @@ export function AboutSection(): JSX.Element {
                 <Stack spacing={2}>
                   <Box>
                     <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      Avatar
+                      3D Avatar
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       The avatar is from the Microsoft Rocketbox library.
@@ -99,7 +104,7 @@ export function AboutSection(): JSX.Element {
                   </Box>
                   <Box>
                     <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      Signs Source
+                      Avatar Signs
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       Sign and motion reference adapted from Studio Galt&apos;s sign language motion capture archive.
@@ -112,6 +117,23 @@ export function AboutSection(): JSX.Element {
                       sx={{ px: 0, mt: 0.75 }}
                     >
                       View Studio Galt Source
+                    </Button>
+                  </Box>
+                  <Box>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
+                      ASL Sign Videos
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Sign video clips sourced from the WLASL (Word-Level American Sign Language) dataset, a large-scale benchmark for word-level ASL recognition.
+                    </Typography>
+                    <Button
+                      href="https://www.kaggle.com/datasets/risangbaskoro/wlasl-processed"
+                      target="_blank"
+                      rel="noreferrer"
+                      size="small"
+                      sx={{ px: 0, mt: 0.75 }}
+                    >
+                      View WLASL Dataset
                     </Button>
                   </Box>
                 </Stack>

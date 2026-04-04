@@ -42,6 +42,11 @@ AiSL is an innovative AI-powered American Sign Language (ASL) learning tool desi
 ### Budget
 [Budget](https://github.com/ikranw/AiSL/blob/main/homework-uploads/budget.md)
 
+### Credits & Data Sources
+- **3D Avatar:** [Microsoft Rocketbox](https://github.com/microsoft/Microsoft-Rocketbox)
+- **3D Animation Clips:** [Studio Galt Sign Language Mocap Archive](https://github.com/StudioGalt/Sign-Language-Mocap-Archive)
+- **ASL Sign Videos:** [WLASL Processed Dataset (Kaggle)](https://www.kaggle.com/datasets/risangbaskoro/wlasl-processed) — Word-Level American Sign Language video dataset
+
 ### Appendix
 * [Appendix Folder](https://github.com/ikranw/AiSL/tree/main/homework-uploads/appendix)
 * [Initial Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/intial-brainstorm.md)
