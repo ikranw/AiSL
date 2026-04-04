@@ -78,9 +78,45 @@ const videoTutorialSections = [
   },
 ];
 
+const flashcards = [
+  {
+    term: 'Hello',
+    detail: 'A common greeting used to start a conversation in ASL.',
+    tip: 'Use this when meeting someone or getting their attention politely.',
+  },
+  {
+    term: 'Thank You',
+    detail: 'An everyday sign used to show gratitude.',
+    tip: 'A good core sign for beginner practice because it is used often.',
+  },
+  {
+    term: 'Please',
+    detail: 'A polite sign used when asking for something.',
+    tip: 'Practice pairing this with simple requests to build short phrases.',
+  },
+  {
+    term: 'Sorry',
+    detail: 'Used to apologize or show regret.',
+    tip: 'Helpful for basic social conversation and respectful communication.',
+  },
+  {
+    term: 'Help',
+    detail: 'A useful sign for asking for support or offering assistance.',
+    tip: 'Try practicing both “help me” and “help you” in context.',
+  },
+  {
+    term: 'Friend',
+    detail: 'A common relationship word often learned early in ASL.',
+    tip: 'Good for beginner introductions and simple personal descriptions.',
+  },
+];
+
 export function ResourcesSection(): JSX.Element {
   const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isFlashcardsOpen, setIsFlashcardsOpen] = useState(false);
+  const [activeFlashcard, setActiveFlashcard] = useState(0);
+  const [isFlashcardFlipped, setIsFlashcardFlipped] = useState(false);
 
   const handleResourceClick = (action: string) => {
     if (action === 'grammar-guide') {
@@ -88,9 +124,28 @@ export function ResourcesSection(): JSX.Element {
       return;
     }
 
+    if (action === 'flashcards') {
+      setActiveFlashcard(0);
+      setIsFlashcardFlipped(false);
+      setIsFlashcardsOpen(true);
+      return;
+    }
+
     if (action === 'videos') {
       setIsVideoOpen(true);
     }
+  };
+
+  const currentFlashcard = flashcards[activeFlashcard];
+
+  const showPreviousFlashcard = () => {
+    setIsFlashcardFlipped(false);
+    setActiveFlashcard((current) => (current === 0 ? flashcards.length - 1 : current - 1));
+  };
+
+  const showNextFlashcard = () => {
+    setIsFlashcardFlipped(false);
+    setActiveFlashcard((current) => (current === flashcards.length - 1 ? 0 : current + 1));
   };
 
   return (
@@ -199,6 +254,76 @@ export function ResourcesSection(): JSX.Element {
                   </Stack>
                 </Paper>
               ))}
+            </Stack>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog
+          open={isFlashcardsOpen}
+          onClose={() => setIsFlashcardsOpen(false)}
+          fullWidth
+          maxWidth="sm"
+        >
+          <DialogTitle>ASL Vocabulary Flashcards</DialogTitle>
+          <DialogContent>
+            <Stack spacing={2.5} sx={{ pt: 1 }}>
+              <Typography variant="body2" color="text.secondary">
+                Practice a small starter set of everyday ASL vocabulary inside the app.
+                Flip each card to read a simple explanation and study tip.
+              </Typography>
+
+              <Paper
+                variant="outlined"
+                sx={{
+                  p: 3,
+                  minHeight: 240,
+                  borderRadius: 3,
+                  boxShadow: 'none',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                  bgcolor: isFlashcardFlipped ? '#f8fafc' : '#eff6ff',
+                }}
+                onClick={() => setIsFlashcardFlipped((value) => !value)}
+              >
+                <Stack spacing={1.5} alignItems="center">
+                  <Typography variant="caption" color="text.secondary">
+                    Card {activeFlashcard + 1} of {flashcards.length}
+                  </Typography>
+                  {!isFlashcardFlipped ? (
+                    <>
+                      <Typography variant="h3">{currentFlashcard.term}</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Tap to flip
+                      </Typography>
+                    </>
+                  ) : (
+                    <>
+                      <Typography variant="h3">Meaning</Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {currentFlashcard.detail}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Study tip: {currentFlashcard.tip}
+                      </Typography>
+                    </>
+                  )}
+                </Stack>
+              </Paper>
+
+              <Stack direction="row" spacing={1.5} justifyContent="space-between">
+                <Button variant="outlined" onClick={showPreviousFlashcard}>
+                  Previous
+                </Button>
+                <Button variant="outlined" onClick={() => setIsFlashcardFlipped((value) => !value)}>
+                  {isFlashcardFlipped ? 'Show Front' : 'Flip Card'}
+                </Button>
+                <Button variant="contained" onClick={showNextFlashcard}>
+                  Next
+                </Button>
+              </Stack>
             </Stack>
           </DialogContent>
         </Dialog>
