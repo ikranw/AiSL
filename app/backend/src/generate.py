@@ -110,7 +110,20 @@ def _clean_gloss_token(token: str) -> str:
             break
 
     token = " ".join(token.split())
-    return token.upper()
+    token = token.upper()
+
+    # Never expose POSS in output; normalize it to MY for display gloss.
+    if token == "POSS":
+        return "MY"
+
+    return token
+
+
+def _to_sign_token(token: str) -> str:
+    # Unity should sign first-person and possessive first-person with the MY sign.
+    if token in {"I", "MY", "POSS"}:
+        return "MY"
+    return token
 
 
 def _clean_output_markers(data: dict[str, Any]) -> dict[str, Any]:
@@ -137,9 +150,10 @@ def _clean_output_markers(data: dict[str, Any]) -> dict[str, Any]:
         if not cleaned_token:
             continue
 
+        sign_token = _to_sign_token(cleaned_token)
         cleaned_sequence.append({
-            "token": cleaned_token,
-            "sign_id": cleaned_token,
+            "token": sign_token,
+            "sign_id": sign_token,
             "type": str(item.get("type", "sign")) or "sign",
         })
 
