@@ -1,8 +1,9 @@
-import { Box, Paper, Stack, Typography } from '@mui/material';
+import { Box, Paper, Stack, Tooltip, Typography } from '@mui/material';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { flushPendingUnityPayload } from '../services/unityBridge';
 
-const UNITY_BUILD_VERSION = '2026-04-04-sign-token-overlay';
+const UNITY_BUILD_VERSION = '2026-04-04-fingerspelling-overlay';
 
 interface AvatarCardProps {
   statusText: string;
@@ -10,6 +11,7 @@ interface AvatarCardProps {
   activeTokenIndex?: number;
   totalTokens?: number;
   isBusy?: boolean;
+  activeTokenInfoMessage?: string | null;
   headerControl?: ReactNode;
   children?: ReactNode;
 }
@@ -20,6 +22,7 @@ export function AvatarCard({
   activeTokenIndex = -1,
   totalTokens = 0,
   isBusy = false,
+  activeTokenInfoMessage = null,
   headerControl,
   children,
 }: AvatarCardProps): JSX.Element {
@@ -32,6 +35,8 @@ export function AvatarCard({
   const [isUnityReady, setIsUnityReady] = useState(false);
 
   const statusColor = isBusy ? '#f59e0b' : '#16a34a';
+  const progressPrefix =
+    activeTokenIndex >= 0 && totalTokens > 0 ? `${activeTokenIndex + 1}/${totalTokens}` : null;
 
   useEffect(() => {
     const node = containerRef.current;
@@ -197,14 +202,24 @@ export function AvatarCard({
                 <Typography
                   variant="caption"
                   sx={{
-                    display: 'block',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 0.75,
                     textAlign: 'center',
                     fontWeight: 600,
                     letterSpacing: '0.02em',
                   }}
                 >
-                  {activeTokenIndex >= 0 && totalTokens > 0 ? `${activeTokenIndex + 1}/${totalTokens} ` : ''}
-                  {activeToken}
+                  <span>
+                    {progressPrefix ? `${progressPrefix} ` : ''}
+                    {activeToken}
+                  </span>
+                  {activeTokenInfoMessage ? (
+                    <Tooltip title={activeTokenInfoMessage} arrow>
+                      <InfoOutlinedIcon sx={{ fontSize: 14, pointerEvents: 'auto' }} />
+                    </Tooltip>
+                  ) : null}
                 </Typography>
               </Box>
             </Box>

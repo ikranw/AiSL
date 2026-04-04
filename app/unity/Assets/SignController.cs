@@ -14,9 +14,31 @@ public class SignController : MonoBehaviour
 
 #if UNITY_WEBGL && !UNITY_EDITOR
     [DllImport("__Internal")]
-    private static extern void ReportPlaybackState(float currentSeconds, float totalSeconds, int isPlaying, string currentToken, int currentTokenIndex, int totalTokens);
+    private static extern void ReportPlaybackState(
+        float currentSeconds,
+        float totalSeconds,
+        int isPlaying,
+        string currentToken,
+        int currentTokenIndex,
+        int totalTokens,
+        int isFingerspelling,
+        string displayToken,
+        int displayIndex,
+        int displayTotal
+    );
 #else
-    private static void ReportPlaybackState(float currentSeconds, float totalSeconds, int isPlaying, string currentToken, int currentTokenIndex, int totalTokens) {}
+    private static void ReportPlaybackState(
+        float currentSeconds,
+        float totalSeconds,
+        int isPlaying,
+        string currentToken,
+        int currentTokenIndex,
+        int totalTokens,
+        int isFingerspelling,
+        string displayToken,
+        int displayIndex,
+        int displayTotal
+    ) {}
 #endif
 
     public Animator animator;
@@ -39,6 +61,14 @@ public class SignController : MonoBehaviour
     private string lastReportedToken = "";
     private int currentPlaybackTokenIndex = -1;
     private int lastReportedTokenIndex = -2;
+    private bool currentPlaybackIsFingerspelling;
+    private int lastReportedIsFingerspelling = -1;
+    private string currentPlaybackDisplayToken = "";
+    private string lastReportedDisplayToken = "";
+    private int currentPlaybackDisplayIndex = -1;
+    private int lastReportedDisplayIndex = -2;
+    private int currentPlaybackDisplayTotal;
+    private int lastReportedDisplayTotal = -1;
     private readonly Dictionary<string, float> stateLengthCache = new Dictionary<string, float>();
 
     private readonly Dictionary<string, int> glossToIndex = new Dictionary<string, int>()
@@ -4030,6 +4060,10 @@ public class SignController : MonoBehaviour
         playbackTotalSeconds = EstimateSequenceDuration(currentSequence, currentPlaybackSpeed);
         currentPlaybackToken = "";
         currentPlaybackTokenIndex = -1;
+        currentPlaybackIsFingerspelling = false;
+        currentPlaybackDisplayToken = "";
+        currentPlaybackDisplayIndex = -1;
+        currentPlaybackDisplayTotal = 0;
         NotifyPlaybackState(true);
 
         currentRoutine = StartCoroutine(PlaySequenceRoutine());
@@ -4087,6 +4121,10 @@ public class SignController : MonoBehaviour
         playbackTotalSeconds = 0f;
         currentPlaybackToken = "";
         currentPlaybackTokenIndex = -1;
+        currentPlaybackIsFingerspelling = false;
+        currentPlaybackDisplayToken = "";
+        currentPlaybackDisplayIndex = -1;
+        currentPlaybackDisplayTotal = 0;
         ReturnToIdle();
         NotifyPlaybackState(true);
     }
@@ -4110,6 +4148,10 @@ public class SignController : MonoBehaviour
                 string token = raw.Trim().ToUpper();
                 currentPlaybackToken = token;
                 currentPlaybackTokenIndex = currentSequenceIndex - 1;
+                currentPlaybackIsFingerspelling = false;
+                currentPlaybackDisplayToken = token;
+                currentPlaybackDisplayIndex = currentPlaybackTokenIndex;
+                currentPlaybackDisplayTotal = currentSequence.Count;
                 NotifyPlaybackState(true);
 
                 if (glossToIndex.TryGetValue(token, out int index))
@@ -4125,6 +4167,10 @@ public class SignController : MonoBehaviour
         playbackElapsedSeconds = playbackTotalSeconds;
         currentPlaybackToken = "";
         currentPlaybackTokenIndex = -1;
+        currentPlaybackIsFingerspelling = false;
+        currentPlaybackDisplayToken = "";
+        currentPlaybackDisplayIndex = -1;
+        currentPlaybackDisplayTotal = 0;
         ReturnToIdle();
         currentRoutine = null;
         NotifyPlaybackState(true);
@@ -4181,13 +4227,35 @@ public class SignController : MonoBehaviour
 
     private IEnumerator Fingerspell(string word)
     {
+        var supportedLetters = new List<char>();
+
         foreach (char letter in word)
         {
             if (letterToIndex.TryGetValue(letter, out int index))
             {
-                yield return StartCoroutine(PlaySign(index));
-                yield return StartCoroutine(WaitForPlaybackSeconds(FingerspellGapSeconds));
+                supportedLetters.Add(letter);
             }
+        }
+
+        if (supportedLetters.Count == 0)
+            yield break;
+
+        currentPlaybackIsFingerspelling = true;
+        currentPlaybackDisplayTotal = supportedLetters.Count;
+
+        for (int letterPosition = 0; letterPosition < supportedLetters.Count; letterPosition++)
+        {
+            char letter = supportedLetters[letterPosition];
+
+            if (!letterToIndex.TryGetValue(letter, out int index))
+                continue;
+
+            currentPlaybackDisplayToken = "Fingerspelling: " + word + " (" + letter + ")";
+            currentPlaybackDisplayIndex = letterPosition;
+            NotifyPlaybackState(true);
+
+            yield return StartCoroutine(PlaySign(index));
+            yield return StartCoroutine(WaitForPlaybackSeconds(FingerspellGapSeconds));
         }
     }
 
@@ -4279,18 +4347,45 @@ public class SignController : MonoBehaviour
     {
         float currentSeconds = Mathf.Clamp(playbackElapsedSeconds, 0f, playbackTotalSeconds);
         int playingFlag = currentRoutine != null && !isPaused ? 1 : 0;
+        int fingerspellingFlag = currentPlaybackIsFingerspelling ? 1 : 0;
         string token = currentPlaybackToken ?? "";
         int tokenIndex = currentPlaybackTokenIndex;
         int totalTokens = currentSequence != null ? currentSequence.Count : 0;
+        string displayToken = currentPlaybackDisplayToken ?? "";
+        int displayIndex = currentPlaybackDisplayIndex;
+        int displayTotal = currentPlaybackDisplayTotal;
 
-        if (!force && Mathf.Abs(currentSeconds - lastReportedPlaybackSeconds) < 0.05f && playingFlag == lastReportedIsPlaying && token == lastReportedToken && tokenIndex == lastReportedTokenIndex)
+        if (!force
+            && Mathf.Abs(currentSeconds - lastReportedPlaybackSeconds) < 0.05f
+            && playingFlag == lastReportedIsPlaying
+            && token == lastReportedToken
+            && tokenIndex == lastReportedTokenIndex
+            && fingerspellingFlag == lastReportedIsFingerspelling
+            && displayToken == lastReportedDisplayToken
+            && displayIndex == lastReportedDisplayIndex
+            && displayTotal == lastReportedDisplayTotal)
             return;
 
         lastReportedPlaybackSeconds = currentSeconds;
         lastReportedIsPlaying = playingFlag;
         lastReportedToken = token;
         lastReportedTokenIndex = tokenIndex;
-        ReportPlaybackState(currentSeconds, playbackTotalSeconds, playingFlag, token, tokenIndex, totalTokens);
+        lastReportedIsFingerspelling = fingerspellingFlag;
+        lastReportedDisplayToken = displayToken;
+        lastReportedDisplayIndex = displayIndex;
+        lastReportedDisplayTotal = displayTotal;
+        ReportPlaybackState(
+            currentSeconds,
+            playbackTotalSeconds,
+            playingFlag,
+            token,
+            tokenIndex,
+            totalTokens,
+            fingerspellingFlag,
+            displayToken,
+            displayIndex,
+            displayTotal
+        );
     }
 
 }

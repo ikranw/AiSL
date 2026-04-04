@@ -108,6 +108,7 @@ export default function App(): JSX.Element {
   const [playbackCurrentToken, setPlaybackCurrentToken] = useState('');
   const [playbackCurrentTokenIndex, setPlaybackCurrentTokenIndex] = useState(-1);
   const [playbackTotalTokens, setPlaybackTotalTokens] = useState(0);
+  const [playbackTokenInfoMessage, setPlaybackTokenInfoMessage] = useState<string | null>(null);
   const [videoSeekToIndex, setVideoSeekToIndex] = useState<number | null>(null);
   const [videoPlaybackVersion, setVideoPlaybackVersion] = useState(0);
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
@@ -116,6 +117,8 @@ export default function App(): JSX.Element {
     unity: [],
     video: [],
   });
+  const unityPlaybackStartIndexRef = useRef(0);
+  const unityPlaybackSourceTotalRef = useRef(0);
   const isUndoingInputRef = useRef(false);
   const translateRequestIdRef = useRef(0);
 
@@ -143,6 +146,7 @@ export default function App(): JSX.Element {
     setPlaybackCurrentToken('');
     setPlaybackCurrentTokenIndex(-1);
     setPlaybackTotalTokens(0);
+    setPlaybackTokenInfoMessage(null);
     translateRequestIdRef.current += 1;
   }, [input]);
 
@@ -165,6 +169,7 @@ export default function App(): JSX.Element {
     setPlaybackCurrentToken('');
     setPlaybackCurrentTokenIndex(-1);
     setPlaybackTotalTokens(0);
+    setPlaybackTokenInfoMessage(null);
     translateRequestIdRef.current += 1;
   }, []);
 
@@ -184,6 +189,7 @@ export default function App(): JSX.Element {
     setPlaybackCurrentToken('');
     setPlaybackCurrentTokenIndex(-1);
     setPlaybackTotalTokens(0);
+    setPlaybackTokenInfoMessage(null);
     setVideoSeekToIndex(null);
     setVideoPlaybackVersion(0);
     handleInputChange(nextSentence);
@@ -220,9 +226,28 @@ export default function App(): JSX.Element {
       setPlaybackCurrentSeconds(state.currentSeconds);
       setPlaybackTotalSeconds(state.totalSeconds);
       setIsPlaying(state.isPlaying);
-      setPlaybackCurrentToken(state.currentToken);
-      setPlaybackCurrentTokenIndex(state.currentTokenIndex);
-      setPlaybackTotalTokens(state.totalTokens);
+
+      if (state.isFingerspelling) {
+        setPlaybackCurrentToken(state.displayToken || state.currentToken);
+        setPlaybackCurrentTokenIndex(state.displayIndex);
+        setPlaybackTotalTokens(state.displayTotal);
+        setPlaybackTokenInfoMessage(
+          state.currentToken
+            ? `We do not have a direct sign for "${state.currentToken}", so this word is being fingerspelled.`
+            : null,
+        );
+        return;
+      }
+
+      const sourceTotal = unityPlaybackSourceTotalRef.current || state.totalTokens;
+      const sourceIndex = state.currentTokenIndex >= 0
+        ? state.currentTokenIndex + unityPlaybackStartIndexRef.current
+        : state.currentTokenIndex;
+
+      setPlaybackCurrentToken(state.displayToken || state.currentToken);
+      setPlaybackCurrentTokenIndex(sourceIndex);
+      setPlaybackTotalTokens(sourceTotal);
+      setPlaybackTokenInfoMessage(null);
     });
 
     return () => setUnityPlaybackStateListener(undefined);
@@ -265,6 +290,7 @@ export default function App(): JSX.Element {
       setPlaybackCurrentToken(nextFullSequence[startIndex] ?? '');
       setPlaybackCurrentTokenIndex(nextFullSequence.length ? startIndex : -1);
       setPlaybackTotalTokens(nextFullSequence.length);
+      setPlaybackTokenInfoMessage(null);
       setIsPlaying(true);
       setVideoSeekToIndex(startIndex);
 
@@ -272,6 +298,9 @@ export default function App(): JSX.Element {
         setVideoPlaybackVersion((value) => value + 1);
         return;
       }
+
+      unityPlaybackStartIndexRef.current = startIndex;
+      unityPlaybackSourceTotalRef.current = nextFullSequence.length;
 
       sendSignSequenceToUnity(nextCurrentSequence, {
         speed,
@@ -299,14 +328,15 @@ export default function App(): JSX.Element {
     resetUnityToIdle();
     setIsPlaying(false);
     setProgress(0);
-      setPlaybackCurrentSeconds(0);
-      setPlaybackTotalSeconds(0);
-      setPlaybackCurrentToken('');
-      setPlaybackCurrentTokenIndex(-1);
-      setPlaybackTotalTokens(0);
-      setVideoSeekToIndex(null);
-      setIsLoading(true);
-      setErrorMessage(null);
+    setPlaybackCurrentSeconds(0);
+    setPlaybackTotalSeconds(0);
+    setPlaybackCurrentToken('');
+    setPlaybackCurrentTokenIndex(-1);
+    setPlaybackTotalTokens(0);
+    setPlaybackTokenInfoMessage(null);
+    setVideoSeekToIndex(null);
+    setIsLoading(true);
+    setErrorMessage(null);
 
     try {
       const result = await translateEnglishToASL(trimmedInput);
@@ -518,6 +548,7 @@ export default function App(): JSX.Element {
                   activeToken={playbackCurrentToken}
                   activeTokenIndex={playbackCurrentTokenIndex}
                   totalTokens={playbackTotalTokens}
+                  activeTokenInfoMessage={playbackTokenInfoMessage}
                   isBusy={isLoading}
                   headerControl={(
                     <FormControl size="small" sx={{ minWidth: 180 }}>

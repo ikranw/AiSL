@@ -10,6 +10,10 @@ export interface UnityPlaybackState {
   currentToken: string;
   currentTokenIndex: number;
   totalTokens: number;
+  isFingerspelling: boolean;
+  displayToken: string;
+  displayIndex: number;
+  displayTotal: number;
 }
 
 type UnityInstance = {
@@ -28,6 +32,10 @@ declare global {
       currentToken: string,
       currentTokenIndex: number,
       totalTokens: number,
+      isFingerspelling: number,
+      displayToken: string,
+      displayIndex: number,
+      displayTotal: number,
     ) => void;
   }
 }
@@ -40,6 +48,10 @@ if (typeof window !== 'undefined') {
     currentToken: string,
     currentTokenIndex: number,
     totalTokens: number,
+    isFingerspelling: number,
+    displayToken: string,
+    displayIndex: number,
+    displayTotal: number,
   ) => {
     window.__unityPlaybackListener?.({
       currentSeconds,
@@ -48,6 +60,10 @@ if (typeof window !== 'undefined') {
       currentToken,
       currentTokenIndex,
       totalTokens,
+      isFingerspelling: Boolean(isFingerspelling),
+      displayToken,
+      displayIndex,
+      displayTotal,
     });
   };
 }
