@@ -12,7 +12,15 @@ export function HeaderNav(): JSX.Element {
     <AppBar
       position="sticky"
       elevation={0}
-      sx={{ bgcolor: 'transparent', color: 'inherit', py: 2 }}
+      sx={{
+        top: 0,
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+        bgcolor: 'background.paper',
+        color: 'text.primary',
+        borderBottom: '1px solid',
+        borderColor: 'divider',
+        py: 2,
+      }}
     >
       <Container maxWidth="lg">
         <Stack direction="row" alignItems="center" justifyContent="space-between">

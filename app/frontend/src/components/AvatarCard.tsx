@@ -75,39 +75,56 @@ export function AvatarCard({
   }, []);
 
   return (
-    <Paper sx={{ p: 4, borderRadius: 4 }}>
-      <Stack direction="row" justifyContent="space-between" alignItems="center" mb={3}>
-        <Typography variant="h4" fontWeight={700}>
+    <Paper sx={{ p: { xs: 3, md: 3.5 }, borderRadius: 3, height: '100%' }}>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={2.5}
+        sx={{ gap: 2 }}
+      >
+        <Typography variant="h5" fontWeight={700}>
           3D ASL Avatar
         </Typography>
         <Stack direction="row" spacing={1} alignItems="center">
           <Box
             sx={{
-              width: 12,
-              height: 12,
+              width: 10,
+              height: 10,
               borderRadius: '50%',
               bgcolor: statusColor,
             }}
           />
-          <Typography variant="body1">{statusText}</Typography>
+          <Typography variant="body2" color="text.secondary">
+            {statusText}
+          </Typography>
         </Stack>
       </Stack>
 
       {unityError ? (
         <Typography color="error">{unityError}</Typography>
       ) : (
-        <canvas
-          id="unity-canvas"
-          ref={canvasRef}
-          tabIndex={0}
-          style={{
-            width: '100%',
-            height: 408,
-            borderRadius: 24,
-            outline: 'none',
-            display: 'block',
+        <Box
+          sx={{
+            borderRadius: 3,
+            overflow: 'hidden',
+            bgcolor: '#edf2f7',
+            border: '1px solid',
+            borderColor: 'divider',
           }}
-        />
+        >
+          <canvas
+            id="unity-canvas"
+            ref={canvasRef}
+            tabIndex={0}
+            style={{
+              width: '100%',
+              height: 360,
+              outline: 'none',
+              display: 'block',
+            }}
+          />
+        </Box>
       )}
 
       {children}
