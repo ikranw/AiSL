@@ -11,6 +11,7 @@ type TranslatorCardProps = {
   response: TranslateResponse | null;
   onInputChange: (value: string) => void;
   onUndoInput: () => void;
+  onRandomSentence: () => void;
   onTranslate: () => void;
 };
 
@@ -134,6 +135,7 @@ export function TranslatorCard({
   response,
   onInputChange,
   onUndoInput,
+  onRandomSentence,
   onTranslate,
 }: TranslatorCardProps): JSX.Element {
   const glossTokens = response?.gloss_tokens ?? [];
@@ -151,7 +153,18 @@ export function TranslatorCard({
     <Card sx={{ height: '100%' }}>
       <CardContent>
         <Stack spacing={3}>
-          <Typography variant="h5">Translate English to ASL Gloss</Typography>
+          <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ gap: 2 }}>
+            <Typography variant="h5">Translate English to ASL Gloss</Typography>
+            <Button
+              variant="outlined"
+              size="small"
+              type="button"
+              onClick={onRandomSentence}
+              disabled={isLoading}
+            >
+              Random Sentence
+            </Button>
+          </Stack>
 
           <TextField
             label="English input"
@@ -166,6 +179,7 @@ export function TranslatorCard({
 
           <Button
             variant="contained"
+            type="button"
             onClick={onTranslate}
             disabled={isLoading || !input.trim()}
             fullWidth

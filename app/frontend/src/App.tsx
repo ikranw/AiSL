@@ -8,6 +8,7 @@ import { PlaybackControls } from './components/PlaybackControls';
 import { ResourcesSection } from './components/ResourcesSection';
 import { Footer } from './components/Footer';
 import { translateEnglishToASL } from './services/llmService';
+import { RANDOM_SENTENCES } from './utils/randomSentences';
 import {
   pauseUnityPlayback,
   resetUnityToIdle,
@@ -102,6 +103,7 @@ export default function App(): JSX.Element {
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
   const inputHistoryRef = useRef<string[]>([]);
   const isUndoingInputRef = useRef(false);
+  const translateRequestIdRef = useRef(0);
 
   const estimatedDurationSeconds = estimateSequenceDuration(currentSequence, speed);
   const totalDurationSeconds = playbackTotalSeconds > 0 ? playbackTotalSeconds : estimatedDurationSeconds;
@@ -124,6 +126,7 @@ export default function App(): JSX.Element {
     setProgress(0);
     setPlaybackCurrentSeconds(0);
     setPlaybackTotalSeconds(0);
+    translateRequestIdRef.current += 1;
   }, [input]);
 
   const handleUndoInput = useCallback(() => {
@@ -142,7 +145,19 @@ export default function App(): JSX.Element {
     setProgress(0);
     setPlaybackCurrentSeconds(0);
     setPlaybackTotalSeconds(0);
+    translateRequestIdRef.current += 1;
   }, []);
+
+  const handleRandomSentence = useCallback(() => {
+    const nextSentence =
+      RANDOM_SENTENCES[Math.floor(Math.random() * RANDOM_SENTENCES.length)];
+    resetUnityToIdle();
+    setIsPlaying(false);
+    setProgress(0);
+    setPlaybackCurrentSeconds(0);
+    setPlaybackTotalSeconds(0);
+    handleInputChange(nextSentence);
+  }, [handleInputChange]);
 
   useEffect(() => {
     if (!isPlaying || totalDurationSeconds <= 0 || playbackTotalSeconds > 0) {
@@ -225,6 +240,9 @@ export default function App(): JSX.Element {
       return;
     }
 
+    const requestId = translateRequestIdRef.current + 1;
+    translateRequestIdRef.current = requestId;
+
     resetUnityToIdle();
     setIsPlaying(false);
     setProgress(0);
@@ -235,6 +253,11 @@ export default function App(): JSX.Element {
 
     try {
       const result = await translateEnglishToASL(trimmedInput);
+
+      if (translateRequestIdRef.current != requestId) {
+        return;
+      }
+
       setResponse(result);
 
       if (result.sign_sequence?.length) {
@@ -246,9 +269,15 @@ export default function App(): JSX.Element {
         startPlayback(normalizedSequence, 0, normalizedSequence);
       }
     } catch (error) {
+      if (translateRequestIdRef.current != requestId) {
+        return;
+      }
+
       setErrorMessage('We could not translate that text right now. Please try again.');
     } finally {
-      setIsLoading(false);
+      if (translateRequestIdRef.current === requestId) {
+        setIsLoading(false);
+      }
     }
   }, [input, startPlayback]);
 
@@ -341,6 +370,7 @@ export default function App(): JSX.Element {
                 response={response}
                 onInputChange={handleInputChange}
                 onUndoInput={handleUndoInput}
+                onRandomSentence={handleRandomSentence}
                 onTranslate={handleTranslate}
               />
             </Grid>
