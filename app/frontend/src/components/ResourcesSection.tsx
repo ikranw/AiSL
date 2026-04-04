@@ -57,12 +57,39 @@ const grammarGuideSections = [
   },
 ];
 
+const videoTutorialSections = [
+  {
+    title: 'Beginner ASL Lessons',
+    summary:
+      'A strong place to start with guided beginner lessons taught by Dr. Bill Vicars through Lifeprint and ASL University.',
+    href: 'https://www.lifeprint.com/videos-studio-explain.htm',
+  },
+  {
+    title: 'Facial Expressions in ASL',
+    summary:
+      'A focused lesson on how facial expressions affect meaning in ASL and why they are part of the language itself.',
+    href: 'https://www.signlanguage101.com/free-lessons/asl-level-1/facial-expressions',
+  },
+  {
+    title: 'Using Classifiers',
+    summary:
+      'A practical video lesson showing how descriptive classifiers are used to describe objects more clearly in ASL.',
+    href: 'https://www.youtube.com/watch?v=Ajiog8S9P3Y',
+  },
+];
+
 export function ResourcesSection(): JSX.Element {
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const handleResourceClick = (action: string) => {
     if (action === 'grammar-guide') {
       setIsGuideOpen(true);
+      return;
+    }
+
+    if (action === 'videos') {
+      setIsVideoOpen(true);
     }
   };
 
@@ -127,6 +154,47 @@ export function ResourcesSection(): JSX.Element {
                       rel="noreferrer"
                     >
                       Open Resource
+                    </Button>
+                  </Stack>
+                </Paper>
+              ))}
+            </Stack>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog
+          open={isVideoOpen}
+          onClose={() => setIsVideoOpen(false)}
+          fullWidth
+          maxWidth="sm"
+        >
+          <DialogTitle>ASL Video Tutorials</DialogTitle>
+          <DialogContent>
+            <Stack spacing={2.5} sx={{ pt: 1 }}>
+              <Typography variant="body2" color="text.secondary">
+                These tutorials give learners a simple path through beginner lessons,
+                facial grammar, and classifier use.
+              </Typography>
+
+              {videoTutorialSections.map((section) => (
+                <Paper
+                  key={section.title}
+                  variant="outlined"
+                  sx={{ p: 2.5, borderRadius: 3, boxShadow: 'none' }}
+                >
+                  <Stack spacing={1.25} alignItems="flex-start">
+                    <Typography variant="h3">{section.title}</Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {section.summary}
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      component="a"
+                      href={section.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Watch Resource
                     </Button>
                   </Stack>
                 </Paper>
