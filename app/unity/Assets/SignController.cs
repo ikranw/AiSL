@@ -1957,6 +1957,7 @@ public class SignController : MonoBehaviour
         { "DEFICIENT", 2054 },
         { "DEFINE", 2055 },
         { "DEFINITE", 2056 },
+            { "DANDELION", 2057 },
     };
 
     private readonly Dictionary<char, int> letterToIndex = new Dictionary<char, int>()
@@ -3950,6 +3951,7 @@ public class SignController : MonoBehaviour
         { 2054, "SG ASL Deficient 2026-3-25 Animation" },
         { 2055, "SG ASL Define 2026-3-25 Animation" },
         { 2056, "SG ASL Definite 2026-3-26 Animation" },
+            { 2057, "SG ASL Dandelion 2025-12-28 Animation" },
     };
 
     void Awake()
