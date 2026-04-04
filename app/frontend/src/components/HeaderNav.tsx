@@ -2,8 +2,7 @@ import { AppBar, Box, Container, Stack, Typography } from '@mui/material';
 import SignLanguageIcon from '@mui/icons-material/SignLanguage';
 
 const navItems = [
-  { label: 'Learn', href: '#learn' },
-  { label: 'Practice', href: '#practice' },
+  { label: 'Practice', href: '#' },
   { label: 'Resources', href: '#resources' },
   { label: 'About', href: '#about' },
 ];
