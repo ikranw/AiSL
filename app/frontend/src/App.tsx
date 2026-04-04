@@ -14,20 +14,33 @@ import { TranslateResponse } from './types/translate';
 const MAX_INPUT_LENGTH = 500;
 
 function normalizeUnityToken(token: string): string[] {
-  const t = token.trim().toUpperCase();
-
-  if (t === 'X-MY NAME' || t === 'MY NAME IS') {
-    return ['MY NAME IS'];
-  }
-
-  const fingerspellMatch = t.match(/^FINGERSPELL\((.+)\)$/);
-  if (fingerspellMatch) {
-    return [fingerspellMatch[1].toUpperCase()];
+  let t = token.trim().toUpperCase();
+  if (!t) {
+    return [];
   }
 
   const nestedFingerspellMatch = t.match(/^FINGERSPELL\(FINGERSPELL\((.+)\)\)$/);
   if (nestedFingerspellMatch) {
-    return [nestedFingerspellMatch[1].toUpperCase()];
+    t = nestedFingerspellMatch[1].toUpperCase().trim();
+  }
+
+  const fingerspellMatch = t.match(/^FINGERSPELL\((.+)\)$/);
+  if (fingerspellMatch) {
+    t = fingerspellMatch[1].toUpperCase().trim();
+  }
+
+  if (t.startsWith('X-')) {
+    t = t.slice(2).trim();
+  } else if (t.startsWith('DESC-')) {
+    t = t.slice(5).trim();
+  }
+
+  if (t === 'MY NAME' || t === 'MY NAME IS') {
+    return ['MY NAME IS'];
+  }
+
+  if (!t) {
+    return [];
   }
 
   return [t];

@@ -115,8 +115,6 @@ def _get_default_rules(grammar_rules: list[dict[str, Any]]) -> list[dict[str, An
         rule_id = str(rule.get("rule_id", "")).lower()
         if rule_id in {
             "compact-word-order",
-            "preserve-x-pronouns",
-            "preserve-desc-markers",
             "drop-articles",
         }:
             defaults.append(rule)
@@ -273,10 +271,10 @@ def _build_allowed_token_policy(sign_inventory: dict[str, Any]) -> str:
     return (
         f"Use only canonical gloss tokens from the allowed list "
         f"(current inventory size: {token_count}). "
-        f"Preserve X-* and DESC-* token forms exactly when supported by the inventory "
-        f"or retrieved examples. "
+        f"Output plain gloss words only. "
+        f"Do not include X-* or DESC-* prefixes. "
         f"Prefer compressed dataset-compatible gloss over English-like phrasing. "
-        f"If a needed concept is unavailable, output FINGERSPELL(word)."
+        f"If a needed concept is unavailable, output the plain word."
     )
 
 

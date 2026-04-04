@@ -103,9 +103,9 @@ if __name__ == "__main__":
     ]
 
     sample_policy = (
-        "Use only canonical gloss tokens from the allowed list. "
-        "Remove X-* and DESC-* token forms exactly when supported by inventory or examples. "
-        "Do not invent new tokens or forms that are not supported by the inventory or examples."
+        "Output plain gloss words only. "
+        "Do not include X-* or DESC-* prefixes. "
+        "Do not output wrappers like FINGERSPELL(...)."
         )
 
     prompt = build_prompt(

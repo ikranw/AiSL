@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from typing import Any
 
 from dotenv import load_dotenv
@@ -85,8 +86,69 @@ Repair instructions:
 - gloss_tokens must be an array of strings.
 - non_manual must be an array, even if empty.
 - confidence_note must be a string.
-- Preserve dataset-style X-* and DESC-* tokens when appropriate.
+- Use plain gloss words only.
+- Do not include prefixes such as X- or DESC-.
+- Do not use wrappers such as FINGERSPELL(...).
 """
+
+
+def _clean_gloss_token(token: str) -> str:
+    token = token.strip()
+    if not token:
+        return ""
+
+    # Unwrap fingerspelling markers: FINGERSPELL(name) -> NAME
+    match = re.fullmatch(r"FINGERSPELL\((.*)\)", token, flags=re.IGNORECASE)
+    if match:
+        token = match.group(1).strip()
+
+    # Remove known dataset indicator prefixes
+    upper = token.upper()
+    for prefix in ("X-", "DESC-"):
+        if upper.startswith(prefix):
+            token = token[len(prefix):]
+            break
+
+    token = " ".join(token.split())
+    return token.upper()
+
+
+def _clean_output_markers(data: dict[str, Any]) -> dict[str, Any]:
+    result = dict(data)
+    cleaned_tokens: list[str] = []
+    for token in result.get("gloss_tokens", []):
+        if not isinstance(token, str):
+            continue
+        cleaned = _clean_gloss_token(token)
+        if cleaned:
+            cleaned_tokens.append(cleaned)
+
+    result["gloss_tokens"] = cleaned_tokens
+    cleaned_sequence: list[dict[str, str]] = []
+    for item in result.get("sign_sequence", []):
+        if not isinstance(item, dict):
+            continue
+
+        raw_token = item.get("token", "")
+        if not isinstance(raw_token, str):
+            continue
+
+        cleaned_token = _clean_gloss_token(raw_token)
+        if not cleaned_token:
+            continue
+
+        cleaned_sequence.append({
+            "token": cleaned_token,
+            "sign_id": cleaned_token,
+            "type": str(item.get("type", "sign")) or "sign",
+        })
+
+    if cleaned_sequence:
+        result["sign_sequence"] = cleaned_sequence
+
+    return result
+
+
 def extract_json_object(raw_text: str) -> str:
     start = raw_text.find("{")
     end = raw_text.rfind("}")
@@ -156,7 +218,10 @@ def generate_once(text: str) -> dict[str, Any]:
     # 6. Map to signs
     mapped = map_to_signs(normalized)
 
-    return mapped
+    # 7. Ensure output contains plain gloss words only (no X-/DESC-/FINGERSPELL markers)
+    cleaned = _clean_output_markers(mapped)
+
+    return cleaned
 
 
 if __name__ == "__main__":
