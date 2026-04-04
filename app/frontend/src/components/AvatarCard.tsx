@@ -10,6 +10,7 @@ interface AvatarCardProps {
   activeTokenIndex?: number;
   totalTokens?: number;
   isBusy?: boolean;
+  headerControl?: ReactNode;
   children?: ReactNode;
 }
 
@@ -19,6 +20,7 @@ export function AvatarCard({
   activeTokenIndex = -1,
   totalTokens = 0,
   isBusy = false,
+  headerControl,
   children,
 }: AvatarCardProps): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -124,7 +126,7 @@ export function AvatarCard({
             letterSpacing: '-0.01em',
           }}
         >
-          3D ASL Avatar
+          {headerControl ?? '3D ASL Avatar'}
         </Typography>
         <Stack direction="row" spacing={1} alignItems="center">
           <Box
@@ -153,6 +155,8 @@ export function AvatarCard({
             border: '1px solid',
             borderColor: 'divider',
             position: 'relative',
+            height: { xs: 400, md: 460 },
+            minHeight: { xs: 400, md: 460 },
           }}
         >
           <canvas
@@ -161,7 +165,7 @@ export function AvatarCard({
             tabIndex={0}
             style={{
               width: '100%',
-              height: 360,
+              height: '100%',
               outline: 'none',
               display: 'block',
             }}

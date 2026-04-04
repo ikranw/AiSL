@@ -1,15 +1,16 @@
-import { Box, Container, Grid } from '@mui/material';
+import { Box, Container, FormControl, Grid, MenuItem, Select } from '@mui/material';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { HeaderNav } from './components/HeaderNav';
 import { Hero } from './components/Hero';
 import { TranslatorCard } from './components/TranslatorCard';
 import { AvatarCard } from './components/AvatarCard';
+import { VideoAvatarCard } from './components/VideoAvatarCard';
 import { PlaybackControls } from './components/PlaybackControls';
 import { ResourcesSection } from './components/ResourcesSection';
 import { AboutSection } from './components/AboutSection';
 import { Footer } from './components/Footer';
 import { translateEnglishToASL } from './services/llmService';
-import { RANDOM_SENTENCES } from './utils/randomSentences';
+import { UNITY_RANDOM_SENTENCES, VIDEO_RANDOM_SENTENCES } from './utils/randomSentences';
 import {
   pauseUnityPlayback,
   resetUnityToIdle,
@@ -25,6 +26,8 @@ const MAX_INPUT_LENGTH = 500;
 const BASE_SIGN_DURATION_SECONDS = 1.2;
 const FINGERSPELL_LETTER_SECONDS = 0.45;
 const LOADING_STEPS = ['Analyzing text...', 'Building gloss...', 'Preparing signs...'];
+
+type AvatarRendererMode = 'unity' | 'video';
 
 function normalizeUnityToken(token: string): string[] {
   let t = token.trim().toUpperCase();
@@ -89,6 +92,7 @@ function estimateSequenceDuration(sequence: string[], speed: number): number {
 }
 
 export default function App(): JSX.Element {
+  const [avatarMode, setAvatarMode] = useState<AvatarRendererMode>('unity');
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -104,8 +108,14 @@ export default function App(): JSX.Element {
   const [playbackCurrentToken, setPlaybackCurrentToken] = useState('');
   const [playbackCurrentTokenIndex, setPlaybackCurrentTokenIndex] = useState(-1);
   const [playbackTotalTokens, setPlaybackTotalTokens] = useState(0);
+  const [videoSeekToIndex, setVideoSeekToIndex] = useState<number | null>(null);
+  const [videoPlaybackVersion, setVideoPlaybackVersion] = useState(0);
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
   const inputHistoryRef = useRef<string[]>([]);
+  const randomSentenceHistoryRef = useRef<Record<AvatarRendererMode, string[]>>({
+    unity: [],
+    video: [],
+  });
   const isUndoingInputRef = useRef(false);
   const translateRequestIdRef = useRef(0);
 
@@ -159,8 +169,13 @@ export default function App(): JSX.Element {
   }, []);
 
   const handleRandomSentence = useCallback(() => {
-    const nextSentence =
-      RANDOM_SENTENCES[Math.floor(Math.random() * RANDOM_SENTENCES.length)];
+    const sentencePool = avatarMode === 'video' ? VIDEO_RANDOM_SENTENCES : UNITY_RANDOM_SENTENCES;
+    const recentHistory = randomSentenceHistoryRef.current[avatarMode];
+    const availableSentences = sentencePool.filter((sentence) => !recentHistory.includes(sentence));
+    const candidates = availableSentences.length > 0 ? availableSentences : [...sentencePool];
+    const nextSentence = candidates[Math.floor(Math.random() * candidates.length)];
+
+    randomSentenceHistoryRef.current[avatarMode] = [...recentHistory, nextSentence].slice(-6);
     resetUnityToIdle();
     setIsPlaying(false);
     setProgress(0);
@@ -169,11 +184,13 @@ export default function App(): JSX.Element {
     setPlaybackCurrentToken('');
     setPlaybackCurrentTokenIndex(-1);
     setPlaybackTotalTokens(0);
+    setVideoSeekToIndex(null);
+    setVideoPlaybackVersion(0);
     handleInputChange(nextSentence);
-  }, [handleInputChange]);
+  }, [avatarMode, handleInputChange]);
 
   useEffect(() => {
-    if (!isPlaying || totalDurationSeconds <= 0 || playbackTotalSeconds > 0) {
+    if (avatarMode === 'video' || !isPlaying || totalDurationSeconds <= 0 || playbackTotalSeconds > 0) {
       return undefined;
     }
 
@@ -196,7 +213,7 @@ export default function App(): JSX.Element {
     }, 100);
 
     return () => window.clearInterval(interval);
-  }, [isLooping, isPlaying, playbackTotalSeconds, totalDurationSeconds]);
+  }, [avatarMode, isLooping, isPlaying, playbackTotalSeconds, totalDurationSeconds]);
 
   useEffect(() => {
     setUnityPlaybackStateListener((state) => {
@@ -225,26 +242,43 @@ export default function App(): JSX.Element {
   }, [isLoading]);
 
   const startPlayback = useCallback(
-    (sequence: string[], nextProgress = 0, sourceSequence?: string[]) => {
+    (
+      sequence: string[],
+      nextProgress = 0,
+      sourceSequence?: string[],
+      options?: { renderer?: AvatarRendererMode; startIndex?: number },
+    ) => {
       if (!sequence.length) {
         return;
       }
 
-      setFullSequence(sourceSequence ?? sequence);
-      setCurrentSequence(sequence);
+      const renderer = options?.renderer ?? avatarMode;
+      const nextFullSequence = [...(sourceSequence ?? sequence)];
+      const nextCurrentSequence = renderer === 'video' ? nextFullSequence : [...sequence];
+      const startIndex = options?.startIndex ?? 0;
+
+      setFullSequence(nextFullSequence);
+      setCurrentSequence(nextCurrentSequence);
       setProgress(nextProgress);
       setPlaybackCurrentSeconds(0);
       setPlaybackTotalSeconds(0);
-      setPlaybackCurrentToken(sequence[0] ?? '');
-      setPlaybackCurrentTokenIndex(sequence.length ? 0 : -1);
-      setPlaybackTotalTokens(sequence.length);
+      setPlaybackCurrentToken(nextFullSequence[startIndex] ?? '');
+      setPlaybackCurrentTokenIndex(nextFullSequence.length ? startIndex : -1);
+      setPlaybackTotalTokens(nextFullSequence.length);
       setIsPlaying(true);
-      sendSignSequenceToUnity(sequence, {
+      setVideoSeekToIndex(startIndex);
+
+      if (renderer === 'video') {
+        setVideoPlaybackVersion((value) => value + 1);
+        return;
+      }
+
+      sendSignSequenceToUnity(nextCurrentSequence, {
         speed,
         loop: isLooping,
       });
     },
-    [isLooping, speed],
+    [avatarMode, isLooping, speed],
   );
 
   const handleTranslate = useCallback(async () => {
@@ -265,13 +299,14 @@ export default function App(): JSX.Element {
     resetUnityToIdle();
     setIsPlaying(false);
     setProgress(0);
-    setPlaybackCurrentSeconds(0);
-    setPlaybackTotalSeconds(0);
-    setPlaybackCurrentToken('');
-    setPlaybackCurrentTokenIndex(-1);
-    setPlaybackTotalTokens(0);
-    setIsLoading(true);
-    setErrorMessage(null);
+      setPlaybackCurrentSeconds(0);
+      setPlaybackTotalSeconds(0);
+      setPlaybackCurrentToken('');
+      setPlaybackCurrentTokenIndex(-1);
+      setPlaybackTotalTokens(0);
+      setVideoSeekToIndex(null);
+      setIsLoading(true);
+      setErrorMessage(null);
 
     try {
       const result = await translateEnglishToASL(trimmedInput);
@@ -308,6 +343,21 @@ export default function App(): JSX.Element {
       return;
     }
 
+    if (avatarMode === 'video') {
+      if (!isPlaying) {
+        if (displayProgress >= 100) {
+          startPlayback(fullSequence, 0, fullSequence, { renderer: 'video', startIndex: 0 });
+          return;
+        }
+
+        setIsPlaying(true);
+        return;
+      }
+
+      setIsPlaying(false);
+      return;
+    }
+
     if (!isPlaying) {
       if (displayProgress >= 100) {
         startPlayback(fullSequence, 0, fullSequence);
@@ -321,20 +371,24 @@ export default function App(): JSX.Element {
 
     pauseUnityPlayback();
     setIsPlaying(false);
-  }, [displayProgress, fullSequence, isPlaying, startPlayback]);
+  }, [avatarMode, displayProgress, fullSequence, isPlaying, startPlayback]);
 
   const handleToggleLoop = useCallback(() => {
     setIsLooping((value) => {
       const nextValue = !value;
-      setUnityPlaybackLoop(nextValue);
+      if (avatarMode === 'unity') {
+        setUnityPlaybackLoop(nextValue);
+      }
       return nextValue;
     });
-  }, []);
+  }, [avatarMode]);
 
   const handleSpeedChange = useCallback((value: number) => {
     setSpeed(value);
-    setUnityPlaybackSpeed(value);
-  }, []);
+    if (avatarMode === 'unity') {
+      setUnityPlaybackSpeed(value);
+    }
+  }, [avatarMode]);
 
   const handleProgressChange = useCallback(
     (value: number) => {
@@ -347,15 +401,24 @@ export default function App(): JSX.Element {
         fullSequence.length - 1,
         Math.floor((nextValue / 100) * fullSequence.length),
       );
-      const remainingSequence = fullSequence.slice(targetIndex);
 
-      if (!remainingSequence.length) {
+      if (avatarMode === 'video') {
+        startPlayback(fullSequence, nextValue, fullSequence, {
+          renderer: 'video',
+          startIndex: targetIndex,
+        });
         return;
       }
 
-      startPlayback(remainingSequence, nextValue, fullSequence);
+      const remainingSequence = fullSequence.slice(targetIndex);
+      if (remainingSequence.length) {
+        startPlayback(remainingSequence, nextValue, fullSequence, {
+          renderer: 'unity',
+          startIndex: targetIndex,
+        });
+      }
     },
-    [fullSequence, startPlayback],
+    [avatarMode, fullSequence, startPlayback],
   );
 
   const handleRestart = useCallback(() => {
@@ -363,8 +426,52 @@ export default function App(): JSX.Element {
       return;
     }
 
-    startPlayback(fullSequence, 0, fullSequence);
-  }, [fullSequence, startPlayback]);
+    startPlayback(fullSequence, 0, fullSequence, { renderer: avatarMode, startIndex: 0 });
+  }, [avatarMode, fullSequence, startPlayback]);
+
+  const handleAvatarModeChange = useCallback((nextMode: AvatarRendererMode) => {
+    if (nextMode === avatarMode) {
+      return;
+    }
+
+    if (avatarMode === 'unity') {
+      pauseUnityPlayback();
+      resetUnityToIdle();
+    }
+
+    setAvatarMode(nextMode);
+    setIsPlaying(false);
+    setProgress(0);
+    setPlaybackCurrentSeconds(0);
+    setPlaybackTotalSeconds(0);
+    setPlaybackCurrentToken('');
+    setPlaybackCurrentTokenIndex(-1);
+    setPlaybackTotalTokens(fullSequence.length);
+    setVideoSeekToIndex(null);
+
+    if (!fullSequence.length) {
+      return;
+    }
+
+    startPlayback(fullSequence, 0, fullSequence, { renderer: nextMode, startIndex: 0 });
+  }, [avatarMode, fullSequence, startPlayback]);
+
+  const handleVideoProgress = useCallback((index: number, total: number) => {
+    setPlaybackCurrentToken(fullSequence[index] ?? '');
+    setPlaybackCurrentTokenIndex(index);
+    setPlaybackTotalTokens(total);
+    setProgress(total > 1 ? (index / (total - 1)) * 100 : 0);
+  }, [fullSequence]);
+
+  const handleVideoPlaybackEnd = useCallback(() => {
+    setPlaybackCurrentSeconds(0);
+    setPlaybackTotalSeconds(0);
+    setPlaybackCurrentToken('');
+    setPlaybackCurrentTokenIndex(fullSequence.length ? fullSequence.length - 1 : -1);
+    setPlaybackTotalTokens(fullSequence.length);
+    setProgress(100);
+    setIsPlaying(false);
+  }, [fullSequence]);
 
   const statusText = isLoading
     ? LOADING_STEPS[loadingStepIndex]
@@ -379,7 +486,14 @@ export default function App(): JSX.Element {
       <HeaderNav />
       <Hero />
 
-      <Box component="section" id="practice" sx={{ pb: { xs: 8, md: 12 } }}>
+      <Box
+        component="section"
+        id="practice"
+        sx={{
+          mt: { xs: -3, md: -5 },
+          pb: { xs: 8, md: 12 },
+        }}
+      >
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="stretch">
             <Grid item xs={12} md={6}>
@@ -398,27 +512,102 @@ export default function App(): JSX.Element {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <AvatarCard
-                statusText={statusText}
-                activeToken={playbackCurrentToken}
-                activeTokenIndex={playbackCurrentTokenIndex}
-                totalTokens={playbackTotalTokens}
-                isBusy={isLoading}
-              >
-                <PlaybackControls
+              {avatarMode === 'unity' ? (
+                <AvatarCard
+                  statusText={statusText}
+                  activeToken={playbackCurrentToken}
+                  activeTokenIndex={playbackCurrentTokenIndex}
+                  totalTokens={playbackTotalTokens}
+                  isBusy={isLoading}
+                  headerControl={(
+                    <FormControl size="small" sx={{ minWidth: 180 }}>
+                      <Select
+                        value={avatarMode}
+                        onChange={(event) => handleAvatarModeChange(event.target.value as AvatarRendererMode)}
+                        variant="standard"
+                        disableUnderline
+                        sx={{
+                          minWidth: 180,
+                          fontSize: '1.25rem',
+                          fontWeight: 600,
+                          letterSpacing: '-0.01em',
+                          '.MuiSelect-select': {
+                            py: 0,
+                            pr: 3,
+                          },
+                        }}
+                      >
+                        <MenuItem value="unity">3D ASL Avatar</MenuItem>
+                        <MenuItem value="video">ASL Sign Videos</MenuItem>
+                      </Select>
+                    </FormControl>
+                  )}
+                >
+                  <PlaybackControls
+                    isPlaying={isPlaying}
+                    isLooping={isLooping}
+                    speed={speed}
+                    progress={displayProgress}
+                    totalDurationSeconds={totalDurationSeconds}
+                    canInteract={fullSequence.length > 0}
+                    onRestart={handleRestart}
+                    onTogglePlay={handleTogglePlay}
+                    onToggleLoop={handleToggleLoop}
+                    onSpeedChange={handleSpeedChange}
+                    onProgressChange={handleProgressChange}
+                  />
+                </AvatarCard>
+              ) : (
+                <VideoAvatarCard
+                  statusText={statusText}
+                  isBusy={isLoading}
+                  sequence={currentSequence}
+                  speed={speed}
                   isPlaying={isPlaying}
                   isLooping={isLooping}
-                  speed={speed}
-                  progress={displayProgress}
-                  totalDurationSeconds={totalDurationSeconds}
-                  canInteract={fullSequence.length > 0}
-                  onRestart={handleRestart}
-                  onTogglePlay={handleTogglePlay}
-                  onToggleLoop={handleToggleLoop}
-                  onSpeedChange={handleSpeedChange}
-                  onProgressChange={handleProgressChange}
-                />
-              </AvatarCard>
+                  seekToIndex={videoSeekToIndex}
+                  playbackVersion={videoPlaybackVersion}
+                  onProgress={handleVideoProgress}
+                  onPlaybackEnd={handleVideoPlaybackEnd}
+                  headerControl={(
+                    <FormControl size="small" sx={{ minWidth: 180 }}>
+                      <Select
+                        value={avatarMode}
+                        onChange={(event) => handleAvatarModeChange(event.target.value as AvatarRendererMode)}
+                        variant="standard"
+                        disableUnderline
+                        sx={{
+                          minWidth: 180,
+                          fontSize: '1.25rem',
+                          fontWeight: 600,
+                          letterSpacing: '-0.01em',
+                          '.MuiSelect-select': {
+                            py: 0,
+                            pr: 3,
+                          },
+                        }}
+                      >
+                        <MenuItem value="unity">3D ASL Avatar</MenuItem>
+                        <MenuItem value="video">ASL Sign Videos</MenuItem>
+                      </Select>
+                    </FormControl>
+                  )}
+                >
+                  <PlaybackControls
+                    isPlaying={isPlaying}
+                    isLooping={isLooping}
+                    speed={speed}
+                    progress={displayProgress}
+                    totalDurationSeconds={totalDurationSeconds}
+                    canInteract={fullSequence.length > 0}
+                    onRestart={handleRestart}
+                    onTogglePlay={handleTogglePlay}
+                    onToggleLoop={handleToggleLoop}
+                    onSpeedChange={handleSpeedChange}
+                    onProgressChange={handleProgressChange}
+                  />
+                </VideoAvatarCard>
+              )}
             </Grid>
           </Grid>
         </Container>
