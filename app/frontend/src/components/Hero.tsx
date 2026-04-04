@@ -30,7 +30,7 @@ export function Hero(): JSX.Element {
             mb: { xs: 1, md: 1.75 },
           }}
         >
-          Turn every day into clear ASL gloss with guided structure and visual playback.
+          Get structured ASL gloss, fingerspelling guidance, and 3D avatar playback — all in one place.
         </Typography>
       </Container>
     </Box>

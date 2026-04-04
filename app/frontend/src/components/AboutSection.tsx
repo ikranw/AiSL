@@ -5,7 +5,7 @@ const faqItems = [
   {
     question: 'Is AiSL trying to be a perfect ASL translator?',
     answer:
-      'No. AiSL is meant to be a transparent learning prototype that helps users study how English structure shifts into ASL-style gloss.',
+      'Not even close. AiSL is a learning prototype built for transparency, not perfection. It\'s here to help you study how English structure shifts into ASL-style gloss, not to replace a fluent signer.',
   },
   {
     question: 'Why does the output look different from normal English?',
@@ -20,7 +20,17 @@ const faqItems = [
   {
     question: 'Why does the avatar not always know every word?',
     answer:
-      'The current avatar only has a limited direct sign library. Some outputs are clearer than others, and some words still depend on fallback behavior or future sign support.',
+      'The sign database is currently limited and manually maintained. Each sign has to be individually recorded and uploaded, so if a word isn\'t in the database yet, the avatar will default to fingerspelling it letter by letter. Less common words, names, and new vocabulary may always appear fingerspelled for now.',
+  },
+  {
+    question: 'Is AiSL a substitute for learning ASL from a Deaf instructor?',
+    answer:
+      'No, and it shouldn\'t be. ASL is a full language with nuance, regional variation, and cultural depth that no tool can fully capture. AiSL is a study aid. For real learning, go to Deaf instructors and engage with the Deaf community directly.',
+  },
+  {
+    question: 'Why Unity — and why does the avatar look the way she does?',
+    answer:
+      'Unity gives us direct control over the avatar\'s skeleton, animations, and her face. Facial expressions are a core part of ASL grammar, not just emotion, so being able to eventually drive eyebrows, mouth shapes, and gaze programmatically matters a lot. She may not be the most polished avatar right now, but the goal is to build toward expressive, accurate signing. That requires a platform we can actually control at that level.',
   },
   {
     question: 'Why do some avatar changes need a WebGL rebuild?',
@@ -42,7 +52,7 @@ export function AboutSection(): JSX.Element {
               Why AiSL exists
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              A small space to understand the project, the people and tools behind it, and where the work came from.
+              A small space to understand the project, the people, and tools behind it.
             </Typography>
           </Stack>
 
@@ -55,10 +65,9 @@ export function AboutSection(): JSX.Element {
               </AccordionSummary>
               <AccordionDetails sx={{ px: 3, pb: 3 }}>
                 <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 760 }}>
-                  AiSL was made to help learners with a part of ASL study that many tools still gloss over: how English
-                  grammar and ASL structure differ. Instead of only giving a result, it lets users see how English-like
-                  phrasing shifts into ASL gloss, watch it play back, and study that change more directly while they
-                  practice.
+                  Most ASL tools hand you a result and move on. AiSL slows that down — it shows how English phrasing
+                  shifts into ASL gloss, lets you watch it play back on a 3D avatar, and gives learners something to
+                  actually study rather than just consume.
                 </Typography>
               </AccordionDetails>
             </Accordion>
