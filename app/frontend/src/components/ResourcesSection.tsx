@@ -22,9 +22,9 @@ const resources = [
     action: 'grammar-guide',
   },
   {
-    title: 'Vocabulary Flashcards',
-    description: 'Practice daily signs with interactive memory cards.',
-    buttonLabel: 'Access Cards',
+    title: 'Deaf Culture Facts',
+    description: 'Quick facts about Deaf culture, language, and community etiquette.',
+    buttonLabel: 'View Facts',
     color: '#2563eb',
     action: 'flashcards',
   },
@@ -81,34 +81,44 @@ const videoTutorialSections = [
 
 const flashcards = [
   {
-    term: 'Hello',
-    detail: 'A common greeting used to start a conversation in ASL.',
-    tip: 'Use this when meeting someone or getting their attention politely.',
+    term: 'Big “D” vs. Little “d”',
+    detail: 'Lowercase “deaf” refers to audiological disability. Capital “Deaf” signals a linguistic and cultural identity — for those born Deaf, it\'s who they are, not just how they hear. The Deaf community also includes hearing people like CODAs and interpreters.',
+    source: 'https://www.wesleyan.edu/about/news/2023/06/fast-facts-about-deaf-culture.html',
   },
   {
-    term: 'Thank You',
-    detail: 'An everyday sign used to show gratitude.',
-    tip: 'A good core sign for beginner practice because it is used often.',
+    term: 'Watch the face, not the hands',
+    detail: 'When talking with someone who signs, keep eye contact — not your eyes on their hands. If an interpreter is present, address the Deaf person directly, not the interpreter. Facial expressions are also grammar in ASL: raised eyebrows mark yes/no questions, furrowed brows mark questions like who, what, and where. It\'s not about how you feel, it\'s punctuation.',
+    source: 'https://www.wesleyan.edu/about/news/2023/06/fast-facts-about-deaf-culture.html',
   },
   {
-    term: 'Please',
-    detail: 'A polite sign used when asking for something.',
-    tip: 'Practice pairing this with simple requests to build short phrases.',
+    term: '”Hearing-impaired” is not preferred',
+    detail: 'Terms like “hearing-impaired” and “hearing loss” can feel pejorative to many Deaf people. As one perspective puts it: “I was born Deaf. I was never hearing, therefore I did not lose anything.”',
+    source: 'https://www.wesleyan.edu/about/news/2023/06/fast-facts-about-deaf-culture.html',
   },
   {
-    term: 'Sorry',
-    detail: 'Used to apologize or show regret.',
-    tip: 'Helpful for basic social conversation and respectful communication.',
+    term: 'ASL is its own language',
+    detail: 'ASL is not English translated into signs. It has its own grammar, vocabulary, and structure — using signs, fingerspelling, facial expressions, and body movement to convey full meaning independently.',
+    source: 'https://www.wesleyan.edu/about/news/2023/06/fast-facts-about-deaf-culture.html',
   },
   {
-    term: 'Help',
-    detail: 'A useful sign for asking for support or offering assistance.',
-    tip: 'Try practicing both “help me” and “help you” in context.',
+    term: 'First Deaf school in America',
+    detail: 'Hartford, Connecticut was home to the first free public deaf school in America. Thomas Hopkins Gallaudet partnered with French educator Laurent Clerc to establish what became the American School for the Deaf in 1817.',
+    source: 'https://www.wesleyan.edu/about/news/2023/06/fast-facts-about-deaf-culture.html',
   },
   {
-    term: 'Friend',
-    detail: 'A common relationship word often learned early in ASL.',
-    tip: 'Good for beginner introductions and simple personal descriptions.',
+    term: 'Where ASL came from',
+    detail: 'ASL evolved from a mix of local village sign languages, Native American Hand Talk, and French Sign Language — making it a genuinely distinct language with deep historical roots.',
+    source: 'https://www.wesleyan.edu/about/news/2023/06/fast-facts-about-deaf-culture.html',
+  },
+  {
+    term: 'The Deaf President Now movement',
+    detail: 'In 1988, Gallaudet University students staged a historic protest demanding Deaf leadership. They won — I. King Jordan became the university\'s first Deaf president, and the movement became a landmark moment for Deaf civil rights.',
+    source: 'https://gallaudet.edu/museum/history/the-deaf-president-now-dpn-protest/',
+  },
+  {
+    term: 'Over 300 sign languages exist',
+    detail: 'There are more than 300 distinct sign languages worldwide, and they vary even within the same country. ASL is not a universal sign language — a Deaf person in Japan or Brazil uses a completely different one.',
+    source: 'https://www.nad.org/resources/american-sign-language/community-and-culture-frequently-asked-questions/',
   },
 ];
 
@@ -271,12 +281,11 @@ export function ResourcesSection(): JSX.Element {
           fullWidth
           maxWidth="sm"
         >
-          <DialogTitle>ASL Vocabulary Flashcards</DialogTitle>
+          <DialogTitle>Deaf Culture Fast Facts</DialogTitle>
           <DialogContent>
             <Stack spacing={2.5} sx={{ pt: 1 }}>
               <Typography variant="body2" color="text.secondary">
-                Practice a small starter set of everyday ASL vocabulary inside the app.
-                Flip each card to read a simple explanation and study tip.
+                A few things worth knowing before you dive in. Flip each card to read the full fact.
               </Typography>
 
               <Paper
@@ -308,13 +317,19 @@ export function ResourcesSection(): JSX.Element {
                     </>
                   ) : (
                     <>
-                      <Typography variant="h3">Meaning</Typography>
                       <Typography variant="body2" color="text.secondary">
                         {currentFlashcard.detail}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Study tip: {currentFlashcard.tip}
-                      </Typography>
+                      <Button
+                        component="a"
+                        href={currentFlashcard.source}
+                        target="_blank"
+                        rel="noreferrer"
+                        size="small"
+                        sx={{ px: 0, mt: 0.5, fontSize: '0.7rem' }}
+                      >
+                        View source
+                      </Button>
                     </>
                   )}
                 </Stack>
