@@ -490,7 +490,7 @@ export default function App(): JSX.Element {
         component="section"
         id="practice"
         sx={{
-          mt: { xs: -3, md: -5 },
+          mt: { xs: -2, md: -4 },
           pb: { xs: 8, md: 12 },
         }}
       >

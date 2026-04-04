@@ -422,12 +422,12 @@ export function VideoAvatarCard({
     : null;
 
   return (
-    <Paper sx={{ p: { xs: 3, md: 3.5 }, borderRadius: 3, height: '100%', ...sx }}>
+    <Paper sx={{ p: { xs: 2.5, md: 3 }, borderRadius: 3, height: '100%', ...sx }}>
       <Stack
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-        mb={2.5}
+        mb={2}
         sx={{ gap: 2 }}
       >
         <Typography
@@ -462,8 +462,8 @@ export function VideoAvatarCard({
           border: '1px solid',
           borderColor: 'divider',
           position: 'relative',
-          height: { xs: 400, md: 460 },
-          minHeight: { xs: 400, md: 460 },
+          height: { xs: 380, md: 430 },
+          minHeight: { xs: 380, md: 430 },
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

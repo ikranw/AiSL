@@ -151,8 +151,8 @@ export function TranslatorCard({
 
   return (
     <Card sx={{ height: '100%' }}>
-      <CardContent>
-        <Stack spacing={3}>
+      <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
+        <Stack spacing={2.5}>
           <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ gap: 2 }}>
             <Typography variant="h5">Translate English to ASL Gloss</Typography>
             <Button
