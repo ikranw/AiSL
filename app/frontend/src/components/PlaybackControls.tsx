@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Box,
   Chip,
@@ -8,7 +9,7 @@ import {
 } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import ReplayIcon from '@mui/icons-material/Replay';
 import LoopIcon from '@mui/icons-material/Loop';
 import { formatTime } from '../utils/time';
 
@@ -17,6 +18,9 @@ interface PlaybackControlsProps {
   isLooping: boolean;
   speed: number;
   progress: number;
+  totalDurationSeconds: number;
+  canInteract: boolean;
+  onRestart: () => void;
   onTogglePlay: () => void;
   onToggleLoop: () => void;
   onSpeedChange: (value: number) => void;
@@ -30,31 +34,41 @@ export function PlaybackControls({
   isLooping,
   speed,
   progress,
+  totalDurationSeconds,
+  canInteract,
+  onRestart,
   onTogglePlay,
   onToggleLoop,
   onSpeedChange,
   onProgressChange,
 }: PlaybackControlsProps): JSX.Element {
-  const totalDurationSeconds = 60;
-  const currentTimeSeconds = (progress / 100) * totalDurationSeconds;
+  const [sliderValue, setSliderValue] = useState(progress);
+
+  useEffect(() => {
+    setSliderValue(progress);
+  }, [progress]);
+
+  const currentTimeSeconds = (sliderValue / 100) * totalDurationSeconds;
 
   return (
     <Stack spacing={2} sx={{ mt: 2 }}>
       <Stack direction="row" spacing={1} alignItems="center">
-        <IconButton aria-label="volume" size="small">
-          <VolumeUpIcon fontSize="small" />
+        <IconButton aria-label="restart" size="small" onClick={onRestart} disabled={!canInteract}>
+          <ReplayIcon fontSize="small" />
         </IconButton>
-        <IconButton aria-label="play" size="small" onClick={onTogglePlay}>
+        <IconButton aria-label="play" size="small" onClick={onTogglePlay} disabled={!canInteract}>
           {isPlaying ? <PauseIcon fontSize="small" /> : <PlayArrowIcon fontSize="small" />}
         </IconButton>
-        <IconButton aria-label="loop" size="small" onClick={onToggleLoop}>
+        <IconButton aria-label="loop" size="small" onClick={onToggleLoop} disabled={!canInteract}>
           <LoopIcon fontSize="small" color={isLooping ? 'primary' : 'inherit'} />
         </IconButton>
         <Box sx={{ flexGrow: 1, px: 1 }}>
           <Slider
-            value={progress}
-            onChange={(_, value) => onProgressChange(value as number)}
+            value={sliderValue}
+            onChange={(_, value) => setSliderValue(value as number)}
+            onChangeCommitted={(_, value) => onProgressChange(value as number)}
             size="small"
+            disabled={!canInteract}
           />
         </Box>
         <Typography variant="caption" color="text.secondary">
@@ -73,6 +87,7 @@ export function PlaybackControls({
             variant={option === speed ? 'filled' : 'outlined'}
             onClick={() => onSpeedChange(option)}
             size="small"
+            disabled={!canInteract}
           />
         ))}
       </Stack>

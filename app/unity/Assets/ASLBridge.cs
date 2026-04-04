@@ -61,4 +61,34 @@ public class ASLBridge : MonoBehaviour
             Debug.LogError("ASLBridge parse error: " + ex.Message);
         }
     }
+
+    public void PausePlayback(string _)
+    {
+        if (signController != null)
+            signController.PausePlayback();
+    }
+
+    public void ResumePlayback(string _)
+    {
+        if (signController != null)
+            signController.ResumePlayback();
+    }
+
+    public void SetPlaybackSpeed(string speedValue)
+    {
+        if (signController == null)
+            return;
+
+        if (float.TryParse(speedValue, out float speed))
+            signController.SetPlaybackSpeed(speed);
+    }
+
+    public void SetLooping(string loopValue)
+    {
+        if (signController == null)
+            return;
+
+        if (bool.TryParse(loopValue, out bool loop))
+            signController.SetLooping(loop);
+    }
 }

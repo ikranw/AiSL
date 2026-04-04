@@ -13,6 +13,11 @@ public class SignController : MonoBehaviour
     public Button submitButton;
 
     private Coroutine currentRoutine;
+    private List<string> currentSequence = new List<string>();
+    private int currentSequenceIndex;
+    private float currentPlaybackSpeed = 1f;
+    private bool currentLoopPlayback;
+    private bool isPaused;
 
     private readonly Dictionary<string, int> glossToIndex = new Dictionary<string, int>()
     {
@@ -3994,35 +3999,70 @@ public class SignController : MonoBehaviour
         if (currentRoutine != null)
             StopCoroutine(currentRoutine);
 
-        currentRoutine = StartCoroutine(PlaySequenceRoutine(sequence, speed, loop));
+        currentSequence = sequence != null ? new List<string>(sequence) : new List<string>();
+        currentSequenceIndex = 0;
+        currentPlaybackSpeed = Mathf.Max(0.1f, speed);
+        currentLoopPlayback = loop;
+        isPaused = false;
+
+        currentRoutine = StartCoroutine(PlaySequenceRoutine());
     }
 
-    private IEnumerator PlaySequenceRoutine(List<string> sequence, float speed, bool loop)
+    public void PausePlayback()
+    {
+        isPaused = true;
+        animator.speed = 0f;
+    }
+
+    public void ResumePlayback()
+    {
+        isPaused = false;
+        animator.speed = currentPlaybackSpeed;
+    }
+
+    public void SetPlaybackSpeed(float speed)
+    {
+        currentPlaybackSpeed = Mathf.Max(0.1f, speed);
+        if (!isPaused)
+            animator.speed = currentPlaybackSpeed;
+    }
+
+    public void SetLooping(bool loop)
+    {
+        currentLoopPlayback = loop;
+    }
+
+    private IEnumerator PlaySequenceRoutine()
     {
         do
         {
-            foreach (var raw in sequence)
+            currentSequenceIndex = 0;
+
+            while (currentSequenceIndex < currentSequence.Count)
             {
+                var raw = currentSequence[currentSequenceIndex];
+                currentSequenceIndex++;
+
                 if (string.IsNullOrWhiteSpace(raw))
                     continue;
 
                 string token = raw.Trim().ToUpper();
 
                 if (glossToIndex.TryGetValue(token, out int index))
-                    yield return StartCoroutine(PlaySign(index, speed));
+                    yield return StartCoroutine(PlaySign(index));
                 else
-                    yield return StartCoroutine(Fingerspell(token, speed));
+                    yield return StartCoroutine(Fingerspell(token));
 
-                yield return new WaitForSeconds(0.2f / speed);
+                yield return StartCoroutine(WaitForPlaybackSeconds(0.2f));
             }
         }
-        while (loop);
+        while (currentLoopPlayback);
 
         ReturnToIdle();
         currentRoutine = null;
     }
 
-    private IEnumerator PlaySign(int index, float speed)
+    private IEnumerator PlaySign(int index)
     {
         if (!indexToStateName.ContainsKey(index))
         {
@@ -4030,7 +4070,7 @@ public class SignController : MonoBehaviour
             yield break;
         }
 
-        animator.speed = speed;
+        animator.speed = isPaused ? 0f : currentPlaybackSpeed;
         animator.SetInteger("SignIndex", index);
         animator.SetTrigger("PlaySign");
 
@@ -4050,23 +4090,51 @@ public class SignController : MonoBehaviour
         var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float clipLength = Mathf.Clamp(stateInfo.length, 0.3f, 4f);
 
-        yield return new WaitForSeconds(clipLength / speed);
+        float playedSeconds = 0f;
+        while (playedSeconds < clipLength)
+        {
+            if (!isPaused)
+            {
+                animator.speed = currentPlaybackSpeed;
+                playedSeconds += Time.deltaTime * currentPlaybackSpeed;
+            }
+            else
+            {
+                animator.speed = 0f;
+            }
+
+            yield return null;
+        }
     }
 
-    private IEnumerator Fingerspell(string word, float speed)
+    private IEnumerator Fingerspell(string word)
     {
         foreach (char letter in word)
         {
             if (letterToIndex.TryGetValue(letter, out int index))
             {
-                yield return StartCoroutine(PlaySign(index, speed));
-                yield return new WaitForSeconds(0.1f / speed);
+                yield return StartCoroutine(PlaySign(index));
+                yield return StartCoroutine(WaitForPlaybackSeconds(0.1f));
             }
+        }
+    }
+
+    private IEnumerator WaitForPlaybackSeconds(float seconds)
+    {
+        float elapsed = 0f;
+
+        while (elapsed < seconds)
+        {
+            if (!isPaused)
+                elapsed += Time.deltaTime * currentPlaybackSpeed;
+
+            yield return null;
         }
     }
 
     private void ReturnToIdle()
     {
+        isPaused = false;
         animator.speed = 1f;
         animator.SetInteger("SignIndex", 0);
         animator.SetTrigger("PlaySign");

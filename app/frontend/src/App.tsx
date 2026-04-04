@@ -1,5 +1,5 @@
 import { Box, Container, Grid } from '@mui/material';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { HeaderNav } from './components/HeaderNav';
 import { Hero } from './components/Hero';
 import { TranslatorCard } from './components/TranslatorCard';
@@ -8,10 +8,18 @@ import { PlaybackControls } from './components/PlaybackControls';
 import { ResourcesSection } from './components/ResourcesSection';
 import { Footer } from './components/Footer';
 import { translateEnglishToASL } from './services/llmService';
-import { sendSignSequenceToUnity } from './services/unityBridge';
+import {
+  pauseUnityPlayback,
+  resumeUnityPlayback,
+  sendSignSequenceToUnity,
+  setUnityPlaybackLoop,
+  setUnityPlaybackSpeed,
+} from './services/unityBridge';
 import { TranslateResponse } from './types/translate';
 
 const MAX_INPUT_LENGTH = 500;
+const BASE_SIGN_DURATION_SECONDS = 1.2;
+const FINGERSPELL_LETTER_SECONDS = 0.45;
 
 function normalizeUnityToken(token: string): string[] {
   let t = token.trim().toUpperCase();
@@ -52,6 +60,29 @@ function normalizeUnityToken(token: string): string[] {
   return [t];
 }
 
+function estimateSequenceDuration(sequence: string[], speed: number): number {
+  if (!sequence.length) {
+    return 0;
+  }
+
+  const estimatedSeconds = sequence.reduce((total, token) => {
+    const cleanToken = token.trim();
+    if (!cleanToken) {
+      return total;
+    }
+
+    // Unknown words may be fingerspelled character-by-character, so longer words
+    // should reserve more playback time than a single known sign.
+    const tokenDuration = cleanToken.includes(' ')
+      ? BASE_SIGN_DURATION_SECONDS
+      : Math.max(BASE_SIGN_DURATION_SECONDS, cleanToken.length * FINGERSPELL_LETTER_SECONDS);
+
+    return total + tokenDuration;
+  }, 0);
+
+  return estimatedSeconds / Math.max(speed, 0.1);
+}
+
 export default function App(): JSX.Element {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -61,12 +92,64 @@ export default function App(): JSX.Element {
   const [isLooping, setIsLooping] = useState(false);
   const [speed, setSpeed] = useState(1);
   const [progress, setProgress] = useState(0);
+  const [fullSequence, setFullSequence] = useState<string[]>([]);
+  const [currentSequence, setCurrentSequence] = useState<string[]>([]);
+
+  const totalDurationSeconds = estimateSequenceDuration(currentSequence, speed);
 
   const handleInputChange = useCallback((value: string) => {
     setInput(value);
     setErrorMessage(null);
     setResponse(null);
+    setFullSequence([]);
+    setCurrentSequence([]);
+    setIsPlaying(false);
+    setProgress(0);
   }, []);
+
+  useEffect(() => {
+    if (!isPlaying || totalDurationSeconds <= 0) {
+      return undefined;
+    }
+
+    const interval = window.setInterval(() => {
+      setProgress((current) => {
+        const nextValue = current + (0.1 / totalDurationSeconds) * 100;
+
+        if (nextValue >= 100) {
+          if (isLooping) {
+            return 0;
+          }
+
+          window.clearInterval(interval);
+          setIsPlaying(false);
+          return 100;
+        }
+
+        return nextValue;
+      });
+    }, 100);
+
+    return () => window.clearInterval(interval);
+  }, [isLooping, isPlaying, totalDurationSeconds]);
+
+  const startPlayback = useCallback(
+    (sequence: string[], nextProgress = 0, sourceSequence?: string[]) => {
+      if (!sequence.length) {
+        return;
+      }
+
+      setFullSequence(sourceSequence ?? sequence);
+      setCurrentSequence(sequence);
+      setProgress(nextProgress);
+      setIsPlaying(true);
+      sendSignSequenceToUnity(sequence, {
+        speed,
+        loop: isLooping,
+      });
+    },
+    [isLooping, speed],
+  );
 
   const handleTranslate = useCallback(async () => {
     const trimmedInput = input.trim();
@@ -93,19 +176,85 @@ export default function App(): JSX.Element {
           .flat()
           .filter(Boolean);
 
-        sendSignSequenceToUnity(normalizedSequence, {
-          speed,
-          loop: isLooping,
-        });
+        startPlayback(normalizedSequence, 0, normalizedSequence);
       }
     } catch (error) {
       setErrorMessage('We could not translate that text right now. Please try again.');
     } finally {
       setIsLoading(false);
     }
-  }, [input, speed, isLooping]);
+  }, [input, startPlayback]);
 
-  const statusText = isLoading ? 'Translating...' : 'Ready to translate';
+  const handleTogglePlay = useCallback(() => {
+    if (!fullSequence.length) {
+      return;
+    }
+
+    if (!isPlaying) {
+      if (progress >= 100) {
+        startPlayback(fullSequence, 0, fullSequence);
+        return;
+      }
+
+      resumeUnityPlayback();
+      setIsPlaying(true);
+      return;
+    }
+
+    pauseUnityPlayback();
+    setIsPlaying(false);
+  }, [fullSequence, isPlaying, progress, startPlayback]);
+
+  const handleToggleLoop = useCallback(() => {
+    setIsLooping((value) => {
+      const nextValue = !value;
+      setUnityPlaybackLoop(nextValue);
+      return nextValue;
+    });
+  }, []);
+
+  const handleSpeedChange = useCallback((value: number) => {
+    setSpeed(value);
+    setUnityPlaybackSpeed(value);
+  }, []);
+
+  const handleProgressChange = useCallback(
+    (value: number) => {
+      if (!fullSequence.length) {
+        return;
+      }
+
+      const nextValue = Math.min(Math.max(value, 0), 100);
+      const targetIndex = Math.min(
+        fullSequence.length - 1,
+        Math.floor((nextValue / 100) * fullSequence.length),
+      );
+      const remainingSequence = fullSequence.slice(targetIndex);
+
+      if (!remainingSequence.length) {
+        return;
+      }
+
+      startPlayback(remainingSequence, nextValue, fullSequence);
+    },
+    [fullSequence, startPlayback],
+  );
+
+  const handleRestart = useCallback(() => {
+    if (!fullSequence.length) {
+      return;
+    }
+
+    startPlayback(fullSequence, 0, fullSequence);
+  }, [fullSequence, startPlayback]);
+
+  const statusText = isLoading
+    ? 'Translating...'
+    : currentSequence.length
+      ? isPlaying
+        ? 'Playing signs'
+        : 'Playback paused'
+      : 'Ready to translate';
 
   return (
     <Box sx={{ bgcolor: 'background.default', minHeight: '100vh' }}>
@@ -134,10 +283,13 @@ export default function App(): JSX.Element {
                   isLooping={isLooping}
                   speed={speed}
                   progress={progress}
-                  onTogglePlay={() => setIsPlaying((value) => !value)}
-                  onToggleLoop={() => setIsLooping((value) => !value)}
-                  onSpeedChange={(value) => setSpeed(value)}
-                  onProgressChange={(value) => setProgress(value)}
+                  totalDurationSeconds={totalDurationSeconds}
+                  canInteract={fullSequence.length > 0}
+                  onRestart={handleRestart}
+                  onTogglePlay={handleTogglePlay}
+                  onToggleLoop={handleToggleLoop}
+                  onSpeedChange={handleSpeedChange}
+                  onProgressChange={handleProgressChange}
                 />
               </AvatarCard>
             </Grid>
