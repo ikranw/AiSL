@@ -5,6 +5,7 @@ const navItems = [
   { label: 'Learn', href: '#learn' },
   { label: 'Practice', href: '#practice' },
   { label: 'Resources', href: '#resources' },
+  { label: 'About', href: '#about' },
 ];
 
 export function HeaderNav(): JSX.Element {

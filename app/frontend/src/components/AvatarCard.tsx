@@ -2,9 +2,13 @@ import { Box, Paper, Stack, Typography } from '@mui/material';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { flushPendingUnityPayload } from '../services/unityBridge';
 
+const UNITY_BUILD_VERSION = '2026-04-04-sign-token-overlay';
+
 interface AvatarCardProps {
   statusText: string;
   activeToken?: string;
+  activeTokenIndex?: number;
+  totalTokens?: number;
   isBusy?: boolean;
   children?: ReactNode;
 }
@@ -12,6 +16,8 @@ interface AvatarCardProps {
 export function AvatarCard({
   statusText,
   activeToken,
+  activeTokenIndex = -1,
+  totalTokens = 0,
   isBusy = false,
   children,
 }: AvatarCardProps): JSX.Element {
@@ -58,9 +64,9 @@ export function AvatarCard({
 
       (window as any)
         .createUnityInstance(unityCanvas, {
-          dataUrl: '/unity-build/Build/unity-build.data',
-          frameworkUrl: '/unity-build/Build/unity-build.framework.js',
-          codeUrl: '/unity-build/Build/unity-build.wasm',
+          dataUrl: `/unity-build/Build/unity-build.data?v=${UNITY_BUILD_VERSION}`,
+          frameworkUrl: `/unity-build/Build/unity-build.framework.js?v=${UNITY_BUILD_VERSION}`,
+          codeUrl: `/unity-build/Build/unity-build.wasm?v=${UNITY_BUILD_VERSION}`,
           companyName: 'AiSL',
           productName: 'AiSL Avatar',
           productVersion: '1.0',
@@ -82,7 +88,7 @@ export function AvatarCard({
       startUnity();
     } else if (!existingScript) {
       const script = document.createElement('script');
-      script.src = '/unity-build/Build/unity-build.loader.js';
+      script.src = `/unity-build/Build/unity-build.loader.js?v=${UNITY_BUILD_VERSION}`;
       script.dataset.unityLoader = 'aisl';
       script.onload = startUnity;
       script.onerror = () => setUnityError('Failed to load Unity loader.');
@@ -111,7 +117,13 @@ export function AvatarCard({
         mb={2.5}
         sx={{ gap: 2 }}
       >
-        <Typography variant="h5" fontWeight={700}>
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 600,
+            letterSpacing: '-0.01em',
+          }}
+        >
           3D ASL Avatar
         </Typography>
         <Stack direction="row" spacing={1} alignItems="center">
@@ -160,7 +172,7 @@ export function AvatarCard({
                 position: 'absolute',
                 left: 16,
                 right: 16,
-                bottom: 14,
+                bottom: 12,
                 display: 'flex',
                 justifyContent: 'center',
                 pointerEvents: 'none',
@@ -168,13 +180,13 @@ export function AvatarCard({
             >
               <Box
                 sx={{
-                  px: 1.5,
-                  py: 0.75,
+                  px: 1.25,
+                  py: 0.5,
                   borderRadius: 999,
-                  bgcolor: 'rgba(15, 23, 42, 0.76)',
-                  color: 'common.white',
-                  border: '1px solid rgba(255, 255, 255, 0.18)',
-                  backdropFilter: 'blur(6px)',
+                  bgcolor: 'rgba(255, 255, 255, 0.54)',
+                  color: '#1f2937',
+                  border: '1px solid rgba(255, 255, 255, 0.35)',
+                  backdropFilter: 'blur(4px)',
                   maxWidth: '100%',
                 }}
               >
@@ -183,11 +195,12 @@ export function AvatarCard({
                   sx={{
                     display: 'block',
                     textAlign: 'center',
-                    fontWeight: 700,
-                    letterSpacing: '0.04em',
+                    fontWeight: 600,
+                    letterSpacing: '0.02em',
                   }}
                 >
-                  Signing: {activeToken}
+                  {activeTokenIndex >= 0 && totalTokens > 0 ? `${activeTokenIndex + 1}/${totalTokens} ` : ''}
+                  {activeToken}
                 </Typography>
               </Box>
             </Box>

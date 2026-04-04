@@ -11,8 +11,8 @@ export function Hero(): JSX.Element {
           </Box>
         </Typography>
         <Typography variant="subtitle1" align="center" sx={{ maxWidth: 640, mx: 'auto' }}>
-          AiSL helps you learn ASL faster with AI-powered translation, realistic 3D
-          demonstrations, and curated learning resources.
+          See how everyday English shifts into ASL gloss through guided structure,
+          visual playback, and a learning flow built for the gap most tools skip.
         </Typography>
       </Container>
     </Box>

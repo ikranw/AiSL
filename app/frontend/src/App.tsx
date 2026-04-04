@@ -6,6 +6,7 @@ import { TranslatorCard } from './components/TranslatorCard';
 import { AvatarCard } from './components/AvatarCard';
 import { PlaybackControls } from './components/PlaybackControls';
 import { ResourcesSection } from './components/ResourcesSection';
+import { AboutSection } from './components/AboutSection';
 import { Footer } from './components/Footer';
 import { translateEnglishToASL } from './services/llmService';
 import { RANDOM_SENTENCES } from './utils/randomSentences';
@@ -101,6 +102,8 @@ export default function App(): JSX.Element {
   const [playbackCurrentSeconds, setPlaybackCurrentSeconds] = useState(0);
   const [playbackTotalSeconds, setPlaybackTotalSeconds] = useState(0);
   const [playbackCurrentToken, setPlaybackCurrentToken] = useState('');
+  const [playbackCurrentTokenIndex, setPlaybackCurrentTokenIndex] = useState(-1);
+  const [playbackTotalTokens, setPlaybackTotalTokens] = useState(0);
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
   const inputHistoryRef = useRef<string[]>([]);
   const isUndoingInputRef = useRef(false);
@@ -128,6 +131,8 @@ export default function App(): JSX.Element {
     setPlaybackCurrentSeconds(0);
     setPlaybackTotalSeconds(0);
     setPlaybackCurrentToken('');
+    setPlaybackCurrentTokenIndex(-1);
+    setPlaybackTotalTokens(0);
     translateRequestIdRef.current += 1;
   }, [input]);
 
@@ -148,6 +153,8 @@ export default function App(): JSX.Element {
     setPlaybackCurrentSeconds(0);
     setPlaybackTotalSeconds(0);
     setPlaybackCurrentToken('');
+    setPlaybackCurrentTokenIndex(-1);
+    setPlaybackTotalTokens(0);
     translateRequestIdRef.current += 1;
   }, []);
 
@@ -160,6 +167,8 @@ export default function App(): JSX.Element {
     setPlaybackCurrentSeconds(0);
     setPlaybackTotalSeconds(0);
     setPlaybackCurrentToken('');
+    setPlaybackCurrentTokenIndex(-1);
+    setPlaybackTotalTokens(0);
     handleInputChange(nextSentence);
   }, [handleInputChange]);
 
@@ -195,6 +204,8 @@ export default function App(): JSX.Element {
       setPlaybackTotalSeconds(state.totalSeconds);
       setIsPlaying(state.isPlaying);
       setPlaybackCurrentToken(state.currentToken);
+      setPlaybackCurrentTokenIndex(state.currentTokenIndex);
+      setPlaybackTotalTokens(state.totalTokens);
     });
 
     return () => setUnityPlaybackStateListener(undefined);
@@ -225,6 +236,8 @@ export default function App(): JSX.Element {
       setPlaybackCurrentSeconds(0);
       setPlaybackTotalSeconds(0);
       setPlaybackCurrentToken(sequence[0] ?? '');
+      setPlaybackCurrentTokenIndex(sequence.length ? 0 : -1);
+      setPlaybackTotalTokens(sequence.length);
       setIsPlaying(true);
       sendSignSequenceToUnity(sequence, {
         speed,
@@ -255,6 +268,8 @@ export default function App(): JSX.Element {
     setPlaybackCurrentSeconds(0);
     setPlaybackTotalSeconds(0);
     setPlaybackCurrentToken('');
+    setPlaybackCurrentTokenIndex(-1);
+    setPlaybackTotalTokens(0);
     setIsLoading(true);
     setErrorMessage(null);
 
@@ -386,6 +401,8 @@ export default function App(): JSX.Element {
               <AvatarCard
                 statusText={statusText}
                 activeToken={playbackCurrentToken}
+                activeTokenIndex={playbackCurrentTokenIndex}
+                totalTokens={playbackTotalTokens}
                 isBusy={isLoading}
               >
                 <PlaybackControls
@@ -408,6 +425,7 @@ export default function App(): JSX.Element {
       </Box>
 
       <ResourcesSection />
+      <AboutSection />
       <Footer />
     </Box>
   );
