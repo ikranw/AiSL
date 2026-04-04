@@ -3,15 +3,37 @@ export interface UnityPlaybackOptions {
   loop: boolean;
 }
 
+export interface UnityPlaybackState {
+  currentSeconds: number;
+  totalSeconds: number;
+  isPlaying: boolean;
+}
+
 type UnityInstance = {
   SendMessage: (objectName: string, methodName: string, parameter?: string) => void;
 };
 
 declare global {
   interface Window {
+    __unityPlaybackListener?: (state: UnityPlaybackState) => void;
     unityInstance?: UnityInstance;
     __pendingUnityPayload?: string;
+    handleUnityPlaybackState?: (currentSeconds: number, totalSeconds: number, isPlaying: number) => void;
   }
+}
+
+if (typeof window !== 'undefined') {
+  window.handleUnityPlaybackState = (
+    currentSeconds: number,
+    totalSeconds: number,
+    isPlaying: number,
+  ) => {
+    window.__unityPlaybackListener?.({
+      currentSeconds,
+      totalSeconds,
+      isPlaying: Boolean(isPlaying),
+    });
+  };
 }
 
 function sendUnityMessage(methodName: string, parameter?: string): boolean {
@@ -61,4 +83,14 @@ export function setUnityPlaybackLoop(loop: boolean): void {
 
 export function setUnityPlaybackSpeed(speed: number): void {
   sendUnityMessage('SetPlaybackSpeed', String(speed));
+}
+
+export function resetUnityToIdle(): void {
+  sendUnityMessage('ResetToIdle');
+}
+
+export function setUnityPlaybackStateListener(
+  listener?: (state: UnityPlaybackState) => void,
+): void {
+  window.__unityPlaybackListener = listener;
 }

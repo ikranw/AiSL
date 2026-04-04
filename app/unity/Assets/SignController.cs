@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class SignController : MonoBehaviour
 {
+#if UNITY_WEBGL && !UNITY_EDITOR
+    [DllImport("__Internal")]
+    private static extern void ReportPlaybackState(float currentSeconds, float totalSeconds, int isPlaying);
+#else
+    private static void ReportPlaybackState(float currentSeconds, float totalSeconds, int isPlaying) {}
+#endif
+
     public Animator animator;
 
     // Can be assigned in Inspector, or auto-found by name at runtime
@@ -18,6 +26,11 @@ public class SignController : MonoBehaviour
     private float currentPlaybackSpeed = 1f;
     private bool currentLoopPlayback;
     private bool isPaused;
+    private float playbackElapsedSeconds;
+    private float playbackTotalSeconds;
+    private float lastReportedPlaybackSeconds = -1f;
+    private int lastReportedIsPlaying = -1;
+    private readonly Dictionary<string, float> stateLengthCache = new Dictionary<string, float>();
 
     private readonly Dictionary<string, int> glossToIndex = new Dictionary<string, int>()
     {
@@ -4004,6 +4017,9 @@ public class SignController : MonoBehaviour
         currentPlaybackSpeed = Mathf.Max(0.1f, speed);
         currentLoopPlayback = loop;
         isPaused = false;
+        playbackElapsedSeconds = 0f;
+        playbackTotalSeconds = EstimateSequenceDuration(currentSequence, currentPlaybackSpeed);
+        NotifyPlaybackState(true);
 
         currentRoutine = StartCoroutine(PlaySequenceRoutine());
     }
@@ -4012,19 +4028,31 @@ public class SignController : MonoBehaviour
     {
         isPaused = true;
         animator.speed = 0f;
+        NotifyPlaybackState(true);
     }
 
     public void ResumePlayback()
     {
         isPaused = false;
         animator.speed = currentPlaybackSpeed;
+        NotifyPlaybackState(true);
     }
 
     public void SetPlaybackSpeed(float speed)
     {
+        float previousSpeed = currentPlaybackSpeed;
         currentPlaybackSpeed = Mathf.Max(0.1f, speed);
+
+        if (playbackTotalSeconds > playbackElapsedSeconds && previousSpeed > 0f)
+        {
+            float remainingSeconds = playbackTotalSeconds - playbackElapsedSeconds;
+            playbackTotalSeconds = playbackElapsedSeconds + (remainingSeconds * (previousSpeed / currentPlaybackSpeed));
+        }
+
         if (!isPaused)
             animator.speed = currentPlaybackSpeed;
+
+        NotifyPlaybackState(true);
     }
 
     public void SetLooping(bool loop)
@@ -4032,11 +4060,31 @@ public class SignController : MonoBehaviour
         currentLoopPlayback = loop;
     }
 
+    public void ResetToIdle()
+    {
+        if (currentRoutine != null)
+        {
+            StopCoroutine(currentRoutine);
+            currentRoutine = null;
+        }
+
+        currentSequence = new List<string>();
+        currentSequenceIndex = 0;
+        currentLoopPlayback = false;
+        isPaused = false;
+        playbackElapsedSeconds = 0f;
+        playbackTotalSeconds = 0f;
+        ReturnToIdle();
+        NotifyPlaybackState(true);
+    }
+
     private IEnumerator PlaySequenceRoutine()
     {
         do
         {
             currentSequenceIndex = 0;
+            playbackElapsedSeconds = 0f;
+            NotifyPlaybackState(true);
 
             while (currentSequenceIndex < currentSequence.Count)
             {
@@ -4058,8 +4106,10 @@ public class SignController : MonoBehaviour
         }
         while (currentLoopPlayback);
 
+        playbackElapsedSeconds = playbackTotalSeconds;
         ReturnToIdle();
         currentRoutine = null;
+        NotifyPlaybackState(true);
     }
 
     private IEnumerator PlaySign(int index)
@@ -4096,7 +4146,9 @@ public class SignController : MonoBehaviour
             if (!isPaused)
             {
                 animator.speed = currentPlaybackSpeed;
+                playbackElapsedSeconds += Time.deltaTime;
                 playedSeconds += Time.deltaTime * currentPlaybackSpeed;
+                NotifyPlaybackState();
             }
             else
             {
@@ -4126,7 +4178,11 @@ public class SignController : MonoBehaviour
         while (elapsed < seconds)
         {
             if (!isPaused)
+            {
+                playbackElapsedSeconds += Time.deltaTime;
                 elapsed += Time.deltaTime * currentPlaybackSpeed;
+                NotifyPlaybackState();
+            }
 
             yield return null;
         }
@@ -4138,6 +4194,77 @@ public class SignController : MonoBehaviour
         animator.speed = 1f;
         animator.SetInteger("SignIndex", 0);
         animator.SetTrigger("PlaySign");
+    }
+
+    private float EstimateSequenceDuration(List<string> sequence, float speed)
+    {
+        float total = 0f;
+        float safeSpeed = Mathf.Max(0.1f, speed);
+
+        foreach (var raw in sequence)
+        {
+            if (string.IsNullOrWhiteSpace(raw))
+                continue;
+
+            string token = raw.Trim().ToUpper();
+            if (glossToIndex.TryGetValue(token, out int index))
+            {
+                total += GetClipLengthForIndex(index) / safeSpeed;
+            }
+            else
+            {
+                foreach (char letter in token)
+                {
+                    if (letterToIndex.TryGetValue(letter, out int letterIndex))
+                    {
+                        total += GetClipLengthForIndex(letterIndex) / safeSpeed;
+                        total += 0.1f / safeSpeed;
+                    }
+                }
+            }
+
+            total += 0.2f / safeSpeed;
+        }
+
+        return total;
+    }
+
+    private float GetClipLengthForIndex(int index)
+    {
+        if (!indexToStateName.TryGetValue(index, out string stateName))
+            return 1f;
+
+        if (stateLengthCache.TryGetValue(stateName, out float cachedLength))
+            return cachedLength;
+
+        float clipLength = 1f;
+        if (animator != null && animator.runtimeAnimatorController != null)
+        {
+            foreach (var clip in animator.runtimeAnimatorController.animationClips)
+            {
+                if (clip != null && clip.name == stateName)
+                {
+                    clipLength = Mathf.Clamp(clip.length, 0.3f, 4f);
+                    break;
+                }
+            }
+        }
+
+        stateLengthCache[stateName] = clipLength;
+        return clipLength;
+    }
+
+    private void NotifyPlaybackState(bool force = false)
+    {
+        float currentSeconds = Mathf.Clamp(playbackElapsedSeconds, 0f, playbackTotalSeconds);
+        int playingFlag = currentRoutine != null && !isPaused ? 1 : 0;
+
+        if (!force && Mathf.Abs(currentSeconds - lastReportedPlaybackSeconds) < 0.05f && playingFlag == lastReportedIsPlaying)
+            return;
+
+        lastReportedPlaybackSeconds = currentSeconds;
+        lastReportedIsPlaying = playingFlag;
+        ReportPlaybackState(currentSeconds, playbackTotalSeconds, playingFlag);
     }
 
 }

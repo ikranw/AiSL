@@ -10,8 +10,10 @@ import { Footer } from './components/Footer';
 import { translateEnglishToASL } from './services/llmService';
 import {
   pauseUnityPlayback,
+  resetUnityToIdle,
   resumeUnityPlayback,
   sendSignSequenceToUnity,
+  setUnityPlaybackStateListener,
   setUnityPlaybackLoop,
   setUnityPlaybackSpeed,
 } from './services/unityBridge';
@@ -95,11 +97,17 @@ export default function App(): JSX.Element {
   const [progress, setProgress] = useState(0);
   const [fullSequence, setFullSequence] = useState<string[]>([]);
   const [currentSequence, setCurrentSequence] = useState<string[]>([]);
+  const [playbackCurrentSeconds, setPlaybackCurrentSeconds] = useState(0);
+  const [playbackTotalSeconds, setPlaybackTotalSeconds] = useState(0);
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
   const inputHistoryRef = useRef<string[]>([]);
   const isUndoingInputRef = useRef(false);
 
-  const totalDurationSeconds = estimateSequenceDuration(currentSequence, speed);
+  const estimatedDurationSeconds = estimateSequenceDuration(currentSequence, speed);
+  const totalDurationSeconds = playbackTotalSeconds > 0 ? playbackTotalSeconds : estimatedDurationSeconds;
+  const displayProgress = playbackTotalSeconds > 0
+    ? Math.min((playbackCurrentSeconds / playbackTotalSeconds) * 100, 100)
+    : progress;
 
   const handleInputChange = useCallback((value: string) => {
     if (!isUndoingInputRef.current && value !== input) {
@@ -114,6 +122,8 @@ export default function App(): JSX.Element {
     setCurrentSequence([]);
     setIsPlaying(false);
     setProgress(0);
+    setPlaybackCurrentSeconds(0);
+    setPlaybackTotalSeconds(0);
   }, [input]);
 
   const handleUndoInput = useCallback(() => {
@@ -130,10 +140,12 @@ export default function App(): JSX.Element {
     setCurrentSequence([]);
     setIsPlaying(false);
     setProgress(0);
+    setPlaybackCurrentSeconds(0);
+    setPlaybackTotalSeconds(0);
   }, []);
 
   useEffect(() => {
-    if (!isPlaying || totalDurationSeconds <= 0) {
+    if (!isPlaying || totalDurationSeconds <= 0 || playbackTotalSeconds > 0) {
       return undefined;
     }
 
@@ -156,7 +168,17 @@ export default function App(): JSX.Element {
     }, 100);
 
     return () => window.clearInterval(interval);
-  }, [isLooping, isPlaying, totalDurationSeconds]);
+  }, [isLooping, isPlaying, playbackTotalSeconds, totalDurationSeconds]);
+
+  useEffect(() => {
+    setUnityPlaybackStateListener((state) => {
+      setPlaybackCurrentSeconds(state.currentSeconds);
+      setPlaybackTotalSeconds(state.totalSeconds);
+      setIsPlaying(state.isPlaying);
+    });
+
+    return () => setUnityPlaybackStateListener(undefined);
+  }, []);
 
   useEffect(() => {
     if (!isLoading) {
@@ -180,6 +202,8 @@ export default function App(): JSX.Element {
       setFullSequence(sourceSequence ?? sequence);
       setCurrentSequence(sequence);
       setProgress(nextProgress);
+      setPlaybackCurrentSeconds(0);
+      setPlaybackTotalSeconds(0);
       setIsPlaying(true);
       sendSignSequenceToUnity(sequence, {
         speed,
@@ -201,6 +225,11 @@ export default function App(): JSX.Element {
       return;
     }
 
+    resetUnityToIdle();
+    setIsPlaying(false);
+    setProgress(0);
+    setPlaybackCurrentSeconds(0);
+    setPlaybackTotalSeconds(0);
     setIsLoading(true);
     setErrorMessage(null);
 
@@ -229,7 +258,7 @@ export default function App(): JSX.Element {
     }
 
     if (!isPlaying) {
-      if (progress >= 100) {
+      if (displayProgress >= 100) {
         startPlayback(fullSequence, 0, fullSequence);
         return;
       }
@@ -241,7 +270,7 @@ export default function App(): JSX.Element {
 
     pauseUnityPlayback();
     setIsPlaying(false);
-  }, [fullSequence, isPlaying, progress, startPlayback]);
+  }, [displayProgress, fullSequence, isPlaying, startPlayback]);
 
   const handleToggleLoop = useCallback(() => {
     setIsLooping((value) => {
@@ -322,7 +351,7 @@ export default function App(): JSX.Element {
                   isPlaying={isPlaying}
                   isLooping={isLooping}
                   speed={speed}
-                  progress={progress}
+                  progress={displayProgress}
                   totalDurationSeconds={totalDurationSeconds}
                   canInteract={fullSequence.length > 0}
                   onRestart={handleRestart}

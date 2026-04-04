@@ -91,4 +91,10 @@ public class ASLBridge : MonoBehaviour
         if (bool.TryParse(loopValue, out bool loop))
             signController.SetLooping(loop);
     }
+
+    public void ResetToIdle(string _)
+    {
+        if (signController != null)
+            signController.ResetToIdle();
+    }
 }
