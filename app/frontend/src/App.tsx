@@ -43,6 +43,12 @@ function normalizeUnityToken(token: string): string[] {
     return [];
   }
 
+  // Keep Unity signing aligned with backend rule:
+  // first-person and possessive first-person use MY sign.
+  if (t === 'I' || t === 'MY' || t === 'POSS') {
+    return ['MY'];
+  }
+
   return [t];
 }
 
