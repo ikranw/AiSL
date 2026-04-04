@@ -1,5 +1,5 @@
 import { Box, Container, Grid } from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { HeaderNav } from './components/HeaderNav';
 import { Hero } from './components/Hero';
 import { TranslatorCard } from './components/TranslatorCard';
@@ -96,11 +96,34 @@ export default function App(): JSX.Element {
   const [fullSequence, setFullSequence] = useState<string[]>([]);
   const [currentSequence, setCurrentSequence] = useState<string[]>([]);
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
+  const inputHistoryRef = useRef<string[]>([]);
+  const isUndoingInputRef = useRef(false);
 
   const totalDurationSeconds = estimateSequenceDuration(currentSequence, speed);
 
   const handleInputChange = useCallback((value: string) => {
+    if (!isUndoingInputRef.current && value !== input) {
+      inputHistoryRef.current.push(input);
+    }
+
+    isUndoingInputRef.current = false;
     setInput(value);
+    setErrorMessage(null);
+    setResponse(null);
+    setFullSequence([]);
+    setCurrentSequence([]);
+    setIsPlaying(false);
+    setProgress(0);
+  }, [input]);
+
+  const handleUndoInput = useCallback(() => {
+    const previousValue = inputHistoryRef.current.pop();
+    if (previousValue === undefined) {
+      return;
+    }
+
+    isUndoingInputRef.current = true;
+    setInput(previousValue);
     setErrorMessage(null);
     setResponse(null);
     setFullSequence([]);
@@ -288,6 +311,7 @@ export default function App(): JSX.Element {
                 errorMessage={errorMessage}
                 response={response}
                 onInputChange={handleInputChange}
+                onUndoInput={handleUndoInput}
                 onTranslate={handleTranslate}
               />
             </Grid>

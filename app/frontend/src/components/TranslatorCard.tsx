@@ -1,4 +1,5 @@
 import { Box, Button, Card, CardContent, Chip, Stack, TextField, Typography } from '@mui/material';
+import { KeyboardEvent } from 'react';
 import { TranslateResponse } from '../types/translate';
 
 type TranslatorCardProps = {
@@ -9,6 +10,7 @@ type TranslatorCardProps = {
   errorMessage: string | null;
   response: TranslateResponse | null;
   onInputChange: (value: string) => void;
+  onUndoInput: () => void;
   onTranslate: () => void;
 };
 
@@ -131,11 +133,19 @@ export function TranslatorCard({
   errorMessage,
   response,
   onInputChange,
+  onUndoInput,
   onTranslate,
 }: TranslatorCardProps): JSX.Element {
   const glossTokens = response?.gloss_tokens ?? [];
   const glossTags = classifyGlossTokens(glossTokens);
   const visibleTagTypes = Array.from(new Set(glossTags));
+
+  const handleInputKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if ((event.metaKey || event.ctrlKey) && !event.shiftKey && event.key.toLowerCase() === 'z') {
+      event.preventDefault();
+      onUndoInput();
+    }
+  };
 
   return (
     <Card sx={{ height: '100%' }}>
@@ -147,6 +157,7 @@ export function TranslatorCard({
             label="English input"
             value={input}
             onChange={(event) => onInputChange(event.target.value)}
+            onKeyDown={handleInputKeyDown}
             multiline
             minRows={5}
             inputProps={{ maxLength }}
