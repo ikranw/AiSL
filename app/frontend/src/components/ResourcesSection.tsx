@@ -11,6 +11,8 @@ import {
   Stack,
   Tooltip,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 
 const resources = [
@@ -123,6 +125,8 @@ const flashcards = [
 ];
 
 export function ResourcesSection(): JSX.Element {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isFlashcardsOpen, setIsFlashcardsOpen] = useState(false);
@@ -193,6 +197,7 @@ export function ResourcesSection(): JSX.Element {
           open={isGuideOpen}
           onClose={() => setIsGuideOpen(false)}
           fullWidth
+          fullScreen={fullScreen}
           maxWidth="sm"
         >
           <DialogTitle>Mini ASL Grammar Guide</DialogTitle>
@@ -236,6 +241,7 @@ export function ResourcesSection(): JSX.Element {
           open={isVideoOpen}
           onClose={() => setIsVideoOpen(false)}
           fullWidth
+          fullScreen={fullScreen}
           maxWidth="sm"
         >
           <DialogTitle>ASL Video Tutorials</DialogTitle>
@@ -279,6 +285,7 @@ export function ResourcesSection(): JSX.Element {
           open={isFlashcardsOpen}
           onClose={() => setIsFlashcardsOpen(false)}
           fullWidth
+          fullScreen={fullScreen}
           maxWidth="sm"
         >
           <DialogTitle>Deaf Culture Fast Facts</DialogTitle>

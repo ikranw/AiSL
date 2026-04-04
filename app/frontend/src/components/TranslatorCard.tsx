@@ -153,7 +153,7 @@ export function TranslatorCard({
     <Card sx={{ height: '100%' }}>
       <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
         <Stack spacing={2.5}>
-          <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ gap: 2 }}>
+          <Stack direction="row" justifyContent="space-between" alignItems="flex-start" flexWrap="wrap" sx={{ gap: 1.5 }}>
             <Typography variant="h5">Translate English to ASL Gloss</Typography>
             <Button
               variant="outlined"
@@ -161,6 +161,7 @@ export function TranslatorCard({
               type="button"
               onClick={onRandomSentence}
               disabled={isLoading}
+              sx={{ flexShrink: 0 }}
             >
               Random Sentence
             </Button>

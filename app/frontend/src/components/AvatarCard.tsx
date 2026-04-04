@@ -120,9 +120,10 @@ export function AvatarCard({
       <Stack
         direction="row"
         justifyContent="space-between"
-        alignItems="center"
+        alignItems="flex-start"
+        flexWrap="wrap"
         mb={2}
-        sx={{ gap: 2 }}
+        sx={{ gap: 1.5 }}
       >
         <Typography
           variant="h6"

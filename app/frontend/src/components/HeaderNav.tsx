@@ -48,7 +48,7 @@ export function HeaderNav(): JSX.Element {
             </Box>
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
-            <Stack direction="row" spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Stack direction="row" spacing={2} sx={{ display: 'flex', flexWrap: 'wrap' }}>
               {navItems.map((item) => (
                 <Typography
                   key={item.label}
