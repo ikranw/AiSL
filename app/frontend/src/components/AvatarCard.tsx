@@ -14,13 +14,35 @@ export function AvatarCard({
   children,
 }: AvatarCardProps): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const unityInstanceRef = useRef<any>(null);
   const initializedRef = useRef(false);
   const [unityError, setUnityError] = useState<string | null>(null);
+  const [shouldLoadUnity, setShouldLoadUnity] = useState(false);
+  const [isUnityReady, setIsUnityReady] = useState(false);
 
   const statusColor = isBusy ? '#f59e0b' : '#16a34a';
 
   useEffect(() => {
+    const node = containerRef.current;
+    if (!node) return undefined;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShouldLoadUnity(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '240px 0px' },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!shouldLoadUnity || initializedRef.current) return;
     if (initializedRef.current) return;
     initializedRef.current = true;
 
@@ -40,10 +62,13 @@ export function AvatarCard({
           companyName: 'AiSL',
           productName: 'AiSL Avatar',
           productVersion: '1.0',
+          cacheControl: (url: string) =>
+            url.includes('/unity-build/Build/') ? 'immutable' : 'no-store',
         })
         .then((instance: any) => {
           unityInstanceRef.current = instance;
           window.unityInstance = instance;
+          setIsUnityReady(true);
           flushPendingUnityPayload();
         })
         .catch((err: Error) => {
@@ -71,8 +96,9 @@ export function AvatarCard({
       unityInstanceRef.current = null;
       window.unityInstance = undefined;
       initializedRef.current = false;
+      setIsUnityReady(false);
     };
-  }, []);
+  }, [shouldLoadUnity]);
 
   return (
     <Paper sx={{ p: { xs: 3, md: 3.5 }, borderRadius: 3, height: '100%' }}>
@@ -105,12 +131,14 @@ export function AvatarCard({
         <Typography color="error">{unityError}</Typography>
       ) : (
         <Box
+          ref={containerRef}
           sx={{
             borderRadius: 3,
             overflow: 'hidden',
             bgcolor: '#edf2f7',
             border: '1px solid',
             borderColor: 'divider',
+            position: 'relative',
           }}
         >
           <canvas
@@ -124,6 +152,27 @@ export function AvatarCard({
               display: 'block',
             }}
           />
+          {!isUnityReady && (
+            <Box
+              sx={{
+                position: 'absolute',
+                inset: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                bgcolor: 'rgba(237, 242, 247, 0.92)',
+              }}
+            >
+              <Stack spacing={0.75} alignItems="center">
+                <Typography variant="body1" fontWeight={600}>
+                  Loading avatar...
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Large 3D files may take a moment.
+                </Typography>
+              </Stack>
+            </Box>
+          )}
         </Box>
       )}
 
