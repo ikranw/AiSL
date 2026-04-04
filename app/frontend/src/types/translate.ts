@@ -17,4 +17,11 @@ export type TranslateResponse = {
   non_manual: string[];
   confidence_note: string;
   sign_sequence: SignSequenceItem[];
+  diagnostics?: {
+    retrieval_ms: number;
+    llm_ms: number;
+    repair_ms: number;
+    used_repair: boolean;
+    total_ms: number;
+  };
 };

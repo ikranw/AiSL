@@ -5,6 +5,7 @@ type TranslatorCardProps = {
   input: string;
   maxLength: number;
   isLoading: boolean;
+  loadingLabel?: string;
   errorMessage: string | null;
   response: TranslateResponse | null;
   onInputChange: (value: string) => void;
@@ -15,6 +16,7 @@ export function TranslatorCard({
   input,
   maxLength,
   isLoading,
+  loadingLabel,
   errorMessage,
   response,
   onInputChange,
@@ -44,7 +46,7 @@ export function TranslatorCard({
             disabled={isLoading || !input.trim()}
             fullWidth
           >
-            {isLoading ? 'Translating...' : 'Translate'}
+            {isLoading ? loadingLabel ?? 'Translating...' : 'Translate'}
           </Button>
 
           {errorMessage && <Typography color="error">{errorMessage}</Typography>}
@@ -66,6 +68,11 @@ export function TranslatorCard({
               <Typography variant="body2">
                 Confidence note: {response.confidence_note}
               </Typography>
+              {response.diagnostics && (
+                <Typography variant="body2" color="text.secondary">
+                  Response time: {(response.diagnostics.total_ms / 1000).toFixed(1)}s
+                </Typography>
+              )}
             </Box>
           )}
         </Stack>

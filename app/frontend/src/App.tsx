@@ -20,6 +20,7 @@ import { TranslateResponse } from './types/translate';
 const MAX_INPUT_LENGTH = 500;
 const BASE_SIGN_DURATION_SECONDS = 1.2;
 const FINGERSPELL_LETTER_SECONDS = 0.45;
+const LOADING_STEPS = ['Analyzing text...', 'Building gloss...', 'Preparing signs...'];
 
 function normalizeUnityToken(token: string): string[] {
   let t = token.trim().toUpperCase();
@@ -94,6 +95,7 @@ export default function App(): JSX.Element {
   const [progress, setProgress] = useState(0);
   const [fullSequence, setFullSequence] = useState<string[]>([]);
   const [currentSequence, setCurrentSequence] = useState<string[]>([]);
+  const [loadingStepIndex, setLoadingStepIndex] = useState(0);
 
   const totalDurationSeconds = estimateSequenceDuration(currentSequence, speed);
 
@@ -132,6 +134,19 @@ export default function App(): JSX.Element {
 
     return () => window.clearInterval(interval);
   }, [isLooping, isPlaying, totalDurationSeconds]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setLoadingStepIndex(0);
+      return undefined;
+    }
+
+    const interval = window.setInterval(() => {
+      setLoadingStepIndex((current) => (current + 1) % LOADING_STEPS.length);
+    }, 1200);
+
+    return () => window.clearInterval(interval);
+  }, [isLoading]);
 
   const startPlayback = useCallback(
     (sequence: string[], nextProgress = 0, sourceSequence?: string[]) => {
@@ -249,7 +264,7 @@ export default function App(): JSX.Element {
   }, [fullSequence, startPlayback]);
 
   const statusText = isLoading
-    ? 'Translating...'
+    ? LOADING_STEPS[loadingStepIndex]
     : currentSequence.length
       ? isPlaying
         ? 'Playing signs'
@@ -269,6 +284,7 @@ export default function App(): JSX.Element {
                 input={input}
                 maxLength={MAX_INPUT_LENGTH}
                 isLoading={isLoading}
+                loadingLabel={LOADING_STEPS[loadingStepIndex]}
                 errorMessage={errorMessage}
                 response={response}
                 onInputChange={handleInputChange}

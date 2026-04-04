@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import re
+from time import perf_counter
 from typing import Any
 
 from dotenv import load_dotenv
@@ -190,8 +191,12 @@ def generate_once(text: str) -> dict[str, Any]:
     if not text:
         raise ValueError("Input text cannot be empty.")
 
+    started_at = perf_counter()
+
     # 1. Retrieve context
+    retrieval_started_at = perf_counter()
     context = retrieve_context(text)
+    retrieval_ms = round((perf_counter() - retrieval_started_at) * 1000, 1)
 
     # 2. Build prompt
     prompt = build_prompt(
@@ -202,19 +207,26 @@ def generate_once(text: str) -> dict[str, Any]:
     )
 
     # 3. Call LLM
+    llm_started_at = perf_counter()
     raw_output = call_llm(prompt)
+    llm_ms = round((perf_counter() - llm_started_at) * 1000, 1)
+    used_repair = False
+    repair_ms = 0.0
 
     # 4. Parse + validate, with one repair retry
     try:
         validated = parse_and_validate(raw_output)
     except Exception as e:
+        used_repair = True
         repair_prompt = build_repair_prompt(
             original_text=text,
             invalid_output=raw_output,
             error_message=str(e),
         )
 
+        repair_started_at = perf_counter()
         repaired_output = call_llm(repair_prompt)
+        repair_ms = round((perf_counter() - repair_started_at) * 1000, 1)
 
         try:
             validated = parse_and_validate(repaired_output)
@@ -234,6 +246,13 @@ def generate_once(text: str) -> dict[str, Any]:
 
     # 7. Ensure output contains plain gloss words only (no X-/DESC-/FINGERSPELL markers)
     cleaned = _clean_output_markers(mapped)
+    cleaned["diagnostics"] = {
+        "retrieval_ms": retrieval_ms,
+        "llm_ms": llm_ms,
+        "repair_ms": repair_ms,
+        "used_repair": used_repair,
+        "total_ms": round((perf_counter() - started_at) * 1000, 1),
+    }
 
     return cleaned
 
