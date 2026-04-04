@@ -251,21 +251,6 @@ export function TranslatorCard({
             </Box>
           </Box>
 
-          {response && (
-            <Box>
-              <Typography variant="body2">
-                Sentence type: {response.sentence_type}
-              </Typography>
-              <Typography variant="body2">
-                Confidence note: {response.confidence_note}
-              </Typography>
-              {response.diagnostics && (
-                <Typography variant="body2" color="text.secondary">
-                  Response time: {(response.diagnostics.total_ms / 1000).toFixed(1)}s
-                </Typography>
-              )}
-            </Box>
-          )}
         </Stack>
       </CardContent>
     </Card>
