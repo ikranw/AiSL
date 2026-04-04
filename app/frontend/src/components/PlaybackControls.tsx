@@ -5,6 +5,7 @@ import {
   IconButton,
   Slider,
   Stack,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -53,15 +54,27 @@ export function PlaybackControls({
   return (
     <Stack spacing={2} sx={{ mt: 2 }}>
       <Stack direction="row" spacing={1} alignItems="center">
-        <IconButton aria-label="restart" size="small" onClick={onRestart} disabled={!canInteract}>
-          <ReplayIcon fontSize="small" />
-        </IconButton>
-        <IconButton aria-label="play" size="small" onClick={onTogglePlay} disabled={!canInteract}>
-          {isPlaying ? <PauseIcon fontSize="small" /> : <PlayArrowIcon fontSize="small" />}
-        </IconButton>
-        <IconButton aria-label="loop" size="small" onClick={onToggleLoop} disabled={!canInteract}>
-          <LoopIcon fontSize="small" color={isLooping ? 'primary' : 'inherit'} />
-        </IconButton>
+        <Tooltip title={canInteract ? 'Replay' : 'Translate first'}>
+          <span>
+            <IconButton aria-label="restart" size="small" onClick={onRestart} disabled={!canInteract}>
+              <ReplayIcon fontSize="small" />
+            </IconButton>
+          </span>
+        </Tooltip>
+        <Tooltip title={canInteract ? (isPlaying ? 'Pause' : 'Play') : 'Translate first'}>
+          <span>
+            <IconButton aria-label="play" size="small" onClick={onTogglePlay} disabled={!canInteract}>
+              {isPlaying ? <PauseIcon fontSize="small" /> : <PlayArrowIcon fontSize="small" />}
+            </IconButton>
+          </span>
+        </Tooltip>
+        <Tooltip title={canInteract ? 'Loop' : 'Translate first'}>
+          <span>
+            <IconButton aria-label="loop" size="small" onClick={onToggleLoop} disabled={!canInteract}>
+              <LoopIcon fontSize="small" color={isLooping ? 'primary' : 'inherit'} />
+            </IconButton>
+          </span>
+        </Tooltip>
         <Box sx={{ flexGrow: 1, px: 1 }}>
           <Slider
             value={sliderValue}
@@ -80,15 +93,18 @@ export function PlaybackControls({
       </Stack>
       <Stack direction="row" spacing={1} alignItems="center" justifyContent="flex-end">
         {speedOptions.map((option) => (
-          <Chip
-            key={option}
-            label={`${option}x`}
-            color={option === speed ? 'primary' : 'default'}
-            variant={option === speed ? 'filled' : 'outlined'}
-            onClick={() => onSpeedChange(option)}
-            size="small"
-            disabled={!canInteract}
-          />
+          <Tooltip key={option} title={canInteract ? `${option}x speed` : 'Translate first'}>
+            <span>
+              <Chip
+                label={`${option}x`}
+                color={option === speed ? 'primary' : 'default'}
+                variant={option === speed ? 'filled' : 'outlined'}
+                onClick={() => onSpeedChange(option)}
+                size="small"
+                disabled={!canInteract}
+              />
+            </span>
+          </Tooltip>
         ))}
       </Stack>
     </Stack>

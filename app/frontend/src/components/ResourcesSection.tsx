@@ -9,6 +9,7 @@ import {
   Grid,
   Paper,
   Stack,
+  Tooltip,
   Typography,
 } from '@mui/material';
 
@@ -163,13 +164,15 @@ export function ResourcesSection(): JSX.Element {
                   <Typography variant="body2" color="text.secondary">
                     {resource.description}
                   </Typography>
-                  <Button
-                    variant="contained"
-                    sx={{ bgcolor: resource.color, alignSelf: 'flex-start' }}
-                    onClick={() => handleResourceClick(resource.action)}
-                  >
-                    {resource.buttonLabel}
-                  </Button>
+                  <Tooltip title={resource.buttonLabel}>
+                    <Button
+                      variant="contained"
+                      sx={{ bgcolor: resource.color, alignSelf: 'flex-start' }}
+                      onClick={() => handleResourceClick(resource.action)}
+                    >
+                      {resource.buttonLabel}
+                    </Button>
+                  </Tooltip>
                 </Stack>
               </Paper>
             </Grid>
@@ -201,15 +204,17 @@ export function ResourcesSection(): JSX.Element {
                     <Typography variant="body2" color="text.secondary">
                       {section.summary}
                     </Typography>
-                    <Button
-                      variant="outlined"
-                      component="a"
-                      href={section.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Open Resource
-                    </Button>
+                    <Tooltip title="Open link">
+                      <Button
+                        variant="outlined"
+                        component="a"
+                        href={section.href}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Open Resource
+                      </Button>
+                    </Tooltip>
                   </Stack>
                 </Paper>
               ))}
@@ -242,15 +247,17 @@ export function ResourcesSection(): JSX.Element {
                     <Typography variant="body2" color="text.secondary">
                       {section.summary}
                     </Typography>
-                    <Button
-                      variant="outlined"
-                      component="a"
-                      href={section.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Watch Resource
-                    </Button>
+                    <Tooltip title="Watch lesson">
+                      <Button
+                        variant="outlined"
+                        component="a"
+                        href={section.href}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Watch Resource
+                      </Button>
+                    </Tooltip>
                   </Stack>
                 </Paper>
               ))}
@@ -314,15 +321,21 @@ export function ResourcesSection(): JSX.Element {
               </Paper>
 
               <Stack direction="row" spacing={1.5} justifyContent="space-between">
-                <Button variant="outlined" onClick={showPreviousFlashcard}>
-                  Previous
-                </Button>
-                <Button variant="outlined" onClick={() => setIsFlashcardFlipped((value) => !value)}>
-                  {isFlashcardFlipped ? 'Show Front' : 'Flip Card'}
-                </Button>
-                <Button variant="contained" onClick={showNextFlashcard}>
-                  Next
-                </Button>
+                <Tooltip title="Previous card">
+                  <Button variant="outlined" onClick={showPreviousFlashcard}>
+                    Previous
+                  </Button>
+                </Tooltip>
+                <Tooltip title={isFlashcardFlipped ? 'Show front' : 'Flip card'}>
+                  <Button variant="outlined" onClick={() => setIsFlashcardFlipped((value) => !value)}>
+                    {isFlashcardFlipped ? 'Show Front' : 'Flip Card'}
+                  </Button>
+                </Tooltip>
+                <Tooltip title="Next card">
+                  <Button variant="contained" onClick={showNextFlashcard}>
+                    Next
+                  </Button>
+                </Tooltip>
               </Stack>
             </Stack>
           </DialogContent>

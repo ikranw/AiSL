@@ -42,6 +42,7 @@ export function TranslatorCard({
             variant="contained"
             onClick={onTranslate}
             disabled={isLoading || !input.trim()}
+            fullWidth
           >
             {isLoading ? 'Translating...' : 'Translate'}
           </Button>
