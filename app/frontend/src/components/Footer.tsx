@@ -14,7 +14,7 @@ export function Footer(): JSX.Element {
               </Typography>
             </Stack>
             <Typography variant="caption" color="text.secondary">
-              Avatar credit: Rocketbox. Pose credit: Studio Galt.
+              Avatar credit: Rocketbox. Sign credit: Studio Galt.
             </Typography>
             <Link href="#about" underline="hover" variant="caption" sx={{ width: 'fit-content' }}>
               About & Credits

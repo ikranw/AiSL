@@ -20,7 +20,7 @@ const faqItems = [
   {
     question: 'Why does the avatar not always know every word?',
     answer:
-      'The current avatar only has a limited direct sign library. Some outputs are clearer than others, and some words still depend on fallback behavior or future pose support.',
+      'The current avatar only has a limited direct sign library. Some outputs are clearer than others, and some words still depend on fallback behavior or future sign support.',
   },
   {
     question: 'Why do some avatar changes need a WebGL rebuild?',
@@ -50,7 +50,7 @@ export function AboutSection(): JSX.Element {
             <Accordion disableGutters sx={{ borderRadius: 3, overflow: 'hidden' }}>
               <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />} sx={{ px: 3, py: 0.5 }}>
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  The idea
+                  The Idea
                 </Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ px: 3, pb: 3 }}>
@@ -93,7 +93,7 @@ export function AboutSection(): JSX.Element {
                       Signs Source
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Pose and motion reference adapted from Studio Galt&apos;s sign language motion capture archive.
+                      Sign and motion reference adapted from Studio Galt&apos;s sign language motion capture archive.
                     </Typography>
                     <Button
                       href="https://github.com/StudioGalt/Sign-Language-Mocap-Archive"
