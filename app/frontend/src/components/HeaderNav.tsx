@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Container, Stack, Typography } from '@mui/material';
+import { AppBar, Box, Container, Stack, Typography } from '@mui/material';
 import SignLanguageIcon from '@mui/icons-material/SignLanguage';
 
 const navItems = [
@@ -63,9 +63,6 @@ export function HeaderNav(): JSX.Element {
                 </Typography>
               ))}
             </Stack>
-            <Button variant="contained" color="primary" href="#practice">
-              Get Started
-            </Button>
           </Stack>
         </Stack>
       </Container>
