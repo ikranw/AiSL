@@ -7,11 +7,16 @@ using TMPro;
 
 public class SignController : MonoBehaviour
 {
+    private const float SequenceGapSeconds = 0.08f;
+    private const float FingerspellGapSeconds = 0.04f;
+    private const float SignEndTrimSeconds = 0.03f;
+    private const int StateSettleFrames = 3;
+
 #if UNITY_WEBGL && !UNITY_EDITOR
     [DllImport("__Internal")]
-    private static extern void ReportPlaybackState(float currentSeconds, float totalSeconds, int isPlaying);
+    private static extern void ReportPlaybackState(float currentSeconds, float totalSeconds, int isPlaying, string currentToken, int currentTokenIndex, int totalTokens);
 #else
-    private static void ReportPlaybackState(float currentSeconds, float totalSeconds, int isPlaying) {}
+    private static void ReportPlaybackState(float currentSeconds, float totalSeconds, int isPlaying, string currentToken, int currentTokenIndex, int totalTokens) {}
 #endif
 
     public Animator animator;
@@ -30,6 +35,10 @@ public class SignController : MonoBehaviour
     private float playbackTotalSeconds;
     private float lastReportedPlaybackSeconds = -1f;
     private int lastReportedIsPlaying = -1;
+    private string currentPlaybackToken = "";
+    private string lastReportedToken = "";
+    private int currentPlaybackTokenIndex = -1;
+    private int lastReportedTokenIndex = -2;
     private readonly Dictionary<string, float> stateLengthCache = new Dictionary<string, float>();
 
     private readonly Dictionary<string, int> glossToIndex = new Dictionary<string, int>()
@@ -4019,6 +4028,8 @@ public class SignController : MonoBehaviour
         isPaused = false;
         playbackElapsedSeconds = 0f;
         playbackTotalSeconds = EstimateSequenceDuration(currentSequence, currentPlaybackSpeed);
+        currentPlaybackToken = "";
+        currentPlaybackTokenIndex = -1;
         NotifyPlaybackState(true);
 
         currentRoutine = StartCoroutine(PlaySequenceRoutine());
@@ -4074,6 +4085,8 @@ public class SignController : MonoBehaviour
         isPaused = false;
         playbackElapsedSeconds = 0f;
         playbackTotalSeconds = 0f;
+        currentPlaybackToken = "";
+        currentPlaybackTokenIndex = -1;
         ReturnToIdle();
         NotifyPlaybackState(true);
     }
@@ -4095,18 +4108,23 @@ public class SignController : MonoBehaviour
                     continue;
 
                 string token = raw.Trim().ToUpper();
+                currentPlaybackToken = token;
+                currentPlaybackTokenIndex = currentSequenceIndex - 1;
+                NotifyPlaybackState(true);
 
                 if (glossToIndex.TryGetValue(token, out int index))
                     yield return StartCoroutine(PlaySign(index));
                 else
                     yield return StartCoroutine(Fingerspell(token));
 
-                yield return StartCoroutine(WaitForPlaybackSeconds(0.2f));
+                yield return StartCoroutine(WaitForPlaybackSeconds(SequenceGapSeconds));
             }
         }
         while (currentLoopPlayback);
 
         playbackElapsedSeconds = playbackTotalSeconds;
+        currentPlaybackToken = "";
+        currentPlaybackTokenIndex = -1;
         ReturnToIdle();
         currentRoutine = null;
         NotifyPlaybackState(true);
@@ -4122,9 +4140,10 @@ public class SignController : MonoBehaviour
 
         animator.speed = isPaused ? 0f : currentPlaybackSpeed;
         animator.SetInteger("SignIndex", index);
+        animator.ResetTrigger("PlaySign");
         animator.SetTrigger("PlaySign");
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < StateSettleFrames; i++)
             yield return null;
 
         float timeout = 2f;
@@ -4139,9 +4158,10 @@ public class SignController : MonoBehaviour
 
         var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         float clipLength = Mathf.Clamp(stateInfo.length, 0.3f, 4f);
+        float targetPlaySeconds = Mathf.Max(0.12f, clipLength - SignEndTrimSeconds);
 
         float playedSeconds = 0f;
-        while (playedSeconds < clipLength)
+        while (playedSeconds < targetPlaySeconds)
         {
             if (!isPaused)
             {
@@ -4166,7 +4186,7 @@ public class SignController : MonoBehaviour
             if (letterToIndex.TryGetValue(letter, out int index))
             {
                 yield return StartCoroutine(PlaySign(index));
-                yield return StartCoroutine(WaitForPlaybackSeconds(0.1f));
+                yield return StartCoroutine(WaitForPlaybackSeconds(FingerspellGapSeconds));
             }
         }
     }
@@ -4193,6 +4213,7 @@ public class SignController : MonoBehaviour
         isPaused = false;
         animator.speed = 1f;
         animator.SetInteger("SignIndex", 0);
+        animator.ResetTrigger("PlaySign");
         animator.SetTrigger("PlaySign");
     }
 
@@ -4218,12 +4239,12 @@ public class SignController : MonoBehaviour
                     if (letterToIndex.TryGetValue(letter, out int letterIndex))
                     {
                         total += GetClipLengthForIndex(letterIndex) / safeSpeed;
-                        total += 0.1f / safeSpeed;
+                        total += FingerspellGapSeconds / safeSpeed;
                     }
                 }
             }
 
-            total += 0.2f / safeSpeed;
+            total += SequenceGapSeconds / safeSpeed;
         }
 
         return total;
@@ -4258,13 +4279,18 @@ public class SignController : MonoBehaviour
     {
         float currentSeconds = Mathf.Clamp(playbackElapsedSeconds, 0f, playbackTotalSeconds);
         int playingFlag = currentRoutine != null && !isPaused ? 1 : 0;
+        string token = currentPlaybackToken ?? "";
+        int tokenIndex = currentPlaybackTokenIndex;
+        int totalTokens = currentSequence != null ? currentSequence.Count : 0;
 
-        if (!force && Mathf.Abs(currentSeconds - lastReportedPlaybackSeconds) < 0.05f && playingFlag == lastReportedIsPlaying)
+        if (!force && Mathf.Abs(currentSeconds - lastReportedPlaybackSeconds) < 0.05f && playingFlag == lastReportedIsPlaying && token == lastReportedToken && tokenIndex == lastReportedTokenIndex)
             return;
 
         lastReportedPlaybackSeconds = currentSeconds;
         lastReportedIsPlaying = playingFlag;
-        ReportPlaybackState(currentSeconds, playbackTotalSeconds, playingFlag);
+        lastReportedToken = token;
+        lastReportedTokenIndex = tokenIndex;
+        ReportPlaybackState(currentSeconds, playbackTotalSeconds, playingFlag, token, tokenIndex, totalTokens);
     }
 
 }

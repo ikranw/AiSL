@@ -4,12 +4,14 @@ import { flushPendingUnityPayload } from '../services/unityBridge';
 
 interface AvatarCardProps {
   statusText: string;
+  activeToken?: string;
   isBusy?: boolean;
   children?: ReactNode;
 }
 
 export function AvatarCard({
   statusText,
+  activeToken,
   isBusy = false,
   children,
 }: AvatarCardProps): JSX.Element {
@@ -151,7 +153,45 @@ export function AvatarCard({
               outline: 'none',
               display: 'block',
             }}
-          />
+            />
+          {!!activeToken && (
+            <Box
+              sx={{
+                position: 'absolute',
+                left: 16,
+                right: 16,
+                bottom: 14,
+                display: 'flex',
+                justifyContent: 'center',
+                pointerEvents: 'none',
+              }}
+            >
+              <Box
+                sx={{
+                  px: 1.5,
+                  py: 0.75,
+                  borderRadius: 999,
+                  bgcolor: 'rgba(15, 23, 42, 0.76)',
+                  color: 'common.white',
+                  border: '1px solid rgba(255, 255, 255, 0.18)',
+                  backdropFilter: 'blur(6px)',
+                  maxWidth: '100%',
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  sx={{
+                    display: 'block',
+                    textAlign: 'center',
+                    fontWeight: 700,
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  Signing: {activeToken}
+                </Typography>
+              </Box>
+            </Box>
+          )}
           {!isUnityReady && (
             <Box
               sx={{

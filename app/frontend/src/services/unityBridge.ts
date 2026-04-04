@@ -7,6 +7,9 @@ export interface UnityPlaybackState {
   currentSeconds: number;
   totalSeconds: number;
   isPlaying: boolean;
+  currentToken: string;
+  currentTokenIndex: number;
+  totalTokens: number;
 }
 
 type UnityInstance = {
@@ -18,7 +21,14 @@ declare global {
     __unityPlaybackListener?: (state: UnityPlaybackState) => void;
     unityInstance?: UnityInstance;
     __pendingUnityPayload?: string;
-    handleUnityPlaybackState?: (currentSeconds: number, totalSeconds: number, isPlaying: number) => void;
+    handleUnityPlaybackState?: (
+      currentSeconds: number,
+      totalSeconds: number,
+      isPlaying: number,
+      currentToken: string,
+      currentTokenIndex: number,
+      totalTokens: number,
+    ) => void;
   }
 }
 
@@ -27,11 +37,17 @@ if (typeof window !== 'undefined') {
     currentSeconds: number,
     totalSeconds: number,
     isPlaying: number,
+    currentToken: string,
+    currentTokenIndex: number,
+    totalTokens: number,
   ) => {
     window.__unityPlaybackListener?.({
       currentSeconds,
       totalSeconds,
       isPlaying: Boolean(isPlaying),
+      currentToken,
+      currentTokenIndex,
+      totalTokens,
     });
   };
 }

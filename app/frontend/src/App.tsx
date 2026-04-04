@@ -100,6 +100,7 @@ export default function App(): JSX.Element {
   const [currentSequence, setCurrentSequence] = useState<string[]>([]);
   const [playbackCurrentSeconds, setPlaybackCurrentSeconds] = useState(0);
   const [playbackTotalSeconds, setPlaybackTotalSeconds] = useState(0);
+  const [playbackCurrentToken, setPlaybackCurrentToken] = useState('');
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
   const inputHistoryRef = useRef<string[]>([]);
   const isUndoingInputRef = useRef(false);
@@ -126,6 +127,7 @@ export default function App(): JSX.Element {
     setProgress(0);
     setPlaybackCurrentSeconds(0);
     setPlaybackTotalSeconds(0);
+    setPlaybackCurrentToken('');
     translateRequestIdRef.current += 1;
   }, [input]);
 
@@ -145,6 +147,7 @@ export default function App(): JSX.Element {
     setProgress(0);
     setPlaybackCurrentSeconds(0);
     setPlaybackTotalSeconds(0);
+    setPlaybackCurrentToken('');
     translateRequestIdRef.current += 1;
   }, []);
 
@@ -156,6 +159,7 @@ export default function App(): JSX.Element {
     setProgress(0);
     setPlaybackCurrentSeconds(0);
     setPlaybackTotalSeconds(0);
+    setPlaybackCurrentToken('');
     handleInputChange(nextSentence);
   }, [handleInputChange]);
 
@@ -190,6 +194,7 @@ export default function App(): JSX.Element {
       setPlaybackCurrentSeconds(state.currentSeconds);
       setPlaybackTotalSeconds(state.totalSeconds);
       setIsPlaying(state.isPlaying);
+      setPlaybackCurrentToken(state.currentToken);
     });
 
     return () => setUnityPlaybackStateListener(undefined);
@@ -219,6 +224,7 @@ export default function App(): JSX.Element {
       setProgress(nextProgress);
       setPlaybackCurrentSeconds(0);
       setPlaybackTotalSeconds(0);
+      setPlaybackCurrentToken(sequence[0] ?? '');
       setIsPlaying(true);
       sendSignSequenceToUnity(sequence, {
         speed,
@@ -248,6 +254,7 @@ export default function App(): JSX.Element {
     setProgress(0);
     setPlaybackCurrentSeconds(0);
     setPlaybackTotalSeconds(0);
+    setPlaybackCurrentToken('');
     setIsLoading(true);
     setErrorMessage(null);
 
@@ -376,7 +383,11 @@ export default function App(): JSX.Element {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <AvatarCard statusText={statusText} isBusy={isLoading}>
+              <AvatarCard
+                statusText={statusText}
+                activeToken={playbackCurrentToken}
+                isBusy={isLoading}
+              >
                 <PlaybackControls
                   isPlaying={isPlaying}
                   isLooping={isLooping}
