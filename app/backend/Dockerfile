@@ -28,6 +28,7 @@ COPY --from=builder /root/.local /root/.local
 
 # Copy only essential application files
 COPY src/ src/
+COPY data/ data/
 COPY requirements.txt .
 
 # Set environment variables
