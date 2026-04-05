@@ -158,10 +158,11 @@ Only open `app/unity` in Unity if you want to edit animations, scenes, or rebuil
 
 ## Credits
 
-- Studio Galt for the sign pose and sign animation source assets used throughout the project
-- Microsoft Rocketbox for the avatar assets and rig foundation used for playback
+- **Studio Galt** — sign pose and animation source assets used for the 3D avatar (1,915 signs)
+- **Microsoft Rocketbox** — avatar assets and rig foundation used for playback
+- **WLASL (Word-Level American Sign Language) dataset** — sign video clips used in the Sign Videos mode (2,000 clips). Sourced from the processed dataset at [kaggle.com/datasets/risangbaskoro/wlasl-processed](https://www.kaggle.com/datasets/risangbaskoro/wlasl-processed)
 
-These contributions are central to the prototype. The project’s signing visualization depends on both the sign asset library and the avatar pipeline.
+Combined, the two sign inventories cover 3,915 signs across separate databases. These contributions are central to the prototype — the signing visualization depends on both the animation pipeline and the video clip library.
 
 ## Important Caveat
 
