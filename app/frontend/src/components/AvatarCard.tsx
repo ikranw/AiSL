@@ -69,6 +69,11 @@ export function AvatarCard({
       if (!canvasRef.current) return;
       const unityCanvas = canvasRef.current;
 
+      if (typeof (window as any).createUnityInstance !== 'function') {
+        setUnityError('Unity loader script loaded, but createUnityInstance was not available.');
+        return;
+      }
+
       (window as any)
         .createUnityInstance(unityCanvas, {
           dataUrl: `/unity-build/Build/unity-build.data?v=${UNITY_BUILD_VERSION}`,
@@ -96,6 +101,7 @@ export function AvatarCard({
     } else if (!existingScript) {
       const script = document.createElement('script');
       script.src = `/unity-build/Build/unity-build.loader.js?v=${UNITY_BUILD_VERSION}`;
+      script.async = true;
       script.dataset.unityLoader = 'aisl';
       script.onload = startUnity;
       script.onerror = () => setUnityError('Failed to load Unity loader.');
