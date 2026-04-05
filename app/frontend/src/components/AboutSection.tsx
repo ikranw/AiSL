@@ -35,7 +35,7 @@ const faqItems = [
   {
     question: 'What is the difference between the 3D Avatar and ASL Sign Videos modes?',
     answer:
-      'The two modes pull from completely separate databases, so they may not be able to sign the exact same words. The 3D Avatar uses motion-captured animation clips and gives us more direct control over how signing is displayed and built over time. The ASL Sign Videos mode pulls real video clips of human signers, which can feel more natural to watch. Because the word coverage differs between the two datasets, one mode may recognize a word the other does not.',
+      'The two modes pull from completely separate databases, so they may not be able to sign the exact same words. The 3D Avatar uses motion-captured animation clips (1,915 signs) and gives us more direct control over how signing is displayed and built over time. The ASL Sign Videos mode pulls real video clips of human signers (2,000 clips), which can feel more natural to watch. Combined, the two systems cover 3,915 signs across their separate inventories — though there is some overlap between them.',
   },
   {
     question: 'Why do some avatar changes need a WebGL rebuild?',
@@ -65,14 +65,69 @@ export function AboutSection(): JSX.Element {
             <Accordion disableGutters sx={{ borderRadius: 3, overflow: 'hidden' }}>
               <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />} sx={{ px: 3, py: 0.5 }}>
                 <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  The Idea
+                  The Problem
                 </Typography>
               </AccordionSummary>
               <AccordionDetails sx={{ px: 3, pb: 3 }}>
                 <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 760 }}>
-                  Most ASL tools hand you a result and move on. AiSL slows that down — it shows how English phrasing
-                  shifts into ASL gloss, lets you watch it play back on a 3D avatar, and gives learners something to
-                  actually study rather than just consume.
+                  ASL is one of the most under-resourced languages in AI research. Most tools treat it as English with
+                  hand gestures, or focus narrowly on fingerspelling, without ever explaining the structure behind the output.
+                  <br /><br />
+                  The grammar alone makes this hard. ASL follows topic-comment structure, not subject-verb-object. Time
+                  is established at the start of a sentence. Questions are marked by facial expression: raised eyebrows
+                  for yes/no, furrowed brows for who/what/where. None of that survives a word-for-word translation.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+
+            <Accordion disableGutters sx={{ borderRadius: 3, overflow: 'hidden' }}>
+              <AccordionSummary expandIcon={<ExpandMoreRoundedIcon />} sx={{ px: 3, py: 0.5 }}>
+                <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                  The Approach
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails sx={{ px: 3, pb: 3 }}>
+                <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 760 }}>
+                  AiSL shows the structural shift from English to ASL gloss so learners can see how the grammar
+                  actually changes. The current focus is on getting that layer right: gloss ordering, time markers,
+                  and negation. Take this sentence as an example:
+                </Typography>
+                <Box sx={{ my: 2, p: 2, borderRadius: 2, bgcolor: 'background.default', border: '1px solid', borderColor: 'divider' }}>
+                  <Stack spacing={1.5}>
+                    <Stack direction="row" spacing={1} alignItems="center">
+                      <Typography variant="caption" color="text.disabled" sx={{ minWidth: 64, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em' }}>English</Typography>
+                      <Typography variant="body2" sx={{ fontStyle: 'italic' }}>"I am going to the store tomorrow."</Typography>
+                    </Stack>
+                    <Stack direction="row" spacing={1} alignItems="flex-start">
+                      <Typography variant="caption" color="primary.main" sx={{ minWidth: 64, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', pt: 0.5 }}>ASL Gloss</Typography>
+                      <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap alignItems="flex-start">
+                        {[
+                          { token: 'TOMORROW', label: 'Time', bg: '#ede9fe', color: '#6d28d9' },
+                          { token: 'I', label: 'Subject', bg: '#dbeafe', color: '#1d4ed8' },
+                          { token: 'GO', label: 'Verb', bg: '#dcfce7', color: '#166534' },
+                          { token: 'STORE', label: 'Object', bg: '#fef3c7', color: '#92400e' },
+                        ].map(({ token, label, bg, color }) => (
+                          <Stack key={token} alignItems="center" spacing={0.25}>
+                            <Box sx={{ px: 1.25, py: 0.25, borderRadius: 1, bgcolor: bg, color, fontWeight: 700, fontSize: '0.75rem', letterSpacing: '0.04em' }}>
+                              {token}
+                            </Box>
+                            <Typography variant="caption" sx={{ fontSize: '0.6rem', color: 'text.disabled', letterSpacing: '0.04em' }}>
+                              {label}
+                            </Typography>
+                          </Stack>
+                        ))}
+                      </Stack>
+                    </Stack>
+                  </Stack>
+                </Box>
+                <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 760 }}>
+                  Time comes first, the subject follows, and filler words drop entirely. That structural shift is what
+                  AiSL is built to make visible.
+                  <br /><br />
+                  The longer-term goal is facial expressions. In ASL, a sentence without correct facial grammar is
+                  like a sentence without punctuation: technically present, but incomplete. We chose Unity because it
+                  gives us programmatic control over the avatar&apos;s face, and building toward that takes infrastructure
+                  most tools have never tried to build.
                 </Typography>
               </AccordionDetails>
             </Accordion>
@@ -104,7 +159,7 @@ export function AboutSection(): JSX.Element {
                   </Box>
                   <Box>
                     <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      Avatar Signs
+                      Avatar Signs <Typography component="span" variant="caption" color="text.disabled">— 1,915 signs</Typography>
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       Sign and motion reference adapted from Studio Galt&apos;s sign language motion capture archive.
@@ -121,7 +176,7 @@ export function AboutSection(): JSX.Element {
                   </Box>
                   <Box>
                     <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
-                      ASL Sign Videos
+                      ASL Sign Videos <Typography component="span" variant="caption" color="text.disabled">— 2,000 clips</Typography>
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                       Sign video clips sourced from the WLASL (Word-Level American Sign Language) dataset, a large-scale benchmark for word-level ASL recognition.
