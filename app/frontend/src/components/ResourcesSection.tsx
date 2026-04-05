@@ -12,8 +12,6 @@ import {
   Stack,
   Tooltip,
   Typography,
-  useMediaQuery,
-  useTheme,
 } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
@@ -127,8 +125,6 @@ const flashcards = [
 ];
 
 export function ResourcesSection(): JSX.Element {
-  const theme = useTheme();
-  const _fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isFlashcardsOpen, setIsFlashcardsOpen] = useState(false);
