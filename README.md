@@ -43,7 +43,7 @@
    - [Summary of Hours](homework-uploads/summary-of-hours.md)
 
 9. Budget
-   - [Budget](https://github.com/ikranw/AiSL/blob/main/homework-uploads/budget.md)
+   - [Summary of Expenses](https://github.com/ikranw/AiSL/blob/main/homework-uploads/budget.md)
 
 10. Appendix
     - [Appendix Folder](https://github.com/ikranw/AiSL/tree/main/homework-uploads/appendix)
