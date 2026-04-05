@@ -1,5 +1,5 @@
 [build]
-buildCommand = "node scripts/download-lfs.js && npm run build"
+buildCommand = "node scripts/download-lfs.cjs && npm run build"
 
 [deploy]
 startCommand = "node serve.cjs"
