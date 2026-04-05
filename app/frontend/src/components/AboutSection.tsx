@@ -76,6 +76,8 @@ export function AboutSection(): JSX.Element {
                   The grammar alone makes this hard. ASL follows topic-comment structure, not subject-verb-object. Time
                   is established at the start of a sentence. Questions are marked by facial expression: raised eyebrows
                   for yes/no, furrowed brows for who/what/where. None of that survives a word-for-word translation.
+                  <br /><br />
+                  ASL fluency requires far more than token generation and clip playback.
                 </Typography>
               </AccordionDetails>
             </Accordion>
