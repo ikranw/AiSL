@@ -42,13 +42,13 @@ export function HeaderNav(): JSX.Element {
               <Typography variant="h6" sx={{ fontWeight: 700, lineHeight: 1 }}>
                 AiSL
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography variant="caption" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' } }}>
                 AI-Powered Sign Language Learning
               </Typography>
             </Box>
           </Stack>
           <Stack direction="row" spacing={3} alignItems="center">
-            <Stack direction="row" spacing={2} sx={{ display: 'flex', flexWrap: 'wrap' }}>
+            <Stack direction="row" spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
               {navItems.map((item) => (
                 <Typography
                   key={item.label}

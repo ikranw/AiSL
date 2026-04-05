@@ -7,6 +7,7 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
+  IconButton,
   Paper,
   Stack,
   Tooltip,
@@ -14,6 +15,7 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 const resources = [
   {
@@ -197,10 +199,13 @@ export function ResourcesSection(): JSX.Element {
           open={isGuideOpen}
           onClose={() => setIsGuideOpen(false)}
           fullWidth
-          fullScreen={fullScreen}
+          fullScreen={false}
           maxWidth="sm"
         >
-          <DialogTitle>Mini ASL Grammar Guide</DialogTitle>
+          <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            Mini ASL Grammar Guide
+            <IconButton onClick={() => setIsGuideOpen(false)} size="small"><CloseRoundedIcon /></IconButton>
+          </DialogTitle>
           <DialogContent>
             <Stack spacing={2.5} sx={{ pt: 1 }}>
               <Typography variant="body2" color="text.secondary">
@@ -241,10 +246,13 @@ export function ResourcesSection(): JSX.Element {
           open={isVideoOpen}
           onClose={() => setIsVideoOpen(false)}
           fullWidth
-          fullScreen={fullScreen}
+          fullScreen={false}
           maxWidth="sm"
         >
-          <DialogTitle>ASL Video Tutorials</DialogTitle>
+          <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            ASL Video Tutorials
+            <IconButton onClick={() => setIsVideoOpen(false)} size="small"><CloseRoundedIcon /></IconButton>
+          </DialogTitle>
           <DialogContent>
             <Stack spacing={2.5} sx={{ pt: 1 }}>
               <Typography variant="body2" color="text.secondary">
@@ -285,10 +293,13 @@ export function ResourcesSection(): JSX.Element {
           open={isFlashcardsOpen}
           onClose={() => setIsFlashcardsOpen(false)}
           fullWidth
-          fullScreen={fullScreen}
+          fullScreen={false}
           maxWidth="sm"
         >
-          <DialogTitle>Deaf Culture Fast Facts</DialogTitle>
+          <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            Deaf Culture Fast Facts
+            <IconButton onClick={() => setIsFlashcardsOpen(false)} size="small"><CloseRoundedIcon /></IconButton>
+          </DialogTitle>
           <DialogContent>
             <Stack spacing={2.5} sx={{ pt: 1 }}>
               <Typography variant="body2" color="text.secondary">
