@@ -128,7 +128,7 @@ const flashcards = [
 
 export function ResourcesSection(): JSX.Element {
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const _fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const [isGuideOpen, setIsGuideOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isFlashcardsOpen, setIsFlashcardsOpen] = useState(false);

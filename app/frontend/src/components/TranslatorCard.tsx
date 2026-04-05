@@ -134,7 +134,7 @@ export function TranslatorCard({
   loadingLabel,
   errorMessage,
   response,
-  avatarMode,
+  avatarMode: _avatarMode,
   onInputChange,
   onUndoInput,
   onRandomSentence,
