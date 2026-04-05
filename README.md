@@ -1,55 +1,67 @@
-# AiSl
+# AiSL
 
-## Project: 
-We are building an ASL learning tool. A user types an English sentence, our system changes it to ASL (GLOSS) grammar, and a 3D avatar in Unity signs it. Our goal is clear, correct ASL—not word‑for‑word English. We will ask ASL‑fluent people for feedback so we can improve the accuracy and clarity of the signs.
+**Team Members:**
+- Elshaddai Melaku - [melakueb@mail.uc.edu]
+- Ikran Warsame - [warsamih@mail.uc.edu]
+- Fareena Khan - [khanfe@mail.uc.edu]
 
-### Team:
-Advisor: Dr. Jillian Aurisano 
-1. Elshaddai Melaku (melakueb@mail.uc.edu): Project Manager leading LLM work
-2. Ikran Warsame (warsamih@mail.uc.edu): Project Manager leading 3D avatar/animation, ASL community coordinator
-3. Fareena Khan (khanfe@mail.uc.edu): Project Manager leading UI and integration work
+**Advisor:** Dr. Jillian Aurisano
 
-### Project Abstract:
-AiSL is an innovative AI-powered American Sign Language (ASL) learning tool designed to support accessible and culturally respectful language learning. The platform uses natural language processing (NLP) to convert English sentences into ASL grammar, then displays the translation through a 3D avatar built in Unity. By emphasizing accurate grammar rather than direct translation, AiSL enhances linguistic understanding, inclusion, and cross-cultural communication. Learners can use playback controls to adjust speed, loop signs, and download practice materials. Developed in collaboration with the Deaf community, AiSL aims to bridge communication gaps and promote equitable, technology-driven education for diverse users.
+---
 
-### Project Description
-[Project Description](https://github.com/ikranw/AiSL/blob/main/homework-uploads/project-description.md)
+## Table of Contents
 
-### User Stories and Design Diagrams
-* [User Stories](https://github.com/ikranw/AiSL/blob/main/homework-uploads/user-stories.md)
-* [Design Diagrams](https://github.com/ikranw/AiSL/blob/main/homework-uploads/design-diagrams.pdf)
+1. Project Description
+   - [Project Description](https://github.com/ikranw/AiSL/blob/main/homework-uploads/project-description.md)
 
-### Project Tasks and Timeline
-* [Task List](https://github.com/ikranw/AiSL/blob/main/homework-uploads/tasklist.md)
-* [Milestones, Timeline, and Effort Matrix](https://github.com/ikranw/AiSL/blob/main/homework-uploads/milestones%2Ctimelines%2Ceffort-matrix.pdf)
+2. User Stories and Design Diagrams
+   - [User Stories](https://github.com/ikranw/AiSL/blob/main/homework-uploads/user-stories.md)
+   - [Design Diagrams](https://github.com/ikranw/AiSL/blob/main/homework-uploads/design-diagrams.pdf)
 
-### ABET Concerns Essay
-[ABET Concerns](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ABET-concerns.pdf)
+3. Project Tasks and Timeline
+   - [Task List](https://github.com/ikranw/AiSL/blob/main/homework-uploads/tasklist.md)
+   - [Milestones, Timeline, and Effort Matrix](https://github.com/ikranw/AiSL/blob/main/homework-uploads/milestones%2Ctimelines%2Ceffort-matrix.pdf)
 
-### PPT Slideshow
-[Presentation](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ppt-fall2025.pdf)
+4. ABET Concerns Essay
+   - [ABET Concerns](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ABET-concerns.pdf)
 
-### Self-Assessment Essays
-* [Elshaddai Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-contract.md)
-* [Ikran Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/warsame-contract.md)
-* [Fareena Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/khan-contract.md)
+5. Presentation
+   - [PPT Slideshow](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ppt-fall2025.pdf)
+   - [Expo Poster](homework-uploads/poster.png)
 
-### Professional Biographies
-* [Elshaddai Bio](https://github.com/ikranw/AiSL/blob/main/biographies/melaku-bio.md)
-* [Ikran Bio](https://github.com/ikranw/AiSL/blob/main/biographies/warsame-bio.md)
-* [Fareena Bio](https://github.com/ikranw/AiSL/blob/main/biographies/khan-bio.md)
+6. Self-Assessment Essays
+   - [Elshaddai Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-contract.md)
+   - [Ikran Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/warsame-contract.md)
+   - [Fareena Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/khan-contract.md)
 
-### Budget
-[Budget](https://github.com/ikranw/AiSL/blob/main/homework-uploads/budget.md)
+7. Professional Biographies
+   - [Elshaddai Bio](https://github.com/ikranw/AiSL/blob/main/biographies/melaku-bio.md)
+   - [Ikran Bio](https://github.com/ikranw/AiSL/blob/main/biographies/warsame-bio.md)
+   - [Fareena Bio](https://github.com/ikranw/AiSL/blob/main/biographies/khan-bio.md)
 
-### Credits & Data Sources
+8. Summary of Hours and Justification
+   - [Summary of Hours](homework-uploads/summary-of-hours.md)
+
+9. Budget
+   - [Budget](https://github.com/ikranw/AiSL/blob/main/homework-uploads/budget.md)
+
+10. Appendix
+    - [Appendix Folder](https://github.com/ikranw/AiSL/tree/main/homework-uploads/appendix)
+    - [Initial Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/intial-brainstorm.md)
+    - [Idea 1 Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/idea1-brainstorm.md)
+    - [Resources](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/resources.md)
+    - [Considerations](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/tech-stack-considerations.md)
+
+---
+
+## Project Abstract
+
+AiSL is an AI-powered American Sign Language learning tool that converts English sentences into ASL grammar and plays them back through a 3D signing avatar built in Unity. The system prioritizes linguistic accuracy over direct word-for-word translation, using a retrieval-augmented LLM pipeline to generate structured ASL gloss output. Learners can observe how English sentence structure differs from ASL, with playback controls for speed and looping. The project was developed with input from the Deaf community and is designed as an accessible, transparent educational prototype rather than a replacement for native ASL instruction.
+
+---
+
+## Credits and Data Sources
+
 - **3D Avatar:** [Microsoft Rocketbox](https://github.com/microsoft/Microsoft-Rocketbox)
 - **3D Animation Clips:** [Studio Galt Sign Language Mocap Archive](https://github.com/StudioGalt/Sign-Language-Mocap-Archive)
-- **ASL Sign Videos:** [WLASL Processed Dataset (Kaggle)](https://www.kaggle.com/datasets/risangbaskoro/wlasl-processed) — Word-Level American Sign Language video dataset
-
-### Appendix
-* [Appendix Folder](https://github.com/ikranw/AiSL/tree/main/homework-uploads/appendix)
-* [Initial Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/intial-brainstorm.md)
-* [Idea 1 Brainstorm](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/idea1-brainstorm.md)
-* [Resources](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/resources.md)
-* [Considerations](https://github.com/ikranw/AiSL/blob/main/homework-uploads/appendix/tech-stack-considerations.md)
+- **ASL Sign Videos:** [WLASL Processed Dataset (Kaggle)](https://www.kaggle.com/datasets/risangbaskoro/wlasl-processed)
