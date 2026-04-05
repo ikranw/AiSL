@@ -9,6 +9,7 @@ type TranslatorCardProps = {
   loadingLabel?: string;
   errorMessage: string | null;
   response: TranslateResponse | null;
+  avatarMode: 'unity' | 'video';
   onInputChange: (value: string) => void;
   onUndoInput: () => void;
   onRandomSentence: () => void;
@@ -133,6 +134,7 @@ export function TranslatorCard({
   loadingLabel,
   errorMessage,
   response,
+  avatarMode,
   onInputChange,
   onUndoInput,
   onRandomSentence,
@@ -163,7 +165,7 @@ export function TranslatorCard({
               disabled={isLoading}
               sx={{ flexShrink: 0 }}
             >
-              Random Sentence
+              Generate Sentence
             </Button>
           </Stack>
 

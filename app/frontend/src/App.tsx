@@ -534,6 +534,7 @@ export default function App(): JSX.Element {
                 loadingLabel={LOADING_STEPS[loadingStepIndex]}
                 errorMessage={errorMessage}
                 response={response}
+                avatarMode={avatarMode}
                 onInputChange={handleInputChange}
                 onUndoInput={handleUndoInput}
                 onRandomSentence={handleRandomSentence}
