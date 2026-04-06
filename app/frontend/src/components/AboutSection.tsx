@@ -73,7 +73,7 @@ export function AboutSection(): JSX.Element {
                   ASL is one of the most under-resourced languages in AI research. Most tools treat it as English with
                   hand gestures, or focus narrowly on fingerspelling, without ever explaining the structure behind the output.
                   <br /><br />
-                  The grammar alone makes this hard. ASL follows topic-comment structure, not subject-verb-object. Time
+                  The grammar alone makes this hard. ASL follows topic-comment structure. Time
                   is established at the start of a sentence. Questions are marked by facial expression: raised eyebrows
                   for yes/no, furrowed brows for who/what/where. None of that survives a word-for-word translation.
                   <br /><br />
