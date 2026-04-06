@@ -1,28 +1,21 @@
 // Unity sentence pool — only uses words confirmed in SignController.cs:
-// HELLO, MY, YOU, THIS, WHERE, WHICH, PLEASE, TAKE, AND, OR, COME,
+// HELLO, MY, YOU, THIS, WHICH, PLEASE, TAKE, AND, OR, COME,
 // BOOK, COFFEE, CLASS, BAG, CAMERA, BANANA, BABY, CHILD, DAD,
-// ANCIENT, ALIEN, ANIMAL, ANY, BAD, BALANCE, DANGER, FUTURE, EVERYONE,
+// ANCIENT, ALIEN, ANY, BAD, BALANCE, DANGER, FUTURE, EVERYONE,
 // APPLE, ARRIVE, ASK, BAKE, BALL, BANK, BOTH, BRING, CAMP, EQUAL
 // (ANGEL excluded — animation not ready)
 export const UNITY_RANDOM_SENTENCES = [
   'Hello, everyone in class.',
-  'Please take this book to class tomorrow.',
-  'Which book will you take tomorrow?',
-  'Where is my coffee for class tomorrow?',
+  'Please take this book to class.',
   'My dad has an ancient camera.',
   'Please bring this bag to class.',
-  'This animal is near the camp.',
   'Any child can bring a book.',
-  'Where should my child take this book?',
   'This ancient book belongs to my dad.',
-  'Please take both the bag and the book.',
   'My baby has a banana and an apple.',
-  'Where will you arrive tomorrow?',
-  'Ask my dad which class is tomorrow.',
-  'This alien animal looks ancient.',
+  'Ask my dad which class is this.',
+  'This alien looks ancient.',
   'The danger is bad for everyone.',
   'Please bake this for my child.',
-  'My dad and I come to class tomorrow.',
   'Which coffee is for you and me?',
   'The future is equal for everyone.',
 ] as const;
