@@ -360,7 +360,11 @@ export default function App(): JSX.Element {
         return;
       }
 
-      setErrorMessage('We could not translate that text right now. Please try again.');
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : 'We could not translate that text right now. Please try again.',
+      );
     } finally {
       if (translateRequestIdRef.current === requestId) {
         setIsLoading(false);

@@ -14,18 +14,42 @@ function getApiBaseUrl(): string {
 const API_BASE_URL = getApiBaseUrl();
 
 export async function translateEnglishToASL(text: string): Promise<TranslateResponse> {
-  const response = await fetch(`${API_BASE_URL}/api/translate`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ text }),
-  });
+  let response: Response;
 
-  const data = await response.json();
+  try {
+    response = await fetch(`${API_BASE_URL}/api/translate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text }),
+    });
+  } catch {
+    throw new Error('Could not reach the backend. Make sure Flask is running on port 8000.');
+  }
+
+  const responseText = await response.text();
+  let data: unknown = null;
+
+  if (responseText) {
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      if (!response.ok) {
+        throw new Error('The backend returned a non-JSON error. Check the Vite proxy and Flask logs.');
+      }
+
+      throw new Error('The backend returned an unexpected response.');
+    }
+  }
 
   if (!response.ok) {
-    throw new Error(data.error || 'Translation failed.');
+    const errorMessage =
+      data && typeof data === 'object' && 'error' in data && typeof data.error === 'string'
+        ? data.error
+        : 'Translation failed.';
+
+    throw new Error(errorMessage);
   }
 
   return data as TranslateResponse;

@@ -41,6 +41,10 @@ COMMAND_HINT_WORDS = {
     "please", "let", "remember", "do", "go", "stop", "help", "look", "sit", "tell"
 }
 
+PREPOSITION_WORDS = {
+    "of", "to", "in", "for", "on", "with", "at", "by"
+}
+
 
 def _load_json(path: Path) -> Any:
     with open(path, "r", encoding="utf-8") as f:
@@ -81,6 +85,8 @@ def _detect_features(text: str) -> set[str]:
         features.add("negation")
     if tokens & CONDITIONAL_WORDS:
         features.add("conditional")
+    if tokens & PREPOSITION_WORDS:
+        features.add("preposition_drop")
 
     first_word = _tokenize_text(text[:40])[:1]
     if first_word and first_word[0] in COMMAND_HINT_WORDS:
@@ -137,6 +143,7 @@ def _select_relevant_rules(
         "negation": {"explicit-negation"},
         "conditional": {"conditional"},
         "command": {"compact-word-order"},
+        "preposition_drop": {"drop-prepositions", "compact-word-order"},
     }
 
     wanted_rule_ids = set()

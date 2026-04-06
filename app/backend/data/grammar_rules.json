@@ -36,6 +36,16 @@
       ]
     },
     {
+      "rule_id": "drop-prepositions",
+      "description": "Common English prepositions such as 'of', 'to', 'in', 'for', 'on', 'with', 'at', and 'by' are often omitted when gloss can stay clear without them.",
+      "pattern": "PREPOSITION OMITTED",
+      "examples": [
+        "go to school -> GO SCHOOL",
+        "book on table -> BOOK TABLE",
+        "meeting with teacher -> MEETING TEACHER"
+      ]
+    },
+    {
       "rule_id": "spatial-referencing",
       "description": "ASL assigns referents to locations in signing space. Spatial reference markers can be carried through the discourse.",
       "pattern": "REFERENT + IX-location",
