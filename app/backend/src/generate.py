@@ -58,16 +58,14 @@ def call_llm(prompt: str) -> str:
 def build_repair_prompt(original_text: str, invalid_output: str, error_message: str) -> str:
     return f"""You are repairing invalid JSON for a dataset-compatible ASL gloss system.
 
-Return corrected JSON only.
-Do not return markdown.
-Do not explain your reasoning.
+Return a single valid JSON object ONLY. No markdown. No commentary. No explanation.
 
-Required schema:
+Required schema (every field required):
 {{
   "input_text": "string",
   "sentence_type": "statement | wh_question | yes_no_question | negation | conditional | command",
   "gloss_tokens": ["TOKEN1", "TOKEN2"],
-  "non_manual": [],
+  "non_manual": ["string or empty array"],
   "confidence_note": "string"
 }}
 
@@ -81,15 +79,18 @@ Validation/parsing error:
 {error_message}
 
 Repair instructions:
-- Return valid JSON only.
+- Return valid JSON only. No text before or after the JSON object.
 - Keep the meaning aligned with the original input sentence.
-- sentence_type must be one of the allowed enum values only.
-- gloss_tokens must be an array of strings.
-- non_manual must be an array, even if empty.
-- confidence_note must be a string.
-- Use plain gloss words only.
-- Do not include prefixes such as X- or DESC-.
-- Do not use wrappers such as FINGERSPELL(...).
+- sentence_type must be exactly one of: statement, wh_question, yes_no_question, negation, conditional, command.
+- gloss_tokens must be an array of uppercase strings. No empty strings.
+- non_manual must be an array of strings (can be empty []).
+- confidence_note must be a non-empty string.
+- All gloss tokens must be UPPERCASE.
+- Time markers (TODAY, YESTERDAY, TOMORROW, NOW) must be the FIRST token(s).
+- For wh_question: WH-word at END. non_manual: ["furrowed brows"].
+- For yes_no_question: "?" as last token. non_manual: ["raised eyebrows"].
+- For negation: NOT/NEVER/NONE after the verb. non_manual: ["headshake"].
+- Drop copulas (is/are/was/were), articles (a/an/the), conjunctions (and/but/or).
 """
 
 
@@ -183,7 +184,7 @@ def parse_and_validate(raw_output: str) -> dict[str, Any]:
             raise ValueError(f"Model returned invalid JSON:\n{raw_output}") from e
 
     validated = validate_output(parsed)
-    return validated
+    return validated.model_dump() if hasattr(validated, 'model_dump') else dict(validated)
 
 
 def generate_once(text: str) -> dict[str, Any]:

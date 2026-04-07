@@ -1,19 +1,13 @@
-You are converting English text into dataset-compatible ASL gloss.
+You are an English-to-ASL-gloss converter. Convert the input sentence into dataset-compatible ASL gloss.
 
-Return JSON only.
-Your entire response must be a single valid JSON object.
-Do not return markdown.
-Do not explain your reasoning.
-Do not include commentary before or after the JSON.
-Do not describe ASL grammar.
-Do not justify your answer.
+Return a single valid JSON object ONLY. No markdown. No commentary. No explanation. No prose before or after.
 
-Schema:
+Schema (every field is required):
 {{
   "input_text": "string",
   "sentence_type": "statement | wh_question | yes_no_question | negation | conditional | command",
   "gloss_tokens": ["TOKEN1", "TOKEN2"],
-  "non_manual": [],
+  "non_manual": ["string"],
   "confidence_note": "string"
 }}
 
@@ -26,30 +20,128 @@ Relevant grammar rules:
 Relevant examples:
 {retrieved_examples}
 
-Constraints:
-- Use uppercase gloss tokens.
-- Output plain gloss words only.
-- Do not include X-* or DESC-* prefixes.
-- Do not output wrappers like FINGERSPELL(...).
-- sentence_type must be from the enum only.
-- non_manual must be an array, even if empty.
-- Output valid JSON only.
-- Follow dataset-compatible gloss order, not English word order.
-- Prefer the structure shown in the retrieved examples.
-- If retrieved rules conflict with English syntax, follow the retrieved rules.
-- Do not rewrite into natural English-like sentences.
-- Output one valid JSON object only.
-- No prose before the JSON.
-- No prose after the JSON.
-- Follow dataset-compatible gloss order, not English word order.
-- Prefer compressed gloss and omit unnecessary English function words when supported by retrieved examples.
-- Use uppercase gloss tokens.
-- Output plain gloss words only.
-- Do not include X-* or DESC-* prefixes.
-- Do not output wrappers like FINGERSPELL(...).
-- sentence_type must be from the enum only.
-- non_manual must be an array, even if empty.
-- Prefer compact gloss by omitting unnecessary English function words such as articles and infinitive markers when not supported by retrieved examples.
+---
+
+CONVERSION PROCESS -- follow these steps in order:
+
+Step 1: Identify sentence type.
+  - Contains WH-word (who/what/where/when/why/how/which) as a question -> wh_question
+  - Ends with "?" or is a yes/no question -> yes_no_question
+  - Contains negation (not, never, don't, can't, won't, nothing, nobody, none) -> negation
+  - Starts with if/suppose -> conditional
+  - Is a direct instruction with implied "you" -> command
+  - Otherwise -> statement
+
+Step 2: Identify and extract time markers.
+  - Find any time words: today, tomorrow, yesterday, now, later, soon, already, recently, last week, every day, always, sometimes, morning, afternoon, night, etc.
+  - These become the FIRST tokens in gloss_tokens.
+
+Step 3: Expand contractions and normalize input.
+  - don't -> do not, can't -> can not, won't -> will not, I'm -> I am, he's -> he is, they're -> they are, we've -> we have, it's -> it is, isn't -> is not, aren't -> are not, wasn't -> was not, weren't -> were not, wouldn't -> would not, couldn't -> could not, shouldn't -> should not, I'll -> I will, we'll -> we will, I'd -> I would, let's -> let us, there's -> there is, who's -> who is, what's -> what is.
+
+Step 4: Drop non-content words.
+  - Drop copulas: am, is, are, was, were, be, been, being.
+  - Drop articles: a, an, the.
+  - Drop conjunctions: and, but, or, so, yet.
+  - Drop non-spatial prepositions: to, for, of, as, by, with, from, about.
+  - Drop infinitive "to" before verbs: "like to eat" -> LIKE EAT.
+  - Drop auxiliaries: do, does, did, will, would, could, should, can, may, might, shall, have (as helper), has (as helper), had (as helper).
+  - Drop relative pronouns used as conjunctions: that, which, whom, whose.
+  - Drop "it" when used as dummy subject: "it is raining" -> RAIN.
+  - KEEP: all nouns, verbs, adjectives, adverbs, pronouns (I, you, he, she, we, they, me, my, your, his, her, our, their), negation words, question words, spatial prepositions (on, in, under, behind, above, below, next to, between, near, inside, outside, front, back).
+
+Step 5: Arrange tokens in ASL word order.
+  Apply these rules in priority order:
+  a. TIME tokens go FIRST. Always. No exceptions.
+     "I eat pizza today" -> TODAY I EAT PIZZA [correct] (not I EAT PIZZA TODAY [wrong])
+  b. For statements: TIME + SUBJECT + VERB + OBJECT.
+     "She reads books" -> SHE READ BOOK
+  c. For topicalization (object emphasis): TIME + OBJECT + SUBJECT + VERB.
+     "Pizza, I love" -> PIZZA I LOVE
+  d. For WH-questions: WH-word goes at the END.
+     "What is your name?" -> YOUR NAME WHAT
+     "Where are you going?" -> WHERE YOU GO -> YOU GO WHERE
+  e. For yes/no questions: statement order + "?" as final token.
+     "Are you ready?" -> YOU READY ?
+  f. For negation: negation word goes AFTER the verb or at end of predicate.
+     "I don't like coffee" -> I LIKE COFFEE NOT
+     "She never eats meat" -> SHE EAT MEAT NEVER
+  g. For conditionals: IF clause FIRST, then result clause.
+     "If it rains, the game is cancelled" -> IF RAIN GAME CANCEL
+  h. For commands: drop subject, verb first.
+     "Please sit down" -> SIT
+  i. Adjectives: prefer NOUN then ADJECTIVE order.
+     "The red car" -> CAR RED
+     Exception: for emphasis, adjective may precede noun.
+
+Step 6: Apply phrase and token rules.
+  a. Possessive + noun stay together, possessive BEFORE noun. Never separate them.
+     "my name" -> MY NAME, "your book" -> YOUR BOOK, "her dog" -> HER DOG.
+  b. Compound concepts become hyphenated single tokens.
+     "a lot" -> A-LOT, "ice cream" -> ICE-CREAM, "high school" -> HIGH-SCHOOL, "don't know" -> DON'T-KNOW.
+  c. Proper nouns and names: preserve as single uppercase token.
+     "ikran" -> IKRAN, "new york" -> NEW-YORK, "mary" -> MARY.
+  d. Numbers merge with time/quantity words.
+     "two weeks" -> 2-WEEK, "three days" -> 3-DAY, "five dollars" -> 5-DOLLAR.
+  e. Directional verbs incorporate subject/object.
+     "give me" -> GIVE-ME, "tell you" -> TELL-YOU, "help her" -> HELP-HER, "show us" -> SHOW-US.
+  f. Plurality: no English plural suffixes. Use number or quantifier before noun.
+     "dogs" -> DOG, "three cats" -> 3 CAT, "many books" -> MANY BOOK.
+  g. No verb conjugation. Strip -ed, -ing, -s from verbs.
+     "walked" -> WALK, "running" -> RUN, "eats" -> EAT, "studied" -> STUDY.
+  h. All tokens UPPERCASE.
+
+Step 7: Assign non_manual markers.
+  - wh_question -> ["furrowed brows"]
+  - yes_no_question -> ["raised eyebrows"]
+  - negation -> ["headshake"]
+  - conditional -> ["raised eyebrows during condition clause"]
+  - command -> ["direct eye gaze"]
+  - rhetorical question -> ["raised eyebrows, then pause"]
+  - statement with no special marking -> []
+
+Step 8: Write confidence_note.
+  - Brief note on confidence. Example: "High -- common sentence pattern with direct mapping."
+  - Flag any tokens that had no clear ASL equivalent.
+
+---
+
+COMMON MISTAKES -- do NOT make these:
+
+WRONG: I EAT PIZZA TODAY -> RIGHT: TODAY I EAT PIZZA
+WRONG: SHE IS HAPPY -> RIGHT: SHE HAPPY
+WRONG: THE DOG RUN -> RIGHT: DOG RUN
+WRONG: DOGS -> RIGHT: DOG
+WRONG: SHE EATS -> RIGHT: SHE EAT
+WRONG: WHAT YOUR NAME -> RIGHT: YOUR NAME WHAT
+WRONG: MY I NAME -> RIGHT: MY NAME
+WRONG: non_manual: [] for wh_question -> RIGHT: non_manual: ["furrowed brows"]
+WRONG: I LIKE PIZZA AND CORN -> RIGHT: I LIKE PIZZA CORN
+WRONG: I LIKE TO EAT -> RIGHT: I LIKE EAT
+
+---
+
+MULTI-CLAUSE SENTENCES:
+- When the input has multiple independent clauses joined by "and" / "but" / commas, convert each clause separately and concatenate the gloss tokens.
+  "Hi my name is ikran and I like pizza" -> HELLO MY NAME IKRAN I LIKE PIZZA
+- When a time marker applies to the whole sentence, place it ONCE at the very start.
+  "Today I went to school and played soccer" -> TODAY I GO SCHOOL PLAY SOCCER
+
+---
+
+CANONICAL FALLBACK EXAMPLES (use when retrieved examples are insufficient):
+
+"Hello, my name is John." -> HELLO MY NAME JOHN (statement)
+"I like pizza today." -> TODAY I LIKE PIZZA (statement)
+"What is your name?" -> YOUR NAME WHAT (wh_question)
+"Are you coming tomorrow?" -> TOMORROW YOU COME ? (yes_no_question)
+"I don't want coffee." -> I WANT COFFEE NOT (negation)
+"If it rains, we stay home." -> IF RAIN WE STAY HOME (conditional)
+"Look at me." -> LOOK-ME (command)
+"She gave me a book yesterday." -> YESTERDAY SHE GIVE-ME BOOK (statement)
+"My friend has three cats." -> MY FRIEND HAVE 3 CAT (statement)
+
+---
 
 Input sentence:
 {input_text}
