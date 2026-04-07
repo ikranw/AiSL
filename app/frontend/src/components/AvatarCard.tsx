@@ -33,6 +33,7 @@ export function AvatarCard({
   const [unityError, setUnityError] = useState<string | null>(null);
   const [shouldLoadUnity, setShouldLoadUnity] = useState(false);
   const [isUnityReady, setIsUnityReady] = useState(false);
+  const [loadProgress, setLoadProgress] = useState(0);
 
   const statusColor = isBusy ? '#f59e0b' : '#16a34a';
   const progressPrefix =
@@ -84,6 +85,8 @@ export function AvatarCard({
           productVersion: '1.0',
           cacheControl: (url: string) =>
             url.includes('/unity-build/Build/') ? 'immutable' : 'no-store',
+        }, (progress: number) => {
+          setLoadProgress(progress);
         })
         .then((instance: any) => {
           unityInstanceRef.current = instance;
@@ -242,12 +245,31 @@ export function AvatarCard({
                 bgcolor: 'rgba(237, 242, 247, 0.92)',
               }}
             >
-              <Stack spacing={0.75} alignItems="center">
+              <Stack spacing={1.5} alignItems="center" sx={{ width: '60%', maxWidth: 260 }}>
                 <Typography variant="body1" fontWeight={600}>
                   Loading avatar...
                 </Typography>
+                <Box
+                  sx={{
+                    width: '100%',
+                    height: 6,
+                    borderRadius: 3,
+                    bgcolor: 'rgba(0, 0, 0, 0.08)',
+                    overflow: 'hidden',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: `${Math.round(loadProgress * 100)}%`,
+                      height: '100%',
+                      borderRadius: 3,
+                      bgcolor: '#6366f1',
+                      transition: 'width 0.3s ease',
+                    }}
+                  />
+                </Box>
                 <Typography variant="body2" color="text.secondary">
-                  Large 3D files may take a moment.
+                  {Math.round(loadProgress * 100)}%
                 </Typography>
               </Stack>
             </Box>

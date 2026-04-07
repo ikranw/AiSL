@@ -91,8 +91,15 @@ function estimateSequenceDuration(sequence: string[], speed: number): number {
   return estimatedSeconds / Math.max(speed, 0.1);
 }
 
+function getDefaultAvatarMode(): AvatarRendererMode {
+  if (typeof navigator === 'undefined') return 'unity';
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isLowMemory = 'deviceMemory' in navigator && (navigator as any).deviceMemory < 4;
+  return isMobile || isLowMemory ? 'video' : 'unity';
+}
+
 export default function App(): JSX.Element {
-  const [avatarMode, setAvatarMode] = useState<AvatarRendererMode>('unity');
+  const [avatarMode, setAvatarMode] = useState<AvatarRendererMode>(getDefaultAvatarMode);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
