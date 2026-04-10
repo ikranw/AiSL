@@ -26,8 +26,9 @@
    - [ABET Concerns](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ABET-concerns.pdf)
 
 5. Presentation
-   - [PPT Slideshow](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ppt-fall2025.pdf)
-   - [Expo Poster](homework-uploads/poster.png)
+   - [Fall Presentation](https://github.com/ikranw/AiSL/blob/main/homework-uploads/ppt-fall2025.pdf)
+   - [Poster](homework-uploads/poster.png)
+   - [Final Presentation](homework-uploads/expo-presentation.pdf)
 
 6. Self-Assessment Essays
    - [Elshaddai Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-contract.md)
