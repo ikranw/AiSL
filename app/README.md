@@ -158,9 +158,10 @@ Only open `app/unity` in Unity if you want to edit animations, scenes, or rebuil
 
 ## Credits
 
-- **Studio Galt** — sign pose and animation source assets used for the 3D avatar (1,915 signs)
-- **Microsoft Rocketbox** — avatar assets and rig foundation used for playback
-- **WLASL (Word-Level American Sign Language) dataset** — sign video clips used in the Sign Videos mode (2,000 clips). Sourced from the processed dataset at [kaggle.com/datasets/risangbaskoro/wlasl-processed](https://www.kaggle.com/datasets/risangbaskoro/wlasl-processed)
+- **[Studio Galt](https://github.com/StudioGalt/Sign-Language-Mocap-Archive)** — sign pose and animation source assets used for the 3D avatar (1,915 signs)
+- **[Microsoft Rocketbox](https://github.com/microsoft/Microsoft-Rocketbox)** — avatar assets and rig foundation used for playback
+- **[WLASL (Word-Level American Sign Language) dataset](https://www.kaggle.com/datasets/risangbaskoro/wlasl-processed)** — sign video clips used in the Sign Videos mode (2,000 clips)
+- **ASLG-PC12 (English-ASL parallel corpus)** — parallel English-to-ASL gloss data informing the LLM grammar conversion examples and retrieval. Sourced from [kaggle.com/datasets/thedevastator/unlock-the-power-of-english-asl-with-aslg-pc12-c](https://www.kaggle.com/datasets/thedevastator/unlock-the-power-of-english-asl-with-aslg-pc12-c)
 
 Combined, the two sign inventories cover 3,915 signs across separate databases. These contributions are central to the prototype — the signing visualization depends on both the animation pipeline and the video clip library.
 

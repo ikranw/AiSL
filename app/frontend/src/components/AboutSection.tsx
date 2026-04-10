@@ -193,6 +193,23 @@ export function AboutSection(): JSX.Element {
                       View WLASL Dataset
                     </Button>
                   </Box>
+                  <Box>
+                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
+                      English-to-ASL Grammar Data
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      LLM grammar conversion examples and retrieval are informed by the ASLG-PC12 parallel English-ASL gloss corpus.
+                    </Typography>
+                    <Button
+                      href="https://www.kaggle.com/datasets/thedevastator/unlock-the-power-of-english-asl-with-aslg-pc12-c"
+                      target="_blank"
+                      rel="noreferrer"
+                      size="small"
+                      sx={{ px: 0, mt: 0.75 }}
+                    >
+                      View ASLG-PC12 Dataset
+                    </Button>
+                  </Box>
                 </Stack>
               </AccordionDetails>
             </Accordion>
