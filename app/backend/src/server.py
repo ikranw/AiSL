@@ -10,7 +10,10 @@ from generate import generate_once
 app = Flask(__name__)
 CORS(app)
 
-BUG_REPORTS_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'bug_reports.json')
+BUG_REPORTS_PATH = os.path.join(
+    os.path.realpath(os.path.join(os.path.dirname(__file__), '..', 'data')),
+    'bug_reports.json',
+)
 
 
 @app.get("/api/health")
@@ -44,9 +47,14 @@ def bug_report():
         return jsonify({"error": "Description is required."}), 400
 
     reports = []
-    if os.path.exists(BUG_REPORTS_PATH):
-        with open(BUG_REPORTS_PATH, "r") as f:
-            reports = json.load(f)
+    try:
+        if os.path.exists(BUG_REPORTS_PATH):
+            with open(BUG_REPORTS_PATH, "r") as f:
+                content = f.read().strip()
+                if content:
+                    reports = json.loads(content)
+    except (json.JSONDecodeError, OSError):
+        reports = []
 
     reports.append({
         "name": name or "Anonymous",
@@ -55,6 +63,7 @@ def bug_report():
         "timestamp": datetime.now(timezone.utc).isoformat(),
     })
 
+    os.makedirs(os.path.dirname(BUG_REPORTS_PATH), exist_ok=True)
     with open(BUG_REPORTS_PATH, "w") as f:
         json.dump(reports, f, indent=2)
 
