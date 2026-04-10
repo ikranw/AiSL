@@ -31,7 +31,7 @@
    - [Final Presentation](homework-uploads/expo-presentation.pdf)
 
 6. Self-Assessment Essays
-   - Elshaddai: [Contract](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-contract.md)
+   - Elshaddai: [Contract](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-contract.md) [Final Self-Assessment](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-individual-assessment.md)
    - Ikran: [Contract](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/warsame-contract.md)
    - Fareena: [Contract](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/khan-contract.md) | [Final Self-Assessment](homework-uploads/individual-contracts/fareena-individual-assessment.md)
 
