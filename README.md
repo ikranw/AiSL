@@ -31,9 +31,9 @@
    - [Final Presentation](homework-uploads/expo-presentation.pdf)
 
 6. Self-Assessment Essays
-   - [Elshaddai Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-contract.md)
-   - [Ikran Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/warsame-contract.md)
-   - [Fareena Essay](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/khan-contract.md)
+   - Elshaddai: [Contract](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/elshaddai-contract.md)
+   - Ikran: [Contract](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/warsame-contract.md)
+   - Fareena: [Contract](https://github.com/ikranw/AiSL/blob/main/homework-uploads/individual-contracts/khan-contract.md) | [Final Self-Assessment](homework-uploads/individual-contracts/fareena-individual-assessment.md)
 
 7. Professional Biographies
    - [Elshaddai Bio](https://github.com/ikranw/AiSL/blob/main/biographies/melaku-bio.md)
