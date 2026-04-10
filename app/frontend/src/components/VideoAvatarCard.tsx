@@ -43,7 +43,6 @@ export function VideoAvatarCard({
   onProgress,
   onPlaybackEnd,
   headerControl,
-  onBugReport,
   children,
   sx,
 }: VideoAvatarCardProps): JSX.Element {

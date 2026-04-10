@@ -25,7 +25,6 @@ export function AvatarCard({
   isBusy = false,
   activeTokenInfoMessage = null,
   headerControl,
-  onBugReport,
   children,
 }: AvatarCardProps): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
