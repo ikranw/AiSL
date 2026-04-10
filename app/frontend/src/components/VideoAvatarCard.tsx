@@ -26,6 +26,7 @@ interface VideoAvatarCardProps {
   onProgress?: (index: number, total: number) => void;
   onPlaybackEnd?: () => void;
   headerControl?: ReactNode;
+  onBugReport?: () => void;
   children?: ReactNode;
   sx?: SxProps<Theme>;
 }
@@ -42,6 +43,7 @@ export function VideoAvatarCard({
   onProgress,
   onPlaybackEnd,
   headerControl,
+  onBugReport,
   children,
   sx,
 }: VideoAvatarCardProps): JSX.Element {

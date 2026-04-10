@@ -13,6 +13,7 @@ interface AvatarCardProps {
   isBusy?: boolean;
   activeTokenInfoMessage?: string | null;
   headerControl?: ReactNode;
+  onBugReport?: () => void;
   children?: ReactNode;
 }
 
@@ -24,6 +25,7 @@ export function AvatarCard({
   isBusy = false,
   activeTokenInfoMessage = null,
   headerControl,
+  onBugReport,
   children,
 }: AvatarCardProps): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

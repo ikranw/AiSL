@@ -1,3 +1,7 @@
+import json
+import os
+from datetime import datetime, timezone
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
@@ -5,6 +9,8 @@ from generate import generate_once
 
 app = Flask(__name__)
 CORS(app)
+
+BUG_REPORTS_PATH = os.path.join(os.path.dirname(__file__), '..', 'data', 'bug_reports.json')
 
 
 @app.get("/api/health")
@@ -25,6 +31,34 @@ def translate():
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.post("/api/bug-report")
+def bug_report():
+    data = request.get_json(silent=True) or {}
+    name = str(data.get("name", "")).strip()
+    contact = str(data.get("contact", "")).strip()
+    description = str(data.get("description", "")).strip()
+
+    if not description:
+        return jsonify({"error": "Description is required."}), 400
+
+    reports = []
+    if os.path.exists(BUG_REPORTS_PATH):
+        with open(BUG_REPORTS_PATH, "r") as f:
+            reports = json.load(f)
+
+    reports.append({
+        "name": name or "Anonymous",
+        "contact": contact,
+        "description": description,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    })
+
+    with open(BUG_REPORTS_PATH, "w") as f:
+        json.dump(reports, f, indent=2)
+
+    return jsonify({"ok": True})
 
 
 if __name__ == "__main__":

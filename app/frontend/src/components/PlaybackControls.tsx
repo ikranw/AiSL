@@ -12,6 +12,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import ReplayIcon from '@mui/icons-material/Replay';
 import LoopIcon from '@mui/icons-material/Loop';
+import BugReportOutlinedIcon from '@mui/icons-material/BugReportOutlined';
 import { formatTime } from '../utils/time';
 
 interface PlaybackControlsProps {
@@ -26,6 +27,7 @@ interface PlaybackControlsProps {
   onToggleLoop: () => void;
   onSpeedChange: (value: number) => void;
   onProgressChange: (value: number) => void;
+  onBugReport?: () => void;
 }
 
 const speedOptions = [0.5, 1, 2];
@@ -42,6 +44,7 @@ export function PlaybackControls({
   onToggleLoop,
   onSpeedChange,
   onProgressChange,
+  onBugReport,
 }: PlaybackControlsProps): JSX.Element {
   const [sliderValue, setSliderValue] = useState(progress);
 
@@ -91,21 +94,30 @@ export function PlaybackControls({
           {formatTime(totalDurationSeconds)}
         </Typography>
       </Stack>
-      <Stack direction="row" spacing={1} alignItems="center" justifyContent="flex-end">
-        {speedOptions.map((option) => (
-          <Tooltip key={option} title={canInteract ? `${option}x speed` : 'Translate first'}>
-            <span>
-              <Chip
-                label={`${option}x`}
-                color={option === speed ? 'primary' : 'default'}
-                variant={option === speed ? 'filled' : 'outlined'}
-                onClick={() => onSpeedChange(option)}
-                size="small"
-                disabled={!canInteract}
-              />
-            </span>
+      <Stack direction="row" spacing={1} alignItems="center" justifyContent="space-between">
+        {onBugReport ? (
+          <Tooltip title="Report a bug">
+            <IconButton size="small" onClick={onBugReport} sx={{ color: 'text.secondary' }}>
+              <BugReportOutlinedIcon sx={{ fontSize: 18 }} />
+            </IconButton>
           </Tooltip>
-        ))}
+        ) : <Box />}
+        <Stack direction="row" spacing={1} alignItems="center">
+          {speedOptions.map((option) => (
+            <Tooltip key={option} title={canInteract ? `${option}x speed` : 'Translate first'}>
+              <span>
+                <Chip
+                  label={`${option}x`}
+                  color={option === speed ? 'primary' : 'default'}
+                  variant={option === speed ? 'filled' : 'outlined'}
+                  onClick={() => onSpeedChange(option)}
+                  size="small"
+                  disabled={!canInteract}
+                />
+              </span>
+            </Tooltip>
+          ))}
+        </Stack>
       </Stack>
     </Stack>
   );

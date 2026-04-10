@@ -9,6 +9,7 @@ import { PlaybackControls } from './components/PlaybackControls';
 import { ResourcesSection } from './components/ResourcesSection';
 import { AboutSection } from './components/AboutSection';
 import { Footer } from './components/Footer';
+import { BugReportDialog } from './components/BugReportDialog';
 import { translateEnglishToASL } from './services/llmService';
 import { UNITY_RANDOM_SENTENCES, VIDEO_RANDOM_SENTENCES } from './utils/randomSentences';
 import {
@@ -112,6 +113,7 @@ export default function App(): JSX.Element {
   const [videoSeekToIndex, setVideoSeekToIndex] = useState<number | null>(null);
   const [videoPlaybackVersion, setVideoPlaybackVersion] = useState(0);
   const [loadingStepIndex, setLoadingStepIndex] = useState(0);
+  const [bugDialogOpen, setBugDialogOpen] = useState(false);
   const inputHistoryRef = useRef<string[]>([]);
   const randomSentenceHistoryRef = useRef<Record<AvatarRendererMode, string[]>>({
     unity: [],
@@ -587,6 +589,7 @@ export default function App(): JSX.Element {
                     onToggleLoop={handleToggleLoop}
                     onSpeedChange={handleSpeedChange}
                     onProgressChange={handleProgressChange}
+                    onBugReport={() => setBugDialogOpen(true)}
                   />
                 </AvatarCard>
               ) : (
@@ -637,6 +640,7 @@ export default function App(): JSX.Element {
                     onToggleLoop={handleToggleLoop}
                     onSpeedChange={handleSpeedChange}
                     onProgressChange={handleProgressChange}
+                    onBugReport={() => setBugDialogOpen(true)}
                   />
                 </VideoAvatarCard>
               )}
@@ -648,6 +652,7 @@ export default function App(): JSX.Element {
       <ResourcesSection />
       <AboutSection />
       <Footer />
+      <BugReportDialog open={bugDialogOpen} onClose={() => setBugDialogOpen(false)} />
     </Box>
   );
 }
